@@ -1,0 +1,325 @@
+{
+    "name": "ɭandʷah",
+    "syllables": {
+        "onset": [
+            [
+                "plosive",
+                "fricative",
+                "affricate",
+                "nasal"
+            ],
+            [
+                "approximant"
+            ]
+        ],
+        "nucleus": [
+            "vowel"
+        ],
+        "coda": [
+            [
+                "approximant"
+            ],
+            [
+                "plosive",
+                "fricative",
+                "affricate",
+                "nasal"
+            ]
+        ],
+        "min": 1,
+        "max": 1
+    },
+    "consonants": [
+        "j",
+        "r",
+        "l",
+        "h",
+        "b",
+        "bʷ",
+        "m",
+        "v",
+        "vʷ",
+        "bv",
+        "bvʷ",
+        "ʋ",
+        "d",
+        "dʷ",
+        "n",
+        "z",
+        "zʷ",
+        "dz",
+        "dzʷ",
+        "ɖ",
+        "ʐ",
+        "ɭ",
+        "g",
+        "gʷ",
+        "ŋ",
+        "ɣ",
+        "ɣʷ",
+        "gɣ",
+        "gɣʷ"
+    ],
+    "consonant_manners": [
+        "approximant",
+        "trill",
+        "lapproximant",
+        "fricative",
+        "plosive",
+        "plosive",
+        "nasal",
+        "fricative",
+        "fricative",
+        "affricate",
+        "affricate",
+        "approximant",
+        "plosive",
+        "plosive",
+        "nasal",
+        "fricative",
+        "fricative",
+        "affricate",
+        "affricate",
+        "plosive",
+        "fricative",
+        "approximant",
+        "plosive",
+        "plosive",
+        "nasal",
+        "fricative",
+        "fricative",
+        "affricate",
+        "affricate"
+    ],
+    "vowels": [
+        "a",
+        "aː"
+    ],
+    "distribution": {
+        "voice": true,
+        "ejective": false,
+        "labialised": true,
+        "palatalised": false,
+        "velarised": false,
+        "aspiration": false,
+        "voiceless": false,
+        "geminated": false
+    },
+    "manners": {
+        "plosive": true,
+        "nasal": true,
+        "fricative": true,
+        "lfricative": false,
+        "affricate": true,
+        "laffricate": false,
+        "tap": false,
+        "ltap": false,
+        "approximant": true,
+        "uncommon_approximant": false,
+        "trill": false,
+        "click": false,
+        "implosive": false
+    },
+    "vocabulary": [
+        {
+            "pronunciation": "ɭagɣʷ",
+            "spelling": "rlagghw"
+        },
+        {
+            "pronunciation": "dadʷ",
+            "spelling": "dadw"
+        },
+        {
+            "pronunciation": "jaː",
+            "spelling": "yaa"
+        },
+        {
+            "pronunciation": "haɭ",
+            "spelling": "harl"
+        },
+        {
+            "pronunciation": "ɭaːʋ",
+            "spelling": "rlaavw"
+        },
+        {
+            "pronunciation": "dzʷa",
+            "spelling": "dzwa"
+        },
+        {
+            "pronunciation": "bʷa",
+            "spelling": "bwa"
+        },
+        {
+            "pronunciation": "bvʷaj",
+            "spelling": "bvway"
+        },
+        {
+            "pronunciation": "aːgʷɭ",
+            "spelling": "aagwrl"
+        },
+        {
+            "pronunciation": "vaːŋ",
+            "spelling": "vaang"
+        },
+        {
+            "pronunciation": "ah",
+            "spelling": "ah"
+        },
+        {
+            "pronunciation": "ʐaʐj",
+            "spelling": "rzarzy"
+        },
+        {
+            "pronunciation": "vʷan",
+            "spelling": "vwan"
+        },
+        {
+            "pronunciation": "bʷʋaːm",
+            "spelling": "bwvwaam"
+        },
+        {
+            "pronunciation": "gaːzʷ",
+            "spelling": "gaazw"
+        },
+        {
+            "pronunciation": "ɖadʋ",
+            "spelling": "rdadvw"
+        },
+        {
+            "pronunciation": "ɖaːmʋ",
+            "spelling": "rdaamvw"
+        },
+        {
+            "pronunciation": "jaːj",
+            "spelling": "yaay"
+        },
+        {
+            "pronunciation": "gɣar",
+            "spelling": "gghar"
+        },
+        {
+            "pronunciation": "bʷaːgɣʷaːʋ",
+            "spelling": "bwaagghwaavw"
+        },
+        {
+            "pronunciation": "bvʷal",
+            "spelling": "bvwal"
+        },
+        {
+            "pronunciation": "mɭaːbʷ",
+            "spelling": "mrlaabw"
+        },
+        {
+            "pronunciation": "dzaːhbvʷɭaŋ",
+            "spelling": "dzaahbvwrlang"
+        },
+        {
+            "pronunciation": "gʷaːgɣ",
+            "spelling": "gwaaggh"
+        },
+        {
+            "pronunciation": "gʷagɣmjagɣʷ",
+            "spelling": "gwagghmyagghw"
+        },
+        {
+            "pronunciation": "ɣʷaːʋ",
+            "spelling": "ghwaavw"
+        },
+        {
+            "pronunciation": "gaːn",
+            "spelling": "gaan"
+        },
+        {
+            "pronunciation": "ɭadz",
+            "spelling": "rladz"
+        },
+        {
+            "pronunciation": "jaːddzʷaːh",
+            "spelling": "yaaddzwaah"
+        },
+        {
+            "pronunciation": "aːgɣʷ",
+            "spelling": "aagghw"
+        },
+        {
+            "pronunciation": "gʷɭaːbv",
+            "spelling": "gwrlaabv"
+        },
+        {
+            "pronunciation": "ravɭaːvʷ",
+            "spelling": "ravrlaavw"
+        },
+        {
+            "pronunciation": "daʋ",
+            "spelling": "davw"
+        },
+        {
+            "pronunciation": "zʷaːʋ",
+            "spelling": "zwaavw"
+        },
+        {
+            "pronunciation": "maɣ",
+            "spelling": "magh"
+        },
+        {
+            "pronunciation": "ɣam",
+            "spelling": "gham"
+        },
+        {
+            "pronunciation": "gʷanʋ",
+            "spelling": "gwanvw"
+        },
+        {
+            "pronunciation": "ɣɭaːrdzjaj",
+            "spelling": "ghrlaardzyay"
+        },
+        {
+            "pronunciation": "aːɖj",
+            "spelling": "aardy"
+        },
+        {
+            "pronunciation": "agɣʷ",
+            "spelling": "agghw"
+        },
+        {
+            "pronunciation": "ɖaːjgaːbʷ",
+            "spelling": "rdaaygaabw"
+        },
+        {
+            "pronunciation": "ɣʷaːn",
+            "spelling": "ghwaan"
+        },
+        {
+            "pronunciation": "bʷaɣʷdzʷah",
+            "spelling": "bwaghwdzwah"
+        },
+        {
+            "pronunciation": "adz",
+            "spelling": "adz"
+        },
+        {
+            "pronunciation": "ɣabvʷ",
+            "spelling": "ghabvw"
+        },
+        {
+            "pronunciation": "navʷ",
+            "spelling": "navw"
+        },
+        {
+            "pronunciation": "aːgjav",
+            "spelling": "aagyav"
+        },
+        {
+            "pronunciation": "ŋaːdz",
+            "spelling": "ngaadz"
+        },
+        {
+            "pronunciation": "gʷaːbɭ",
+            "spelling": "gwaabrl"
+        },
+        {
+            "pronunciation": "gʷaːɭ",
+            "spelling": "gwaarl"
+        }
+    ]
+}

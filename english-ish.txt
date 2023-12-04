@@ -1,0 +1,1002 @@
+[
+    {
+        "pron": "splæjŋdʃəwts",
+        "spell": "spleingedshoats"
+    },
+    {
+        "pron": "θwæwntglaːlk",
+        "spell": "thwowntglarlk"
+    },
+    {
+        "pron": "dʒʊːk",
+        "spell": "joork"
+    },
+    {
+        "pron": "nɔnz",
+        "spell": "nons"
+    },
+    {
+        "pron": "jɪjb",
+        "spell": "yeeb"
+    },
+    {
+        "pron": "blʊːθvəwʃ",
+        "spell": "bloorthvoash"
+    },
+    {
+        "pron": "ʒæjŋ",
+        "spell": "zheing"
+    },
+    {
+        "pron": "ʒɪpts",
+        "spell": "zhipts"
+    },
+    {
+        "pron": "dojl",
+        "spell": "doil"
+    },
+    {
+        "pron": "snɪdswɜːks",
+        "spell": "snidswerx"
+    },
+    {
+        "pron": "fɔfθ",
+        "spell": "fofth"
+    },
+    {
+        "pron": "gaːk",
+        "spell": "gark"
+    },
+    {
+        "pron": "sfojnz",
+        "spell": "sphoins"
+    },
+    {
+        "pron": "flals",
+        "spell": "flulse"
+    },
+    {
+        "pron": "skoːf",
+        "spell": "skorf"
+    },
+    {
+        "pron": "smʊŋk",
+        "spell": "smoonk"
+    },
+    {
+        "pron": "kʊŋd",
+        "spell": "koonged"
+    },
+    {
+        "pron": "dʒɹojvveldʒ",
+        "spell": "droivevelge"
+    },
+    {
+        "pron": "gwap",
+        "spell": "gwup"
+    },
+    {
+        "pron": "dʒɹeb",
+        "spell": "dreb"
+    },
+    {
+        "pron": "nændskwojnd",
+        "spell": "nandsquoind"
+    },
+    {
+        "pron": "panz",
+        "spell": "puns"
+    },
+    {
+        "pron": "pɑjdz",
+        "spell": "pyds"
+    },
+    {
+        "pron": "gleːʒ",
+        "spell": "glairzhe"
+    },
+    {
+        "pron": "tʃæjlmdðæðd",
+        "spell": "cheilmedthathed"
+    },
+    {
+        "pron": "θeːntblædʒ",
+        "spell": "thairntbladge"
+    },
+    {
+        "pron": "tʃɹʊːpt",
+        "spell": "troorpt"
+    },
+    {
+        "pron": "gwʊːd",
+        "spell": "gwoord"
+    },
+    {
+        "pron": "slæwlk",
+        "spell": "slowlk"
+    },
+    {
+        "pron": "gwʊːŋk",
+        "spell": "gwoornk"
+    },
+    {
+        "pron": "jʊst",
+        "spell": "yoost"
+    },
+    {
+        "pron": "spɹʊlst",
+        "spell": "sproolst"
+    },
+    {
+        "pron": "plojθ",
+        "spell": "ploith"
+    },
+    {
+        "pron": "an",
+        "spell": "un"
+    },
+    {
+        "pron": "ʃeːgwəwzd",
+        "spell": "shairgwoazed"
+    },
+    {
+        "pron": "θalʃ",
+        "spell": "thulsh"
+    },
+    {
+        "pron": "tʃælpt",
+        "spell": "chalped"
+    },
+    {
+        "pron": "dʒɹəwŋd",
+        "spell": "droanged"
+    },
+    {
+        "pron": "lʊːdz",
+        "spell": "loords"
+    },
+    {
+        "pron": "ʉwnʒ",
+        "spell": "oonge"
+    },
+    {
+        "pron": "steːsp",
+        "spell": "stairsp"
+    },
+    {
+        "pron": "nɪsp",
+        "spell": "nisp"
+    },
+    {
+        "pron": "pəwvtwojʒ",
+        "spell": "poavetwoizhe"
+    },
+    {
+        "pron": "fap",
+        "spell": "fup"
+    },
+    {
+        "pron": "gɹæːtʃ",
+        "spell": "gratch"
+    },
+    {
+        "pron": "θeːtəwlts",
+        "spell": "thairtoalts"
+    },
+    {
+        "pron": "ats",
+        "spell": "uts"
+    },
+    {
+        "pron": "wʊtʃ",
+        "spell": "wootch"
+    },
+    {
+        "pron": "snaʒ",
+        "spell": "snuzhe"
+    },
+    {
+        "pron": "mɔʃt",
+        "spell": "moshed"
+    },
+    {
+        "pron": "skɹan",
+        "spell": "scrun"
+    },
+    {
+        "pron": "jʊmpkwækst",
+        "spell": "yoompquaxt"
+    },
+    {
+        "pron": "sfæjŋd",
+        "spell": "spheinged"
+    },
+    {
+        "pron": "klemz",
+        "spell": "clems"
+    },
+    {
+        "pron": "dwɪjm",
+        "spell": "dweem"
+    },
+    {
+        "pron": "dɪŋkθ",
+        "spell": "dingth"
+    },
+    {
+        "pron": "splʊːfðæwd",
+        "spell": "sploorfthowd"
+    },
+    {
+        "pron": "gaːð",
+        "spell": "garth"
+    },
+    {
+        "pron": "ðʊːm",
+        "spell": "thoorm"
+    },
+    {
+        "pron": "twal",
+        "spell": "twull"
+    },
+    {
+        "pron": "lɪlb",
+        "spell": "lilb"
+    },
+    {
+        "pron": "vels",
+        "spell": "velse"
+    },
+    {
+        "pron": "kɜːb",
+        "spell": "kerb"
+    },
+    {
+        "pron": "gwʊːlzʉwp",
+        "spell": "gwoorlsoop"
+    },
+    {
+        "pron": "maːʃ",
+        "spell": "marsh"
+    },
+    {
+        "pron": "θwaːksθs",
+        "spell": "thwarxths"
+    },
+    {
+        "pron": "hɪntʃ",
+        "spell": "hinch"
+    },
+    {
+        "pron": "steːmz",
+        "spell": "stairms"
+    },
+    {
+        "pron": "lɪjntʃ",
+        "spell": "leench"
+    },
+    {
+        "pron": "vaðd",
+        "spell": "vuthed"
+    },
+    {
+        "pron": "kɔlm",
+        "spell": "kolm"
+    },
+    {
+        "pron": "vʊst",
+        "spell": "voost"
+    },
+    {
+        "pron": "spʊlb",
+        "spell": "spoolb"
+    },
+    {
+        "pron": "dwɑjð",
+        "spell": "dwyth"
+    },
+    {
+        "pron": "skʊːŋkθ",
+        "spell": "skoorngth"
+    },
+    {
+        "pron": "bɹɪŋk",
+        "spell": "brink"
+    },
+    {
+        "pron": "bɪjŋ",
+        "spell": "beeng"
+    },
+    {
+        "pron": "gwəwntʃ",
+        "spell": "gwoanch"
+    },
+    {
+        "pron": "vʊst",
+        "spell": "voost"
+    },
+    {
+        "pron": "fɹæn",
+        "spell": "fran"
+    },
+    {
+        "pron": "noːlmd",
+        "spell": "norlmed"
+    },
+    {
+        "pron": "kɹafθ",
+        "spell": "crufth"
+    },
+    {
+        "pron": "ɜːk",
+        "spell": "erk"
+    },
+    {
+        "pron": "plab",
+        "spell": "plub"
+    },
+    {
+        "pron": "tæwl",
+        "spell": "towl"
+    },
+    {
+        "pron": "epθ",
+        "spell": "epth"
+    },
+    {
+        "pron": "ɪjθt",
+        "spell": "eethed"
+    },
+    {
+        "pron": "jɪŋks",
+        "spell": "yinx"
+    },
+    {
+        "pron": "blæjfθ",
+        "spell": "bleifth"
+    },
+    {
+        "pron": "flæð",
+        "spell": "flath"
+    },
+    {
+        "pron": "glæjn",
+        "spell": "glane"
+    },
+    {
+        "pron": "hæːmzpɑjf",
+        "spell": "hamspife"
+    },
+    {
+        "pron": "ləwb",
+        "spell": "lobe"
+    },
+    {
+        "pron": "dwæːpt",
+        "spell": "dwapt"
+    },
+    {
+        "pron": "splʉwxts",
+        "spell": "splooksts"
+    },
+    {
+        "pron": "ʒɔlz",
+        "spell": "zholls"
+    },
+    {
+        "pron": "gloːnθ",
+        "spell": "glornth"
+    },
+    {
+        "pron": "nɪnθ",
+        "spell": "ninth"
+    },
+    {
+        "pron": "jəwnz",
+        "spell": "yoans"
+    },
+    {
+        "pron": "ɹʊdʒ",
+        "spell": "roodge"
+    },
+    {
+        "pron": "ʃtʃɹɪm",
+        "spell": "strim"
+    },
+    {
+        "pron": "stɪʃ",
+        "spell": "stish"
+    },
+    {
+        "pron": "həwzd",
+        "spell": "hoazed"
+    },
+    {
+        "pron": "bləwp",
+        "spell": "blope"
+    },
+    {
+        "pron": "stɪsp",
+        "spell": "stisp"
+    },
+    {
+        "pron": "kʊːlpt",
+        "spell": "koorlped"
+    },
+    {
+        "pron": "θʊːk",
+        "spell": "thoork"
+    },
+    {
+        "pron": "gɹɪjlfnjʉwðddʊfθs",
+        "spell": "greelfnewtheddoofths"
+    },
+    {
+        "pron": "ʃæwmpt",
+        "spell": "showmpt"
+    },
+    {
+        "pron": "kemd",
+        "spell": "kemmed"
+    },
+    {
+        "pron": "laːld",
+        "spell": "larld"
+    },
+    {
+        "pron": "ɹoːmps",
+        "spell": "rormps"
+    },
+    {
+        "pron": "hɪlstbɹɪnt",
+        "spell": "hilstbrint"
+    },
+    {
+        "pron": "ʒəwb",
+        "spell": "zhobe"
+    },
+    {
+        "pron": "maltʃslʊðd",
+        "spell": "mulchsloothed"
+    },
+    {
+        "pron": "feft",
+        "spell": "feft"
+    },
+    {
+        "pron": "spəwmps",
+        "spell": "spoamps"
+    },
+    {
+        "pron": "θʊːd",
+        "spell": "thoord"
+    },
+    {
+        "pron": "tʃɹæwðd",
+        "spell": "trowthed"
+    },
+    {
+        "pron": "ʃæts",
+        "spell": "shats"
+    },
+    {
+        "pron": "ʒʊːð",
+        "spell": "zhoorth"
+    },
+    {
+        "pron": "skojlzʉwt",
+        "spell": "skoilsoot"
+    },
+    {
+        "pron": "spæjxts",
+        "spell": "speiksts"
+    },
+    {
+        "pron": "dens",
+        "spell": "dence"
+    },
+    {
+        "pron": "spɹɑjð",
+        "spell": "spryth"
+    },
+    {
+        "pron": "kɹamp",
+        "spell": "crump"
+    },
+    {
+        "pron": "kojltʃ",
+        "spell": "koilch"
+    },
+    {
+        "pron": "twɪln",
+        "spell": "twiln"
+    },
+    {
+        "pron": "ʃoːg",
+        "spell": "shorg"
+    },
+    {
+        "pron": "glenʒ",
+        "spell": "glenge"
+    },
+    {
+        "pron": "haŋdbɹɔlv",
+        "spell": "hungedbrolve"
+    },
+    {
+        "pron": "skɹʉwpts",
+        "spell": "scroopts"
+    },
+    {
+        "pron": "klɪðd",
+        "spell": "clithed"
+    },
+    {
+        "pron": "spɔm",
+        "spell": "spom"
+    },
+    {
+        "pron": "taʃt",
+        "spell": "tushed"
+    },
+    {
+        "pron": "gojvdɜːʃjoːb",
+        "spell": "goivedershyorb"
+    },
+    {
+        "pron": "gɹend",
+        "spell": "grend"
+    },
+    {
+        "pron": "ʃʊːpθ",
+        "spell": "shoorpth"
+    },
+    {
+        "pron": "tʃɹem",
+        "spell": "trem"
+    },
+    {
+        "pron": "fɹɪjðd",
+        "spell": "freethed"
+    },
+    {
+        "pron": "ðʊls",
+        "spell": "thoolse"
+    },
+    {
+        "pron": "tʃɹɪn",
+        "spell": "trin"
+    },
+    {
+        "pron": "dʊːlpspaːnt",
+        "spell": "doorlpsparnt"
+    },
+    {
+        "pron": "ɹæzd",
+        "spell": "razzed"
+    },
+    {
+        "pron": "kɹapsnaːlmd",
+        "spell": "crupsnarlmed"
+    },
+    {
+        "pron": "kɔlθ",
+        "spell": "kolth"
+    },
+    {
+        "pron": "ʒæwfθhæŋ",
+        "spell": "zhowfthhang"
+    },
+    {
+        "pron": "ðjʉwbojlp",
+        "spell": "thewboilp"
+    },
+    {
+        "pron": "ðɪjðjojlk",
+        "spell": "theethyoilk"
+    },
+    {
+        "pron": "kʉwnt",
+        "spell": "koont"
+    },
+    {
+        "pron": "skjʉwnθ",
+        "spell": "skewnth"
+    },
+    {
+        "pron": "tɜːkt",
+        "spell": "terct"
+    },
+    {
+        "pron": "gleːtʃdʒɹeːdz",
+        "spell": "glairtchdrairds"
+    },
+    {
+        "pron": "pəwp",
+        "spell": "pope"
+    },
+    {
+        "pron": "ʒaːksθs",
+        "spell": "zharxths"
+    },
+    {
+        "pron": "gɹaksθsamps",
+        "spell": "gruxthsumps"
+    },
+    {
+        "pron": "ʃtʃɹʊːmθ",
+        "spell": "stroormth"
+    },
+    {
+        "pron": "wɑjst",
+        "spell": "wyst"
+    },
+    {
+        "pron": "vɪlv",
+        "spell": "vilve"
+    },
+    {
+        "pron": "bæːks",
+        "spell": "bax"
+    },
+    {
+        "pron": "laʒ",
+        "spell": "luzhe"
+    },
+    {
+        "pron": "gæʃ",
+        "spell": "gash"
+    },
+    {
+        "pron": "vɪlts",
+        "spell": "vilts"
+    },
+    {
+        "pron": "skɹəwk",
+        "spell": "scroke"
+    },
+    {
+        "pron": "gleːgvojln",
+        "spell": "glairgvoiln"
+    },
+    {
+        "pron": "splojpts",
+        "spell": "sploipts"
+    },
+    {
+        "pron": "slɔlz",
+        "spell": "slolls"
+    },
+    {
+        "pron": "fɹʊŋ",
+        "spell": "froong"
+    },
+    {
+        "pron": "skɹojmpt",
+        "spell": "scroimpt"
+    },
+    {
+        "pron": "vjʉwŋdab",
+        "spell": "vewngdub"
+    },
+    {
+        "pron": "vælb",
+        "spell": "valb"
+    },
+    {
+        "pron": "kəwlz",
+        "spell": "koals"
+    },
+    {
+        "pron": "bɪʒ",
+        "spell": "bizhe"
+    },
+    {
+        "pron": "kləwptwɑjlpsskwamt",
+        "spell": "clopetwylpssquumt"
+    },
+    {
+        "pron": "dɔkt",
+        "spell": "doct"
+    },
+    {
+        "pron": "bɹɜːdzmæwʃt",
+        "spell": "brerdsmowshed"
+    },
+    {
+        "pron": "ʒʉwkts",
+        "spell": "zhoocts"
+    },
+    {
+        "pron": "hæjl",
+        "spell": "hale"
+    },
+    {
+        "pron": "veːðd",
+        "spell": "vairthed"
+    },
+    {
+        "pron": "vojp",
+        "spell": "voip"
+    },
+    {
+        "pron": "ʃɹɔlts",
+        "spell": "shrolts"
+    },
+    {
+        "pron": "væwd",
+        "spell": "vowd"
+    },
+    {
+        "pron": "θoːnskɹɪpθskæwŋd",
+        "spell": "thorncecripthskownged"
+    },
+    {
+        "pron": "staŋ",
+        "spell": "stung"
+    },
+    {
+        "pron": "dʊg",
+        "spell": "doog"
+    },
+    {
+        "pron": "twæd",
+        "spell": "twad"
+    },
+    {
+        "pron": "mælb",
+        "spell": "malb"
+    },
+    {
+        "pron": "blɔzd",
+        "spell": "blozzed"
+    },
+    {
+        "pron": "dɑjlmd",
+        "spell": "dylmed"
+    },
+    {
+        "pron": "dweːlps",
+        "spell": "dwairlps"
+    },
+    {
+        "pron": "ʃɹʊŋ",
+        "spell": "shroong"
+    },
+    {
+        "pron": "wæʃ",
+        "spell": "wash"
+    },
+    {
+        "pron": "kwɪjŋk",
+        "spell": "queenk"
+    },
+    {
+        "pron": "slæwls",
+        "spell": "slowlse"
+    },
+    {
+        "pron": "dʊlks",
+        "spell": "doolks"
+    },
+    {
+        "pron": "sməwʒ",
+        "spell": "smoazhe"
+    },
+    {
+        "pron": "dæjlst",
+        "spell": "deilst"
+    },
+    {
+        "pron": "lɜːksθ",
+        "spell": "lerxth"
+    },
+    {
+        "pron": "tæð",
+        "spell": "tath"
+    },
+    {
+        "pron": "dɪŋkθ",
+        "spell": "dingth"
+    },
+    {
+        "pron": "skɹɪθt",
+        "spell": "scrithed"
+    },
+    {
+        "pron": "dʒæwlθ",
+        "spell": "jowlth"
+    },
+    {
+        "pron": "ʃæwtθ",
+        "spell": "showdth"
+    },
+    {
+        "pron": "jæwθ",
+        "spell": "yowth"
+    },
+    {
+        "pron": "wɪjnʒ",
+        "spell": "weenge"
+    },
+    {
+        "pron": "bextskæmdʃaθ",
+        "spell": "bekstskammedshuth"
+    },
+    {
+        "pron": "skoːmθtʃɹɪlzkweːldʒ",
+        "spell": "skormthtrillsquairlge"
+    },
+    {
+        "pron": "ʃtʃɹaxts",
+        "spell": "struksts"
+    },
+    {
+        "pron": "pəwv",
+        "spell": "poave"
+    },
+    {
+        "pron": "næwv",
+        "spell": "nowve"
+    },
+    {
+        "pron": "ðemt",
+        "spell": "themt"
+    },
+    {
+        "pron": "fɹʉwlv",
+        "spell": "froolve"
+    },
+    {
+        "pron": "slojt",
+        "spell": "sloit"
+    },
+    {
+        "pron": "glojlm",
+        "spell": "gloilm"
+    },
+    {
+        "pron": "mæjfθ",
+        "spell": "meifth"
+    },
+    {
+        "pron": "bɹekt",
+        "spell": "brect"
+    },
+    {
+        "pron": "wapθ",
+        "spell": "wupth"
+    },
+    {
+        "pron": "dʒaltʃ",
+        "spell": "julch"
+    },
+    {
+        "pron": "ʃæŋkt",
+        "spell": "shanct"
+    },
+    {
+        "pron": "wæːxtsðɜːnθmelt",
+        "spell": "wakststhernthmelt"
+    },
+    {
+        "pron": "ledz",
+        "spell": "leds"
+    },
+    {
+        "pron": "nəwts",
+        "spell": "noats"
+    },
+    {
+        "pron": "skʊːmd",
+        "spell": "skoormed"
+    },
+    {
+        "pron": "ɹɔmdtæwpθ",
+        "spell": "rommedtowpth"
+    },
+    {
+        "pron": "slɔksθs",
+        "spell": "sloxths"
+    },
+    {
+        "pron": "gəwf",
+        "spell": "gofe"
+    },
+    {
+        "pron": "sloːvʊlvkəwʒ",
+        "spell": "slorvoolvekoazhe"
+    },
+    {
+        "pron": "pʊːpθ",
+        "spell": "poorpth"
+    },
+    {
+        "pron": "halps",
+        "spell": "hulps"
+    },
+    {
+        "pron": "ɹoːmt",
+        "spell": "rormt"
+    },
+    {
+        "pron": "dwɪts",
+        "spell": "dwits"
+    },
+    {
+        "pron": "twɔn",
+        "spell": "twon"
+    },
+    {
+        "pron": "ðap",
+        "spell": "thup"
+    },
+    {
+        "pron": "tedfɹɪlf",
+        "spell": "tedfrilf"
+    },
+    {
+        "pron": "swojf",
+        "spell": "swoif"
+    },
+    {
+        "pron": "plʉwv",
+        "spell": "ploove"
+    },
+    {
+        "pron": "veldʒ",
+        "spell": "velge"
+    },
+    {
+        "pron": "stʊn",
+        "spell": "stoon"
+    },
+    {
+        "pron": "glek",
+        "spell": "gleck"
+    },
+    {
+        "pron": "hʊfθs",
+        "spell": "hoofths"
+    },
+    {
+        "pron": "mɔŋd",
+        "spell": "monged"
+    },
+    {
+        "pron": "slʉwlkt",
+        "spell": "sloolked"
+    },
+    {
+        "pron": "flaːθ",
+        "spell": "flarth"
+    },
+    {
+        "pron": "fɹɪjtʃswɪjk",
+        "spell": "freetchsweek"
+    },
+    {
+        "pron": "tʊːksθs",
+        "spell": "toorxths"
+    },
+    {
+        "pron": "ɹæwmp",
+        "spell": "rowmp"
+    },
+    {
+        "pron": "jɔm",
+        "spell": "yom"
+    },
+    {
+        "pron": "ɹɔmz",
+        "spell": "roms"
+    },
+    {
+        "pron": "skɹʉwmt",
+        "spell": "scroomt"
+    },
+    {
+        "pron": "dæjl",
+        "spell": "dale"
+    }
+]

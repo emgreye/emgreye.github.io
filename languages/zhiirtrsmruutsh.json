@@ -1,0 +1,391 @@
+{
+    "name": "ʒiːʈ'ʂmruːtʃ",
+    "syllables": {
+        "onset": [
+            [
+                "plosive"
+            ],
+            [
+                "fricative",
+                "affricate"
+            ],
+            [
+                "nasal"
+            ],
+            [
+                "trill"
+            ]
+        ],
+        "nucleus": [
+            "vowel"
+        ],
+        "coda": [
+            [
+                "trill"
+            ],
+            [
+                "nasal"
+            ],
+            [
+                "fricative",
+                "affricate"
+            ],
+            [
+                "plosive"
+            ]
+        ],
+        "min": 2,
+        "max": 4
+    },
+    "consonants": [
+        "j",
+        "r",
+        "ɸ",
+        "pf",
+        "pf'",
+        "bv",
+        "p",
+        "p'",
+        "b",
+        "m",
+        "f",
+        "f'",
+        "v",
+        "ʙ",
+        "t",
+        "t'",
+        "d",
+        "n",
+        "s",
+        "s'",
+        "z",
+        "ts",
+        "ts'",
+        "dz",
+        "ʃ",
+        "ʃ'",
+        "ʒ",
+        "tʃ",
+        "tʃ'",
+        "dʒ",
+        "ʈ",
+        "ʈ'",
+        "ɖ",
+        "ɳ",
+        "ʂ",
+        "tʂ",
+        "tʂ'",
+        "dʐ",
+        "c",
+        "c'",
+        "ɟ",
+        "ɕ",
+        "ɕ'",
+        "ʑ",
+        "tɕ",
+        "k",
+        "k'",
+        "g",
+        "ŋ",
+        "x",
+        "x'",
+        "ɣ",
+        "kx",
+        "kx'",
+        "gɣ",
+        "ʀ"
+    ],
+    "consonant_manners": [
+        "approximant",
+        "trill",
+        "fricative",
+        "affricate",
+        "affricate",
+        "affricate",
+        "plosive",
+        "plosive",
+        "plosive",
+        "nasal",
+        "fricative",
+        "fricative",
+        "fricative",
+        "trill",
+        "plosive",
+        "plosive",
+        "plosive",
+        "nasal",
+        "fricative",
+        "fricative",
+        "fricative",
+        "affricate",
+        "affricate",
+        "affricate",
+        "fricative",
+        "fricative",
+        "fricative",
+        "affricate",
+        "affricate",
+        "affricate",
+        "plosive",
+        "plosive",
+        "plosive",
+        "nasal",
+        "fricative",
+        "affricate",
+        "affricate",
+        "affricate",
+        "plosive",
+        "plosive",
+        "plosive",
+        "fricative",
+        "fricative",
+        "fricative",
+        "affricate",
+        "plosive",
+        "plosive",
+        "plosive",
+        "nasal",
+        "fricative",
+        "fricative",
+        "fricative",
+        "affricate",
+        "affricate",
+        "affricate",
+        "trill"
+    ],
+    "vowels": [
+        "i",
+        "a",
+        "u",
+        "iː",
+        "aː",
+        "uː"
+    ],
+    "distribution": {
+        "voice": false,
+        "ejective": true,
+        "labialised": false,
+        "palatalised": false,
+        "velarised": false,
+        "aspiration": false,
+        "voiceless": false,
+        "geminated": false
+    },
+    "manners": {
+        "plosive": true,
+        "nasal": true,
+        "fricative": true,
+        "lfricative": false,
+        "affricate": true,
+        "laffricate": false,
+        "tap": false,
+        "ltap": false,
+        "approximant": false,
+        "uncommon_approximant": false,
+        "trill": true,
+        "click": false,
+        "implosive": false
+    },
+    "vocabulary": [
+        {
+            "pronunciation": "ɕ'aʙgic'vɳʀ",
+            "spelling": "sz'abbgic'vrnrg"
+        },
+        {
+            "pronunciation": "ruːɳɖɳrifm",
+            "spelling": "ruurnrdrnrifm"
+        },
+        {
+            "pronunciation": "f'ʙaːts'rnaːc'ʑɳʀʒŋaɕ",
+            "spelling": "f'bbaats'rnaac'zzrnrgzhngasz"
+        },
+        {
+            "pronunciation": "gnʙiːviːts",
+            "spelling": "gnbbiiviits"
+        },
+        {
+            "pronunciation": "p'ʙaːgruːk",
+            "spelling": "p'bbaagruuk"
+        },
+        {
+            "pronunciation": "tsuːdbvɳic'",
+            "spelling": "tsuudbvrnic'"
+        },
+        {
+            "pronunciation": "uɣrnʙiciːc",
+            "spelling": "ughrnbbiciic"
+        },
+        {
+            "pronunciation": "nuːɕ'aːʂdzuːc'ɕ",
+            "spelling": "nuusz'aarsdzuuc'sz"
+        },
+        {
+            "pronunciation": "pnʙaːʈdɕraːɳ",
+            "spelling": "pnbbaartdszraarn"
+        },
+        {
+            "pronunciation": "tʃ'mʀikgɣiv",
+            "spelling": "tsh'mrgikgghiv"
+        },
+        {
+            "pronunciation": "savɣuts'c'iːp's'r",
+            "spelling": "savghuts'c'iip's'r"
+        },
+        {
+            "pronunciation": "tfmʙaxʈbvmʀuːtʂ'its",
+            "spelling": "tfmbbakhrtbvmrguutrs'its"
+        },
+        {
+            "pronunciation": "k'ap'kx'iːʀʃ'naʂ",
+            "spelling": "k'ap'kkh'iirgsh'nars"
+        },
+        {
+            "pronunciation": "kxuts'tʃaːbv",
+            "spelling": "kkhuts'tshaabv"
+        },
+        {
+            "pronunciation": "k'iːpfiːc'nŋiɖʒidm",
+            "spelling": "k'iipfiic'nngirdzhidm"
+        },
+        {
+            "pronunciation": "ɟʂŋruːɳʙc'dʒuːznp'u",
+            "spelling": "jrsngruurnbbc'dzhuuznp'u"
+        },
+        {
+            "pronunciation": "p'mʙiːtʂ'nʀis'",
+            "spelling": "p'mbbiitrs'nrgis'"
+        },
+        {
+            "pronunciation": "ʀiːk'ʈɕ'aːk'gɣn",
+            "spelling": "rgiik'rtsz'aak'gghn"
+        },
+        {
+            "pronunciation": "ʂuːɖʙc'ruːknrvɳiːgʀ",
+            "spelling": "rsuurdbbc'ruuknrvrniigrg"
+        },
+        {
+            "pronunciation": "tat'xŋʙɕuʃac'kx'ʀvaːz",
+            "spelling": "tat'khngbbszushac'kkh'rgvaaz"
+        },
+        {
+            "pronunciation": "dʐuːɖɳc'ʒɳʙiʙ",
+            "spelling": "drzuurdrnc'zhrnbbibb"
+        },
+        {
+            "pronunciation": "ʈaːŋŋʀiːv",
+            "spelling": "rtaangngrgiiv"
+        },
+        {
+            "pronunciation": "ʑŋʙuftʂ'nʙiʈ'mʀ",
+            "spelling": "zzngbbuftrs'nbbirt'mrg"
+        },
+        {
+            "pronunciation": "tʃ'ŋricʃ'uːgʂŋ",
+            "spelling": "tsh'ngricsh'uugrsng"
+        },
+        {
+            "pronunciation": "kmʙiʀt's'ŋʀatʃ'nr",
+            "spelling": "kmbbirgt's'ngrgatsh'nr"
+        },
+        {
+            "pronunciation": "dpf'ʀaːmsuc'",
+            "spelling": "dpf'rgaamsuc'"
+        },
+        {
+            "pronunciation": "ŋac'ʀruf'ʙ",
+            "spelling": "ngac'rgruf'bb"
+        },
+        {
+            "pronunciation": "tʂʙaxtɕiʈ'dʒman",
+            "spelling": "trsbbakhtszirt'dzhman"
+        },
+        {
+            "pronunciation": "ɳaːnʀbiːtx",
+            "spelling": "rnaanrgbiitkh"
+        },
+        {
+            "pronunciation": "ʃŋiːɳʀzmudʐŋɟubɳʀ",
+            "spelling": "shngiirnrgzmudrzngjubrnrg"
+        },
+        {
+            "pronunciation": "tʂuːp'bvɕ'ifʙ",
+            "spelling": "trsuup'bvsz'ifbb"
+        },
+        {
+            "pronunciation": "kxaʈ'nʙʙuːs",
+            "spelling": "kkhart'nbbbbuus"
+        },
+        {
+            "pronunciation": "taːk'ŋʙtʃʀukx",
+            "spelling": "taak'ngbbtshrgukkh"
+        },
+        {
+            "pronunciation": "c'x'uːs'nuːx'ŋitʂ",
+            "spelling": "c'kh'uus'nuukh'ngitrs"
+        },
+        {
+            "pronunciation": "ŋugɣf'ɳʙaːx'",
+            "spelling": "ngugghf'rnbbaakh'"
+        },
+        {
+            "pronunciation": "riːs'ʃaːt",
+            "spelling": "riis'shaat"
+        },
+        {
+            "pronunciation": "bmiːp'dʐaːdzŋfuːʃraːm",
+            "spelling": "bmiip'drzaadzngfuushraam"
+        },
+        {
+            "pronunciation": "k'ŋʀuːʈbvŋʈʒaːʙʃ'aːc",
+            "spelling": "k'ngrguurtbvngrtzhaabbsh'aac"
+        },
+        {
+            "pronunciation": "dzaːkaːɟmʀxuɟɳ",
+            "spelling": "dzaakaajmrgkhujrn"
+        },
+        {
+            "pronunciation": "f'uːʙiːɕ'",
+            "spelling": "f'uubbiisz'"
+        },
+        {
+            "pronunciation": "dʒiʑɕaːk'naː",
+            "spelling": "dzhizzszaak'naa"
+        },
+        {
+            "pronunciation": "zagts'ʃ'uːʂ",
+            "spelling": "zagts'sh'uurs"
+        },
+        {
+            "pronunciation": "ʂaŋrʈuːn",
+            "spelling": "rsangrrtuun"
+        },
+        {
+            "pronunciation": "cʃŋaʀŋuːpf'tɕuːmʀ",
+            "spelling": "cshngargnguupf'tszuumrg"
+        },
+        {
+            "pronunciation": "pf'iːʈʒŋrkmra",
+            "spelling": "pf'iirtzhngrkmra"
+        },
+        {
+            "pronunciation": "rikx'p'iːp'ʙ",
+            "spelling": "rikkh'p'iip'bb"
+        },
+        {
+            "pronunciation": "tʃ'apf'ɳʙutscmʙuc'suːk'",
+            "spelling": "tsh'apf'rnbbutscmbbuc'suuk'"
+        },
+        {
+            "pronunciation": "p'aɖmig",
+            "spelling": "p'ardmig"
+        },
+        {
+            "pronunciation": "ʙuːk'ʃ'tʃ'anrʙaːb",
+            "spelling": "bbuuk'sh'tsh'anrbbaab"
+        },
+        {
+            "pronunciation": "cts'ŋuːpʀp'uː",
+            "spelling": "cts'nguuprgp'uu"
+        }
+    ]
+}

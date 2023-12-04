@@ -1,0 +1,340 @@
+{
+    "name": "ʃʰɤtɕʰtsʰɤtɕafʰ",
+    "syllables": {
+        "onset": [
+            [
+                "plosive",
+                "fricative",
+                "affricate",
+                "nasal"
+            ],
+            []
+        ],
+        "nucleus": [
+            "vowel"
+        ],
+        "coda": [
+            [
+                "plosive",
+                "fricative",
+                "affricate",
+                "nasal"
+            ]
+        ],
+        "min": 2,
+        "max": 4
+    },
+    "consonants": [
+        "w",
+        "r",
+        "l",
+        "p",
+        "pʰ",
+        "m",
+        "f",
+        "fʰ",
+        "pf",
+        "pfʰ",
+        "t",
+        "tʰ",
+        "n",
+        "s",
+        "sʰ",
+        "ts",
+        "tsʰ",
+        "ʃ",
+        "ʃʰ",
+        "tʃ",
+        "c",
+        "cʰ",
+        "ɲ",
+        "tɕ",
+        "tɕʰ",
+        "k",
+        "kʰ",
+        "ŋ",
+        "x",
+        "xʰ",
+        "kx",
+        "kxʰ",
+        "q",
+        "qʰ",
+        "χ",
+        "ʔ",
+        "h"
+    ],
+    "consonant_manners": [
+        "approximant",
+        "trill",
+        "lapproximant",
+        "plosive",
+        "plosive",
+        "nasal",
+        "fricative",
+        "fricative",
+        "affricate",
+        "affricate",
+        "plosive",
+        "plosive",
+        "nasal",
+        "fricative",
+        "fricative",
+        "affricate",
+        "affricate",
+        "fricative",
+        "fricative",
+        "affricate",
+        "plosive",
+        "plosive",
+        "nasal",
+        "affricate",
+        "affricate",
+        "plosive",
+        "plosive",
+        "nasal",
+        "fricative",
+        "fricative",
+        "affricate",
+        "affricate",
+        "plosive",
+        "plosive",
+        "fricative",
+        "plosive",
+        "fricative"
+    ],
+    "vowels": [
+        "i",
+        "ɔ",
+        "a",
+        "ow",
+        "oj",
+        "ɤ"
+    ],
+    "distribution": {
+        "voice": true,
+        "ejective": false,
+        "labialised": false,
+        "palatalised": false,
+        "velarised": false,
+        "aspiration": true,
+        "voiceless": false,
+        "geminated": false
+    },
+    "manners": {
+        "plosive": true,
+        "nasal": true,
+        "fricative": true,
+        "lfricative": false,
+        "affricate": true,
+        "laffricate": false,
+        "tap": false,
+        "ltap": false,
+        "approximant": false,
+        "uncommon_approximant": false,
+        "trill": false,
+        "click": false,
+        "implosive": false
+    },
+    "vocabulary": [
+        {
+            "pronunciation": "tsɤpicʰ",
+            "spelling": "tseopich"
+        },
+        {
+            "pronunciation": "ʃʰɤxfowfɔ",
+            "spelling": "shheokhfowfo"
+        },
+        {
+            "pronunciation": "sɔspʰowtɕowt",
+            "spelling": "sosphowtszowt"
+        },
+        {
+            "pronunciation": "ɲasʰqɤsojʔtɕamhojkʰ",
+            "spelling": "nyashqeosoy'tszamhoykh"
+        },
+        {
+            "pronunciation": "sitsojsʰkowʃʰχowpf",
+            "spelling": "sitsoyshkowshhqhowpf"
+        },
+        {
+            "pronunciation": "ʃʰowsʰkxɔcʰqɤtɕ",
+            "spelling": "shhowshkkhochqeotsz"
+        },
+        {
+            "pronunciation": "qowfi",
+            "spelling": "qowfi"
+        },
+        {
+            "pronunciation": "akxʰɤr",
+            "spelling": "akkhheor"
+        },
+        {
+            "pronunciation": "owtʃxatɕʰ",
+            "spelling": "owtshkhatszh"
+        },
+        {
+            "pronunciation": "asʰpʰif",
+            "spelling": "ashphif"
+        },
+        {
+            "pronunciation": "ikxpfʰowm",
+            "spelling": "ikkhpfhowm"
+        },
+        {
+            "pronunciation": "owcʰɔtɕʰɤkʃowhwɤpfɔcʰ",
+            "spelling": "owchotszheokshowhweopfoch"
+        },
+        {
+            "pronunciation": "ricʰhɤs",
+            "spelling": "richheos"
+        },
+        {
+            "pronunciation": "qowqʰowkxqʰix",
+            "spelling": "qowqhowkkhqhikh"
+        },
+        {
+            "pronunciation": "ɔŋpʰiʃʰɤpʰ",
+            "spelling": "ongphishheoph"
+        },
+        {
+            "pronunciation": "mojxatsʰ",
+            "spelling": "moykhatsh"
+        },
+        {
+            "pronunciation": "aʃʰris",
+            "spelling": "ashhris"
+        },
+        {
+            "pronunciation": "kʰiɲhojχɤpfʰtʰaxʰɔ",
+            "spelling": "khinyhoyqheopfhthakhho"
+        },
+        {
+            "pronunciation": "ʃowtxɔtsɔχɤ",
+            "spelling": "showtkhotsoqheo"
+        },
+        {
+            "pronunciation": "hɔʃʰcɤfʰaasam",
+            "spelling": "hoshhceofhaasam"
+        },
+        {
+            "pronunciation": "kikxʰtɕʰɤ",
+            "spelling": "kikkhhtszheo"
+        },
+        {
+            "pronunciation": "mɤʃʰχatsʰfiχpʰojpʰwɤ",
+            "spelling": "meoshhqhatshfiqhphoyphweo"
+        },
+        {
+            "pronunciation": "tsowtʰki",
+            "spelling": "tsowthki"
+        },
+        {
+            "pronunciation": "pʰɤxowkx",
+            "spelling": "pheokhowkkh"
+        },
+        {
+            "pronunciation": "ʃʰɔmojχqʰipʰqʰɔqʰɔʃʰpfʰɔ",
+            "spelling": "shhomoyqhqhiphqhoqhoshhpfho"
+        },
+        {
+            "pronunciation": "nitsʰfʰɤkxʰ",
+            "spelling": "nitshfheokkhh"
+        },
+        {
+            "pronunciation": "qixʰowqʃʰojwojkʰ",
+            "spelling": "qikhhowqshhoywoykh"
+        },
+        {
+            "pronunciation": "aqkʰɔf",
+            "spelling": "aqkhof"
+        },
+        {
+            "pronunciation": "kxojtɕowsʰi",
+            "spelling": "kkhoytszowshi"
+        },
+        {
+            "pronunciation": "ɔʃʰɤʃxʰits",
+            "spelling": "oshheoshkhhits"
+        },
+        {
+            "pronunciation": "cojɲʔɤχ",
+            "spelling": "coyny'eoqh"
+        },
+        {
+            "pronunciation": "ɔɔpfʰ",
+            "spelling": "oopfh"
+        },
+        {
+            "pronunciation": "towcʰtɕʰɔsticʰ",
+            "spelling": "towchtszhostich"
+        },
+        {
+            "pronunciation": "tsʰowilkojs",
+            "spelling": "tshowilkoys"
+        },
+        {
+            "pronunciation": "tɕɔtɕʃawɔ",
+            "spelling": "tszotszshawo"
+        },
+        {
+            "pronunciation": "fʰɤtɕʰɤtʰoj",
+            "spelling": "fheotszheothoy"
+        },
+        {
+            "pronunciation": "pʰitɕʰɤχtʃoj",
+            "spelling": "phitszheoqhtshoy"
+        },
+        {
+            "pronunciation": "afowqʰfʰiʃʰtsʰowɔpfʰ",
+            "spelling": "afowqhfhishhtshowopfh"
+        },
+        {
+            "pronunciation": "afʃʰow",
+            "spelling": "afshhow"
+        },
+        {
+            "pronunciation": "ɤχaf",
+            "spelling": "eoqhaf"
+        },
+        {
+            "pronunciation": "qʰimɔcʰsʰɤcʰ",
+            "spelling": "qhimochsheoch"
+        },
+        {
+            "pronunciation": "qʰixʰtsʰojntsɔkʰ",
+            "spelling": "qhikhhtshoyntsokh"
+        },
+        {
+            "pronunciation": "ɔtʰiwipfʰ",
+            "spelling": "othiwipfh"
+        },
+        {
+            "pronunciation": "ʔɤnsʰaʔiw",
+            "spelling": "'eonsha'iw"
+        },
+        {
+            "pronunciation": "mɤcʰwɔmsʰɤp",
+            "spelling": "meochwomsheop"
+        },
+        {
+            "pronunciation": "lownsɔtɕtsʰowqʰow",
+            "spelling": "lownsotsztshowqhow"
+        },
+        {
+            "pronunciation": "cowtsojsʰ",
+            "spelling": "cowtsoysh"
+        },
+        {
+            "pronunciation": "ojkʰhɤ",
+            "spelling": "oykhheo"
+        },
+        {
+            "pronunciation": "ɲowkʰim",
+            "spelling": "nyowkhim"
+        },
+        {
+            "pronunciation": "ŋiχow",
+            "spelling": "ngiqhow"
+        }
+    ]
+}

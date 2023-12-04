@@ -1,0 +1,660 @@
+{
+    "onset": [
+        {
+            "spell": "m",
+            "pron": "m"
+        },
+        {
+            "spell": "n",
+            "pron": "n"
+        },
+        {
+            "spell": "p",
+            "pron": "p"
+        },
+        {
+            "spell": "b",
+            "pron": "b"
+        },
+        {
+            "spell": "t",
+            "pron": "t"
+        },
+        {
+            "spell": "d",
+            "pron": "d"
+        },
+        {
+            "spell": "k",
+            "pron": "k"
+        },
+        {
+            "spell": "g",
+            "pron": "g"
+        },
+        {
+            "spell": "ch",
+            "pron": "tʃ"
+        },
+        {
+            "spell": "j",
+            "pron": "dʒ"
+        },
+        {
+            "spell": "f",
+            "pron": "f"
+        },
+        {
+            "spell": "v",
+            "pron": "v"
+        },
+        {
+            "spell": "th",
+            "pron": "θ"
+        },
+        {
+            "spell": "th",
+            "pron": "ð"
+        },
+        {
+            "spell": "sh",
+            "pron": "ʃ"
+        },
+        {
+            "spell": "zh",
+            "pron": "ʒ"
+        },
+        {
+            "spell": "h",
+            "pron": "h"
+        },
+        {
+            "spell": "r",
+            "pron": "ɹ"
+        },
+        {
+            "spell": "y",
+            "pron": "j"
+        },
+        {
+            "spell": "w",
+            "pron": "w"
+        },
+        {
+            "spell": "l",
+            "pron": "l"
+        },
+        {
+            "spell": "pl",
+            "pron": "pl"
+        },
+        {
+            "spell": "bl",
+            "pron": "bl"
+        },
+        {
+            "spell": "cl",
+            "pron": "kl"
+        },
+        {
+            "spell": "gl",
+            "pron": "gl"
+        },
+        {
+            "spell": "br",
+            "pron": "bɹ"
+        },
+        {
+            "spell": "tr",
+            "pron": "tʃɹ"
+        },
+        {
+            "spell": "dr",
+            "pron": "dʒɹ"
+        },
+        {
+            "spell": "cr",
+            "pron": "kɹ"
+        },
+        {
+            "spell": "gr",
+            "pron": "gɹ"
+        },
+        {
+            "spell": "tw",
+            "pron": "tw"
+        },
+        {
+            "spell": "dw",
+            "pron": "dw"
+        },
+        {
+            "spell": "gw",
+            "pron": "gw"
+        },
+        {
+            "spell": "qu",
+            "pron": "kw"
+        },
+        {
+            "spell": "fl",
+            "pron": "fl"
+        },
+        {
+            "spell": "sl",
+            "pron": "sl"
+        },
+        {
+            "spell": "fr",
+            "pron": "fɹ"
+        },
+        {
+            "spell": "shr",
+            "pron": "ʃɹ"
+        },
+        {
+            "spell": "sw",
+            "pron": "sw"
+        },
+        {
+            "spell": "thw",
+            "pron": "θw"
+        },
+        {
+            "spell": "sp",
+            "pron": "sp"
+        },
+        {
+            "spell": "sk",
+            "pron": "sk"
+        },
+        {
+            "spell": "st",
+            "pron": "st"
+        },
+        {
+            "spell": "sm",
+            "pron": "sm"
+        },
+        {
+            "spell": "sn",
+            "pron": "sn"
+        },
+        {
+            "spell": "sph",
+            "pron": "sf"
+        },
+        {
+            "spell": "spl",
+            "pron": "spl"
+        },
+        {
+            "spell": "spr",
+            "pron": "spɹ"
+        },
+        {
+            "spell": "str",
+            "pron": "ʃtʃɹ"
+        },
+        {
+            "spell": "scr",
+            "pron": "skɹ"
+        },
+        {
+            "spell": "squ",
+            "pron": "skw"
+        },
+        {
+            "spell": "",
+            "pron": ""
+        }
+    ],
+    "nucleus":[
+        {
+            "spell": "oo",
+            "pron": "ʊ",
+            "can_end": false
+        },
+        {
+            "spell": "i",
+            "pron": "ɪ",
+            "can_end": false
+        },
+        {
+            "spell": "e",
+            "pron": "e",
+            "can_end": false
+        },
+        {
+            "spell": "a",
+            "pron": "æ",
+            "can_end": false
+        },
+        {
+            "spell": "u",
+            "pron": "a",
+            "can_end": false
+        },
+        {
+            "spell": "o",
+            "pron": "ɔ",
+            "can_end": false
+        },
+        {
+            "spell": "u_e",
+            "pron": "jʉw",
+            "altspell": "ew",
+            "can_end": true
+        },
+        {
+            "spell": "oo",
+            "pron": "ʉw",
+            "can_end": true
+        },
+        {
+            "spell": "ee",
+            "pron": "ɪj",
+            "can_end": true
+        },
+        {
+            "spell": "air",
+            "pron": "eː",
+            "can_end": true
+        },
+        {
+            "spell": "er",
+            "pron": "ɜː",
+            "can_end": true
+        },
+        {
+            "spell": "a",
+            "pron": "æː",
+            "can_end": false
+        },
+        {
+            "spell": "ar",
+            "pron": "aː",
+            "can_end": true
+        },
+        {
+            "spell": "oor",
+            "pron": "ʊː",
+            "can_end": true
+        },
+        {
+            "spell": "or",
+            "pron": "oː",
+            "can_end": true
+        },
+        {
+            "spell": "ow",
+            "pron": "æw",
+            "can_end": true
+        },
+        {
+            "spell": "o_e",
+            "pron": "əw",
+            "altspell": "oa",
+            "can_end": true
+        },
+        {
+            "spell": "a_e",
+            "pron": "æj",
+            "altspell": "ei",
+            "can_end": true
+        },
+        {
+            "spell": "i_e",
+            "pron": "ɑj",
+            "altspell": "y",
+            "can_end": true
+        },
+        {
+            "spell": "oi",
+            "pron": "oj",
+            "can_end": true
+        }
+    ],
+    "coda": [
+        {
+            "spell": "m",
+            "pron": "m"
+        },
+        {
+            "spell": "n",
+            "pron": "n"
+        },
+        {
+            "spell": "p",
+            "pron": "p"
+        },
+        {
+            "spell": "b",
+            "pron": "b"
+        },
+        {
+            "spell": "t",
+            "pron": "t"
+        },
+        {
+            "spell": "d",
+            "pron": "d"
+        },
+        {
+            "spell": "ck",
+            "pron": "k"
+        },
+        {
+            "spell": "g",
+            "pron": "g"
+        },
+        {
+            "spell": "tch",
+            "pron": "tʃ"
+        },
+        {
+            "spell": "dge",
+            "pron": "dʒ"
+        },
+        {
+            "spell": "ff",
+            "pron": "f"
+        },
+        {
+            "spell": "ve",
+            "pron": "v"
+        },
+        {
+            "spell": "th",
+            "pron": "θ"
+        },
+        {
+            "spell": "th",
+            "pron": "ð"
+        },
+        {
+            "spell": "sh",
+            "pron": "ʃ"
+        },
+        {
+            "spell": "zhe",
+            "pron": "ʒ"
+        },
+        {
+            "spell": "ng",
+            "pron": "ŋ"
+        },
+        {
+            "spell": "ll",
+            "pron": "l"
+        },
+        {
+            "spell": "lp",
+            "pron": "lp"
+        },
+        {
+            "spell": "lb",
+            "pron": "lb"
+        },
+        {
+            "spell": "lt",
+            "pron": "lt"
+        },
+        {
+            "spell": "ld",
+            "pron": "ld"
+        },
+        {
+            "spell": "lch",
+            "pron": "ltʃ"
+        },
+        {
+            "spell": "lge",
+            "pron": "ldʒ"
+        },
+        {
+            "spell": "lk",
+            "pron": "lk"
+        },
+        {
+            "spell": "lf",
+            "pron": "lf"
+        },
+        {
+            "spell": "lve",
+            "pron": "lv"
+        },
+        {
+            "spell": "lth",
+            "pron": "lθ"
+        },
+        {
+            "spell": "lse",
+            "pron": "ls"
+        },
+        {
+            "spell": "lls",
+            "pron": "lz"
+        },
+        {
+            "spell": "lsh",
+            "pron": "lʃ"
+        },
+        {
+            "spell": "lm",
+            "pron": "lm"
+        },
+        {
+            "spell": "ln",
+            "pron": "ln"
+        },
+        {
+            "spell": "mp",
+            "pron": "mp"
+        },
+        {
+            "spell": "ms",
+            "pron": "mz"
+        },
+        {
+            "spell": "mth",
+            "pron": "mθ"
+        },
+        {
+            "spell": "nth",
+            "pron": "nθ"
+        },
+        {
+            "spell": "nce",
+            "pron": "ns"
+        },
+        {
+            "spell": "ns",
+            "pron": "nz"
+        },
+        {
+            "spell": "nt",
+            "pron": "nt"
+        },
+        {
+            "spell": "nd",
+            "pron": "nd"
+        },
+        {
+            "spell": "nch",
+            "pron": "ntʃ"
+        },
+        {
+            "spell": "nge",
+            "pron": "nʒ"
+        },
+        {
+            "spell": "nk",
+            "pron": "ŋk"
+        },
+        {
+            "spell": "ngth",
+            "pron": "ŋkθ"
+        },
+        {
+            "spell": "ft",
+            "pron": "ft"
+        },
+        {
+            "spell": "sp",
+            "pron": "sp"
+        },
+        {
+            "spell": "st",
+            "pron": "st"
+        },
+        {
+            "spell": "sk",
+            "pron": "sk"
+        },
+        {
+            "spell": "shed",
+            "pron": "ʃt"
+        },
+        {
+            "spell": "thed",
+            "pron": "θt"
+        },
+        {
+            "spell": "zzed",
+            "pron": "zd"
+        },
+        {
+            "spell": "thed",
+            "pron": "ðd"
+        },
+        {
+            "spell": "fth",
+            "pron": "fθ"
+        },
+        {
+            "spell": "fths",
+            "pron": "fθs"
+        },
+        {
+            "spell": "pt",
+            "pron": "pt"
+        },
+        {
+            "spell": "ct",
+            "pron": "kt"
+        },
+        {
+            "spell": "pts",
+            "pron": "pts"
+        },
+        {
+            "spell": "cts",
+            "pron": "kts"
+        },
+        {
+            "spell": "pth",
+            "pron": "pθ"
+        },
+        {
+            "spell": "ts",
+            "pron": "ts"
+        },
+        {
+            "spell": "dth",
+            "pron": "tθ"
+        },
+        {
+            "spell": "ds",
+            "pron": "dz"
+        },
+        {
+            "spell": "x",
+            "pron": "ks"
+        },
+        {
+            "spell": "lmed",
+            "pron": "lmd"
+        },
+        {
+            "spell": "lped",
+            "pron": "lpt"
+        },
+        {
+            "spell": "lps",
+            "pron": "lps"
+        },
+        {
+            "spell": "lts",
+            "pron": "lts"
+        },
+        {
+            "spell": "lst",
+            "pron": "lst"
+        },
+        {
+            "spell": "lked",
+            "pron": "lkt"
+        },
+        {
+            "spell": "lks",
+            "pron": "lks"
+        },
+        {
+            "spell": "mpt",
+            "pron": "mpt"
+        },
+        {
+            "spell": "mps",
+            "pron": "mps"
+        },
+        {
+            "spell": "nts",
+            "pron": "nts"
+        },
+        {
+            "spell": "nct",
+            "pron": "ŋkt"
+        },
+        {
+            "spell": "nx",
+            "pron": "ŋks"
+        },
+        {
+            "spell": "mt",
+            "pron": "mt"
+        },
+        {
+            "spell": "mmed",
+            "pron": "md"
+        },
+        {
+            "spell": "nged",
+            "pron": "ŋd"
+        },
+        {
+            "spell": "nged",
+            "pron": "ndʒd"
+        },
+        {
+            "spell": "xth",
+            "pron": "ksθ"
+        },
+        {
+            "spell": "xt",
+            "pron": "kst"
+        },
+        {
+            "spell": "xths",
+            "pron": "ksθs"
+        },
+        {
+            "spell": "ksts",
+            "pron": "xts"
+        },
+        {
+            "spell": "",
+            "pron": ""
+        }
+    ]
+}
