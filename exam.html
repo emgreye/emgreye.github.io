@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack Info</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&family=Poppins:wght@300;400&display=swap');
+
+        body{
+            background-color: #191a1d;
+            color: white;
+            align-items: center;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+        }
+        .selected {
+            color: rgb(20, 167, 98);
+            font-weight: bold;
+        }
+        span {
+            background-color: rgb(20, 167, 98);
+            width:100%;
+        }
+
+        div#steps > button {
+            font-family: 'Poppins', sans-serif;
+            background-color: #191a1d;
+            border-color:rgb(20, 167, 98);
+            border-radius: 10px;
+            color: white;
+            padding: 12px;
+            font-size: medium;
+            margin-top: 20px;
+        }
+
+        /*div#steps > img {
+            object-fit: cover;
+            width: 75%;
+            height: 100px;
+        }
+
+        div#steps > img:hover {
+            object-fit: fill;
+            width: 75%;
+            height: 42%;
+        }
+        */
+
+        span > button {
+            font-family: 'Poppins', sans-serif;
+            width: 20%;
+            background-color: #191a1d;
+            border: none;
+            color: white;
+            padding: 12px;
+            font-size: x-large;
+        }
+        
+        button:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        button.selected:hover {
+            text-decoration: none;
+            cursor: default;
+        }
+
+        p {
+            width: 75%;
+            margin: auto;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        div#steps > p {
+            width:50%;
+        }
+
+        aside{
+            margin: auto;
+            margin-top: 20px;
+            border: 3px solid rgb(20, 167, 98);
+            border-radius: 10px;
+            width: 50%;
+            padding:20px;
+        }
+
+        hr {
+            width: 25%;
+            margin-top: 80px;
+            color:#191a1d;
+        }
+
+        code {
+            display:block;
+            margin: 5px;
+            padding: 5px;
+            background-color: rgb(255, 255, 255, 0.1);
+            border-radius: 3px;
+            font-family: 'Noto Sans Mono', monospace;
+            font-size:small;
+        }
+
+        em {
+            padding: 5px;
+            background-color: rgb(255, 255, 255, 0.1);
+            border-radius: 3px;
+            font-family: 'Noto Sans Mono', monospace;
+            font-size:small;
+            font-style: normal;
+        }
+
+        h2{
+            background-image: linear-gradient(to right, rgba(20, 167, 98, 0.0) , rgba(20, 167, 98, 1.0), rgba(20, 167, 98, 0.0));
+            padding: 10px;
+            margin-top: 80px;
+        }
+
+        h2:first-child{
+            margin-top: 10px;
+        }
+
+        h3{
+            text-align:left;
+            margin-left: 12.5%;
+        }
+
+        div#steps > img{
+            width: 49.5%
+        }
+
+        aside > p{
+            width: 100%;
+            margin: 10px 0px;
+        }
+
+        a {
+            color:rgb(40, 231, 142);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        a:clicked {
+            color:white;
+        }
+
+        a:visited {
+            color:rgb(20, 167, 98)
+        }
+
+    </style>
+    <script>
+        let json = '{"steps":[' +
+            '{"title":"Virtual Environment","text":"Assuming you already cloned the repository, you must now activate your virtual environment. In your IDE of choice, enter the following in your terminal: <code>source my_venv_directory/bin/activate</code> for Linux or Mac, or <code>my_venv_directory\Scripts\activate.ps1</code> for Windows, where my_venv_directory is replaced with your actual directory.",' +
+            '"image":"./venv.png", "aside": { "label": "Virtual Environments",' +
+            '"note": "A virtual environment is a context in which you can install packages and other dependencies. It is a way to keep the dependencies of different projects seperate by having different virtual environments for each project. That way, if any dependencies used for different projects have conflicts with eachother, they don’t have to be installed together." } },' +
+            '{"title":"Install Packages","text":"Install all of the necessary packages by entering the following commands into your IDE terminal: <code>pip install flask</code><code>pip install flask-socketio</code><code>pip install flask-wtf</code><code>pip install flask-sqlalchemy</code><code>pip install flask-migrate</code><code>pip install flask-login</code>",' +
+            '"image":"./packages.png", "aside": { "label": "Object Relational Mapping",' +
+            '"note": "SQLAlchemy, a package mentioned above, is a ORM (Object Relational Mapper). An ORM is a tool which allows for interaction between a relational database and an object-oriented programming language. With SQLAlchemy, we synchronised python classes with SQLite database tables in our project. To start, we created a file called app.db and set the database URI to refer to it in our config file. Then we created a db object and a migrate object and imported a models module. This models module was created by us in the file models.py. Then, using SQLAlchemy syntax, we could create classes with various attributes and relationships. For instance in our Trainer class, we defined four columns including the primary key, username, and a relationship to the Messages class, called messages (see below). Then, once the database has been initialised with <em>flask db init</em>, the classes are entered into the database as tables. The database can be synchronised to the classes by then creating a migration script <em>flask db migrate</em> and now whenever you make changes to the python classes, you just run <em>flask db upgrade</em> to keep the database in sync.<img src=./class.png width = 100%>" } },' +
+            '{"title":"Edit Virtual Environment","text":"Our database has a username as a primary key rather than an ID, so the flask-login module needs to be edited to adjust for that. Open the file mixins.py in the directory <code>my_venv_directory/lib/python3.10/site-packages/flask_login</code>Inside the file, change <em>self.id</em> to <em>self.username</em> and save the file.",' +
+            '"image":"./selfusername.png", "aside": { "label": "Why don’t we have IDs?",' +
+            '"note": "As a way of saving space, I initialised the <em>User</em> class of the database without an <em>id</em> column. I thought <em>username</em> would suffice as an alternate primary key since every user has one and they’re all unique. Unfortunately, I was wrong. Some flask extensions assume <em>id</em> will be the primary key rather than username, so you have to change the extension’s python code to get the website to work. I found out flask-login was one of those extensions. This likely affects other extensions too, so it seems our project has been made less scaleable by this decision." } },' + 
+            '{"title":"Start the App","text":"Now, in the terminal, enter: <code>flask run</code>This will start the app on localhost. You can now open the website in your default browser by ctrl-clicking the newly provided link.",' +
+            '"image":"./run.png", "aside": { "label": "Routing",' +
+            '"note": "Flask routes handle requests using a stateless client-server architecture. Effectively, a client can make requests through opening pages, submitting forms, etc and a server will respond to them. Statelessness means the server doesn’t store previous requests – it can only use data provided to it in the current request. Every route in Flask can be given a list of methods defining what requests are allowed from this route. These methods can be <em>POST</em>, <em>GET</em>, <em>PUT</em>, <em>PATCH</em>, or <em>DELETE</em>. These methods respectively allow resources to be created, read, updated, partially updated, or deleted. For example, the route for the history page of FitTrack defines <em>GET</em> as the only method. This is because that page only needs to read the user’s history and information and not update, create or delete anything. The history page getting loaded runs the <em>history()</em> function which then requests the current user’s message history and sends it to the page to be rendered.<img src=./routes.png width = 100%>" } }]}';
+        const instructions = JSON.parse(json);
+
+        window.onload = init;
+
+        function init(){
+            //populate the instructions page
+            let stepdiv = document.getElementById("steps");
+            for(let i = 0; i < instructions.steps.length; i++) {
+                let title = document.createElement("h2");
+                title.innerHTML = "Step " + (i+1) + ": " + instructions.steps[i].title;
+                stepdiv.appendChild(title);
+                let image = document.createElement("img");
+                image.src = instructions.steps[i].image;
+                stepdiv.appendChild(image);
+                let text = document.createElement("p");
+                text.innerHTML = instructions.steps[i].text;
+                stepdiv.appendChild(text);
+                let button = document.createElement("button");
+                button.innerHTML = instructions.steps[i].aside.label;
+                button.setAttribute("onclick","toggleaside('" + i + "')");
+                stepdiv.appendChild(button);
+                let aside = document.createElement("aside");
+                aside.innerHTML = instructions.steps[i].aside.note;
+                aside.id = "a" + i;
+                aside.style.display = "none"
+                stepdiv.appendChild(aside);
+                //if (i + 1 == instructions.steps.length){
+                //    let line = document.createElement("hr");
+                //    stepdiv.appendChild(line);
+                //}
+                //else {
+                //    let line = document.createElement("hr");
+                //    line.style.color = "#191a1d";
+                //    stepdiv.appendChild(line);
+                //}
+            }
+        }
+        function toggleaside(i) {
+            let aside = document.getElementById("a" + i);
+            console.log(aside.style)
+            if (aside.style.display == "block"){
+                aside.style.display = "none";
+            }
+            else if (aside.style.display == "none"){
+                aside.style.display = "block";
+            }
+            else {
+                console.log("error!");
+            }
+        }
+
+        function showsection(shown) {
+            //make all sections invisible
+            const sections = document.getElementsByClassName("section");
+            for (let i = 0; i < sections.length; i++) {
+                sections[i].style.display='none';
+            }
+            //make desired section visible
+            document.getElementById(shown).style.display='block';
+            
+            //remove all buttons from selected class
+            const menu = document.getElementById("menu");
+            const buttons = menu.getElementsByTagName("button");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("selected");
+            }
+
+            //set current button to selected class
+            let button = shown + "b";
+            document.getElementById(button).classList.add("selected");
+            
+            return false;
+        }
+    </script>
+</head>
+<body>
+    
+        <h1>CITS3403: Agile Web Development - Jake McAuliffe, 23136241</h1>
+
+        <span id="menu">
+            <button id="overviewb" class="selected" onclick="showsection('overview')">Overview</button> 
+            <button id="instructionsb" onclick="showsection('instructions')">Build & Run Instructions</button>
+            <button id="suggestedb" onclick="showsection('suggested')">Suggested Features</button>
+            <button id="adviceb" onclick="showsection('advice')">Advice for Groups</button>
+        </span>
+    
+
+    
+    
+        <div class="section" id="overview">
+            <h2>FitTrack</h2>
+            <p>
+                FitTrack is a chatting application designed to connect people with trainers. The sign up page involves our Mascot, GymRat, asking you various questions
+                about yourself and your level of fitness. Once you start chatting, this information is easily available to any trainer you connect with. FitTrack allows
+                you to talk with various trainers to see who you are most comfortable with, without having to be asked the same questions over and over.
+            </p>
+            <p>
+                This website functions using Flask, a microframework written in Python. The webpages are built in HTML with assistance from Jinja and the website's data
+                is stored in an SQLite database, interacted with via SQLAlchemy. The chatroom is set up using Socket.IO.
+            </p>
+            <img src="./login.png" width = 37.5%>
+            <img src="./chat.png" width = 37.5%>
+        </div>
+
+        <div class="section" id="instructions" style="display:none">
+            <div id="steps">
+            </div>
+        </div>
+
+        <div class="section" id="suggested" style="display:none">
+            <h2>
+                Suggestion 1: Choose a preferred trainer
+            </h2>
+            <p>
+                This chat application is currently set up to connect a user to a random trainer every time they open the chatting page. A feature could be added to allow
+                users to set the current trainer they are chatting to as a preferred trainer. Once a preferred trainer has been selected, the user will always be connected
+                to that trainer, unless they are no longer selected as preferred trainer, they are inactive or they delete their account. This would improve our website by
+                letting users continue to chat with someone they are comfortable with, rather than their potential enjoyment of the application being up to chance.
+            </p>
+            <h3>
+                User Story
+            </h3>
+            <p>
+                As a user, if I find a trainer that I like, I want to continue my fitness journey with that trainer.
+            </p>
+            <h3>
+                Test Cases
+            </h3>
+            <aside>
+                <p>
+                    <b>Given</b> user X is connected to trainer Y,
+                </p>
+                <p>
+                    <b>When</b> user X clicks "set this trainer as preferred trainer",
+                </p>
+                <p>
+                    <b>Then</b> the database updates such that the trainer Y is set as user X's preferred trainer.
+                </p>
+            </aside>
+            <aside>
+                <p>
+                    <b>Given</b> user X has trainer Y set as preferred trainer,
+                </p>
+                <p>
+                    <b>When</b> user X logs in and is taken to chatroom,
+                </p>
+                <p>
+                    <b>Then</b> user X is connected to trainer Y.
+                </p>
+            </aside>
+            <aside>
+                <p>
+                    <b>Given</b> user X has trainer Y set as preferred trainer and trainer Y has deleted their account,
+                </p>
+                <p>
+                    <b>When</b> user X logs in and is taken to chatroom,
+                </p>
+                <p>
+                    <b>Then</b> user X is connected to a trainer that is not trainer Y.
+                </p>
+            </aside>
+            <aside>
+                <p>
+                    <b>Given</b> user X has trainer Y set as preferred trainer and trainer Y has been inactive for 1 month,
+                </p>
+                <p>
+                    <b>When</b> user X logs in and is taken to chatroom,
+                </p>
+                <p>
+                    <b>Then</b> user X is connected to a trainer that is not trainer Y.
+                </p>
+            </aside>
+            <h2>
+                Suggestion 2: Notify the users of messages they missed.
+            </h2>
+            <p>
+                Currently, if the recipient of a message isn't in the chatroom when a message is sent, the only way to see that message is by manually checking the
+                history page. This feature would keep track of which messages have been read by the recipient inside the database and notify the recipient if any
+                messages were sent that they haven't read yet. Once the recipient opens the history to read the message/s, the messages will be set as <i>read</i> and the
+                notification will disappear. This useful feature would let any user/trainer know what they missed out on while they were off the page.
+            </p>
+            <h3>
+                User Story
+            </h3>
+            <p>
+                As a user, I want to know what messages I haven't seen since I was last on the webpage. These messages may contain useful advice about my fitness.
+            </p>
+            <p>
+                As a trainer, I want to know what messages I haven't seen since I was last on the webpage. These messages may contain valuable information which I
+                could use to better serve my client.
+            </p>
+            <h3>
+                Test Cases
+            </h3>
+            <aside>
+                <p>
+                    <b>Given</b> user X has received messages from trainer Y while user X was not in the chatroom,
+                </p>
+                <p>
+                    <b>When</b> user X logs in,
+                </p>
+                <p>
+                    <b>Then</b> user X should be notified about the messages they received.
+                </p>
+            </aside>
+            <aside>
+                <p>
+                    <b>Given</b> user X has notifications about messages they received,
+                </p>
+                <p>
+                    <b>When</b> user X views the messages,
+                </p>
+                <p>
+                    <b>Then</b> user X should no longer be notified.
+                </p>
+            </aside>
+            <aside>
+                <p>
+                    <b>Given</b> user X has left the chatroom,
+                </p>
+                <p>
+                    <b>When</b> trainer Y sends a message,
+                </p>
+                <p>
+                    <b>Then</b> user X have that message entered into their database as <i>unread</i>.
+                </p>
+            </aside>
+        </div>
+
+        <div class="section" id="advice" style="display:none">
+            <h3>
+                Recommended software
+            </h3>
+            <p>
+                We used <a href="https://code.visualstudio.com/Download">VSCode</a> as our IDE, as it is a versatile system with many plugins which allowed us to use
+                it for python, html, and css. Plus, it let us easily push, pull and sync from Git. In the project, we used different browsers, but I personally prefer
+                <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a> since I find it runs faster and its <i>Developer Tools</i> are easier to use.
+            </p>
+            <h3>
+                Working together
+            </h3>
+            <p>
+                I found that our method of working together worked really well. Every week, we would have a 1 hour meeting to discuss the project and what we'd achieved. 
+                At the end of the meeting, we would each nominate a task we would try to accomplish over the next week. That way, we were all doing tasks appropriate for
+                our skill level. I would also recommend having a group chat (we used a Discord server) to put ideas & information and to ask for help if you need it. 
+            </p>
+            <h3>
+                Deadlines & Deliverables
+            </h3>
+            <p>
+                I personally think my team wasn’t great at prioritising deadlines and deliverables. Some members of the team, myself included, were working on extra
+                features before we’d even started working on some of the required features. I would instead recommend to prioritise getting the requirements working above
+                all other tasks. In terms of competing deadlines, I would suggest working on both/all of your projects equally until one deadline is really soon, at which
+                point you work more on that one. When team members have other projects due, give them less to do so they can focus on the closer deadlines.
+            </p>
+        </div>
+    
+
+</body>
+</html>
