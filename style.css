@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&family=Noto+Serif:ital,wght@0,400;1,800&family=Poppins:wght@300;400&display=swap');
+
+:root {
+    --bg-color:#191919;
+    --main-text: white;
+    --lighter-bg: #292929;
+}
+
+h1 {
+    font-weight: 800;
+    font-style: italic;
+    text-align: center;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--main-text);
+    font-family: 'Noto Serif', serif;
+}
+
+button.bigbutton {
+    font-family: 'Noto Serif', serif;
+    font-size: x-large;
+    padding: 10px 20px 10px 20px;
+    background-color: var(--lighter-bg);
+    color: var(--main-text);
+    border: 1px solid var(--main-text);
+    border-radius: 5px;
+    margin-top: 10%;
+}
+
+button.bigbutton:hover {
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+button.bigbutton:active {
+    box-shadow: inset 2px 2px 5px 0px black;
+    text-decoration: none;
+}
+
+div.langzone {
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
