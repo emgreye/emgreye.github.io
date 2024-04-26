@@ -317,6 +317,10 @@
     ],
     "coda": [
         {
+            "spell": "",
+            "pron": ""
+        },
+        {
             "spell": "m",
             "pron": "m"
         },
@@ -641,7 +645,7 @@
             "pron": "ksθ"
         },
         {
-            "spell": "xt",
+            "spell": "xed",
             "pron": "kst"
         },
         {
@@ -651,10 +655,6 @@
         {
             "spell": "ksts",
             "pron": "xts"
-        },
-        {
-            "spell": "",
-            "pron": ""
-        }
+        }   
     ]
 }
