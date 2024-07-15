@@ -133,7 +133,7 @@ function makeSyllable(info) {
         } else if (!coda['spell'].includes("e")){
             nucleus['spell'] = nucleus['altspell'];
         }
-    } else if (coda['spell'] === ""){
+    } else if (coda['spell'] === "" && typeof(nucleus['altspell']) !== "undefined"){
         nucleus['spell'] = nucleus['altspell'];
     }
 
