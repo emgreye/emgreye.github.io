@@ -1,3 +1,4 @@
 possible improvements:
 technically words like wag can't be make (a is pronounced typically)
-add commons for ease of navigation
+add comments for ease of navigation
+stress isn't quite right

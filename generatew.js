@@ -20,7 +20,7 @@ function pick(arr) {
     return arr[randIndex];
 }
 
-function makeSyllable(info) {
+function makeSyllable(info, stress) {
     let onset = pick(info['onset']);
     let nucleus = pick(info['nucleus']);
     let coda = "";
@@ -59,7 +59,7 @@ function makeSyllable(info) {
     else if (nucleus['pron'] === 'aː' && onset['pron'].at(-1) === 'w') {
         nucleus['pron'] = 'oː';
     }
-    else if (nucleus['pron'] === 'æ' && onset['pron'].at(-1) === 'w') {
+    else if (nucleus['pron'] === 'æ' && onset['pron'].at(-1) === 'w' && Math.random() < 0.5) {
         nucleus['pron'] = 'ɔ';
     }
 
@@ -75,15 +75,19 @@ function makeSyllable(info) {
         }
     }
 
-    if (coda['pron'] > 1 && coda['pron'].slice(0,1) === "lk" && nucleus['pron'] === 'a') {
+    if (coda['pron'] > 1 && (coda['pron'].slice(0,1) === "lk" || coda['pron'].slice(0,1) === "lc") && nucleus['pron'] === 'a') {
         nucleus['pron'] = 'ɔ';
     }
 
     if (coda['spell'].at(0) === "n" || coda['spell'].at(0) === "m"){
+        if (nucleus['pron'] === "æ"){
+            nucleus['pron'] = "eː";
+        }
         if (nucleus['pron'] === "eː") {
             nucleus['spell'] = "a";
-        } else if (nucleus['pron'] === "æ"){
-            nucleus['pron'] = "eː";
+            if (coda['pron'].at(0) === "ŋ"){
+                nucleus['pron'] = "e";
+            }
         }
     }
 
@@ -95,11 +99,11 @@ function makeSyllable(info) {
 
     if (coda['pron'].at(0) === "l" && nucleus['pron'].slice(-1) === "j"){
         nucleus['pron'] += "ə";
-        console.log(nucleus['pron']);
     }
 
     if (coda['pron'] === "l" && nucleus['pron'] === "oː"){
         nucleus['spell'] = 'a';
+        coda['spell'] = 'll';
     }
 
     if (nucleus['pron'] === "æj"){
@@ -120,9 +124,7 @@ function makeSyllable(info) {
 
     if (nucleus['spell'] === "o_e" && coda['spell'] === ""){
         nucleus['spell'] = "o";
-    }
-
-    if (nucleus['spell'] === "a_e" && coda['spell'] === ""){
+    } else if (nucleus['spell'] === "a_e" && coda['spell'] === ""){
         nucleus['spell'] = "ay";
     }
 
@@ -135,15 +137,23 @@ function makeSyllable(info) {
         }
     } else if (coda['spell'] === "" && typeof(nucleus['altspell']) !== "undefined"){
         nucleus['spell'] = nucleus['altspell'];
-    }
-
-    if (coda['pron'] === "v" && nucleus['pron'] === "a"){
+    } else if (coda['pron'] === "v" && nucleus['pron'] === "a"){
         nucleus['spell'] = "o";
     }
 
-    if (onset['pron'].at(-1) === "k" && ['o', 'u', 'a'].includes(nucleus['spell'].at(0))){
-        onset['pron'][-1] = "c";
+    if (onset['spell'].at(-1) === "k" && ['o', 'u', 'a'].includes(nucleus['spell'].at(0))){
+        onset['spell'] = onset['spell'].slice(0, -1) + "c";
+    }
 
+    if (nucleus['pron'] === "ʊ" && coda['pron'] === "d"){
+        nucleus['spell'] = "ou";
+        coda['spell'] = "ld";
+    } else if (nucleus['pron'] === "æ" && (coda['spell'].slice(0,2) === "ft" || coda['spell'].slice(0,2) === "sk" || coda['spell'].slice(0,2) === "lm")){
+        nucleus['pron'] = "aː";
+    }
+
+    if (!stress && Math.random() < 0.5 && nucleus['pron'].length === 1){
+            nucleus['pron'] = "ə"; 
     }
 
     finality = false;
@@ -164,24 +174,41 @@ function makeWord(info) {
         vowelend.push(value['pron'][0]);
     });
 
-    let syllables = Math.floor(8 * Math.pow(300, -Math.random() - 0.2) + 1);
-    let word = makeSyllable(info);
+    let syllables = Math.floor(12 * Math.pow(300, -Math.random() - 0.2) + 1);
+    let word = makeSyllable(info, true);
+    if (syllables > 1){
+        word['pron'] = "ˈ" + word['pron']
+    }
 
     for (let sylno = 1; sylno < syllables; sylno++) {
-        if (!word['isfinal']){
-            let syl = makeSyllable(info);
-            while (syl['pron'].at(0) === word['pron'].slice(-1) ||syl['spell'].at(0) === word['spell'].slice(-1) ||
-            syl['pron'].at(0) === "d" && word['spell'].slice(-1) === "t" || syl['pron'].at(0) === "z" && word['spell'].slice(-1) === "s" ||
-            syl['pron'].at(0) === "j"){
-                syl = makeSyllable(info);
+        let syl = makeSyllable(info, false);
+        if (Math.random() < 0.5){
+            if (!word['isfinal']){
+                while (syl['pron'].at(0) === word['pron'].slice(-1) ||syl['spell'].at(0) === word['spell'].slice(-1) ||
+                syl['pron'].at(0) === "d" && word['spell'].slice(-1) === "t" || syl['pron'].at(0) === "z" && word['spell'].slice(-1) === "s" ||
+                syl['pron'].at(0) === "j" || (word['spell'].slice(-1) === "e" && ['a', 'e', 'i', 'o', 'u'].includes(syl['spell'].at(0)))){
+                    syl = makeSyllable(info, false);
+                }
+                if (vowelend.includes(word['pron'].slice(-1)) && vowelend.includes(syl['pron'][0])) {
+                    word['pron'] += 'ɹ' + syl['pron'];
+                } else {
+                    word['pron'] += syl['pron'];
+                }
+                word['spell'] += syl['spell'];
+                word['isfinal'] = syl['isfinal'];
             }
-            if (vowelend.includes(word['pron'].slice(-1)) && vowelend.includes(syl['pron'][0])) {
-                word['pron'] += 'ɹ' + syl['pron'];
+        } else {
+            while (word['pron'].at(0) === syl['pron'].slice(-1) ||word['spell'].at(0) === syl['spell'].slice(-1) ||
+            word['pron'].at(0) === "d" && syl['spell'].slice(-1) === "t" || word['pron'].at(0) === "z" && syl['spell'].slice(-1) === "s" ||
+            word['pron'].at(0) === "j" || (syl['spell'].slice(-1) === "e" && ['a', 'e', 'i', 'o', 'u'].includes(word['spell'].at(0)))){
+                word = makesyllable(info, false);
+            }
+            if (vowelend.includes(syl['pron'].slice(-1)) && vowelend.includes(word['pron'][0])) {
+                word['pron'] = syl['pron'] + 'ɹ' + word['pron'];
             } else {
-                word['pron'] += syl['pron'];
+                word['pron'] = syl['pron'] + word['pron'];
             }
-            word['spell'] += syl['spell'];
-            word['isfinal'] = syl['isfinal'];
+            word['spell'] = syl['spell'] + word['spell'];
         }
     }
     delete word['isfinal'];
@@ -192,131 +219,120 @@ function makeWord(info) {
 function displayword() {
     const json = {
         onset: [
-            { spell: "m", pron: "m" },
-            { spell: "n", pron: "n" },
-            { spell: "p", pron: "p" },
-            { spell: "b", pron: "b" },
+            { spell: "", pron: "" },
             { spell: "t", pron: "t" },
             { spell: "d", pron: "d" },
             { spell: "k", pron: "k" },
             { spell: "g", pron: "g" },
+            { spell: "m", pron: "m" },
+            { spell: "n", pron: "n" },
+            { spell: "s", pron: "s" },
+            { spell: "z", pron: "z" },
+            { spell: "p", pron: "p" },
+            { spell: "b", pron: "b" },
             { spell: "ch", pron: "tʃ" },
             { spell: "j", pron: "dʒ" },
             { spell: "f", pron: "f" },
             { spell: "v", pron: "v" },
-            { spell: "th", pron: "θ" },
-            { spell: "th", pron: "ð" },
             { spell: "sh", pron: "ʃ" },
-            { spell: "zh", pron: "ʒ" },
             { spell: "h", pron: "h" },
             { spell: "r", pron: "ɹ" },
             { spell: "y", pron: "j" },
             { spell: "w", pron: "w" },
             { spell: "l", pron: "l" },
+            { spell: "sp", pron: "sp" },
+            { spell: "sk", pron: "sk" },
+            { spell: "st", pron: "st" },
+            { spell: "str", pron: "ʃtʃɹ" },
+            { spell: "scr", pron: "skɹ" },
+            { spell: "sm", pron: "sm" },
+            { spell: "sn", pron: "sn" },
+            { spell: "tr", pron: "tʃɹ" },
+            { spell: "dr", pron: "dʒɹ" },
+            { spell: "cr", pron: "kɹ" },
+            { spell: "zh", pron: "ʒ" },
+            { spell: "gr", pron: "gɹ" },
+            { spell: "fr", pron: "fɹ" },
+            { spell: "shr", pron: "ʃɹ" },
             { spell: "pl", pron: "pl" },
             { spell: "bl", pron: "bl" },
             { spell: "cl", pron: "kl" },
             { spell: "gl", pron: "gl" },
             { spell: "br", pron: "bɹ" },
-            { spell: "tr", pron: "tʃɹ" },
-            { spell: "dr", pron: "dʒɹ" },
-            { spell: "cr", pron: "kɹ" },
-            { spell: "gr", pron: "gɹ" },
+            { spell: "th", pron: "θ" },
+            { spell: "th", pron: "ð" },
             { spell: "tw", pron: "tw" },
             { spell: "dw", pron: "dw" },
             { spell: "gw", pron: "gw" },
             { spell: "qu", pron: "kw" },
             { spell: "fl", pron: "fl" },
             { spell: "sl", pron: "sl" },
-            { spell: "fr", pron: "fɹ" },
-            { spell: "shr", pron: "ʃɹ" },
             { spell: "sw", pron: "sw" },
             { spell: "thw", pron: "θw" },
-            { spell: "sp", pron: "sp" },
-            { spell: "sk", pron: "sk" },
-            { spell: "st", pron: "st" },
-            { spell: "sm", pron: "sm" },
-            { spell: "sn", pron: "sn" },
             { spell: "sph", pron: "sf" },
             { spell: "spl", pron: "spl" },
             { spell: "spr", pron: "spɹ" },
-            { spell: "str", pron: "ʃtʃɹ" },
-            { spell: "scr", pron: "skɹ" },
-            { spell: "squ", pron: "skw" },
-            { spell: "", pron: "" }
+            { spell: "squ", pron: "skw" }
         ],
         nucleus: [
-            { spell: "oo", pron: "ʊ", can_end: false },
             { spell: "i", pron: "ɪ", can_end: false },
             { spell: "e", pron: "e", can_end: false },
             { spell: "a", pron: "æ", can_end: false },
             { spell: "u", pron: "a", can_end: false },
             { spell: "o", pron: "ɔ", can_end: false },
-            { spell: "u_e", pron: "jʉw", altspell: "ew", can_end: true },
             { spell: "oo", pron: "ʉw", can_end: true },
-            { spell: "ee", pron: "ɪj", can_end: true },
-            { spell: "air", pron: "eː", can_end: true },
-            { spell: "er", pron: "ɜː", can_end: true },
-            { spell: "ar", pron: "aː", can_end: true },
-            { spell: "oor", pron: "ʊː", can_end: true },
+            { spell: "ea", pron: "ɪj", altspell: "ee", can_end: true },
             { spell: "or", pron: "oː", altspell: "aw", can_end: true },
-            { spell: "ou", pron: "æw", altspell: "ow", can_end: true },
+            { spell: "ar", pron: "aː", can_end: true },
             { spell: "o_e", pron: "əw", altspell: "oa", can_end: true },
             { spell: "a_e", pron: "æj", altspell: "ei", can_end: true },
             { spell: "i_e", pron: "ɑj", altspell: "y", can_end: true },
-            { spell: "oi", pron: "oj", altspell:"oy", can_end: true }
+            { spell: "oo", pron: "ʊ", can_end: false },
+            { spell: "air", pron: "eː", can_end: true },
+            { spell: "er", pron: "ɜː", can_end: true },
+            { spell: "u_e", pron: "jʉw", altspell: "ew", can_end: true },
+            { spell: "ou", pron: "æw", altspell: "ow", can_end: true },
+            { spell: "oi", pron: "oj", altspell:"oy", can_end: true },
+            { spell: "oor", pron: "ʊː", can_end: true }
         ],
         coda: [
             { spell: "", pron: "" },
             { spell: "m", pron: "m" },
             { spell: "n", pron: "n" },
-            { spell: "p", pron: "p" },
-            { spell: "b", pron: "b" },
             { spell: "t", pron: "t" },
             { spell: "d", pron: "d" },
             { spell: "ck", pron: "k" },
             { spell: "g", pron: "g" },
+            { spell: "ss", pron: "s" },
+            { spell: "zz", pron: "z" },
             { spell: "tch", pron: "tʃ" },
             { spell: "dge", pron: "dʒ" },
+            { spell: "p", pron: "p" },
+            { spell: "b", pron: "b" },
             { spell: "ff", pron: "f" },
             { spell: "ve", pron: "v" },
+            { spell: "ft", pron: "ft" },
+            { spell: "sp", pron: "sp" },
+            { spell: "st", pron: "st" },
+            { spell: "sk", pron: "sk" },
             { spell: "th", pron: "θ" },
             { spell: "the", pron: "ð" },
             { spell: "sh", pron: "ʃ" },
             { spell: "zhe", pron: "ʒ" },
             { spell: "ng", pron: "ŋ" },
             { spell: "ll", pron: "l" },
-            { spell: "lp", pron: "lp" },
-            { spell: "lb", pron: "lb" },
-            { spell: "lt", pron: "lt" },
-            { spell: "ld", pron: "ld" },
-            { spell: "lch", pron: "ltʃ" },
-            { spell: "lge", pron: "ldʒ" },
-            { spell: "lk", pron: "lk" },
-            { spell: "lf", pron: "lf" },
-            { spell: "lve", pron: "lv" },
-            { spell: "lth", pron: "lθ" },
-            { spell: "lse", pron: "ls" },
-            { spell: "lls", pron: "lz" },
-            { spell: "lsh", pron: "lʃ" },
-            { spell: "lm", pron: "lm" },
-            { spell: "ln", pron: "ln" },
-            { spell: "mp", pron: "mp" },
-            { spell: "ms", pron: "mz" },
-            { spell: "mth", pron: "mθ" },
             { spell: "nth", pron: "nθ" },
             { spell: "nce", pron: "ns" },
             { spell: "ns", pron: "nz" },
             { spell: "nt", pron: "nt" },
             { spell: "nd", pron: "nd" },
             { spell: "nch", pron: "ntʃ" },
-            { spell: "nge", pron: "nʒ" },
             { spell: "nk", pron: "ŋk" },
+            { spell: "x", pron: "ks" },
+            { spell: "mp", pron: "mp" },
+            { spell: "ms", pron: "mz" },
+            { spell: "mth", pron: "mθ" },
             { spell: "ngth", pron: "ŋkθ" },
-            { spell: "ft", pron: "ft" },
-            { spell: "sp", pron: "sp" },
-            { spell: "st", pron: "st" },
-            { spell: "sk", pron: "sk" },
             { spell: "shed", pron: "ʃt" },
             { spell: "thed", pron: "θt" },
             { spell: "zzed", pron: "zd" },
@@ -331,7 +347,6 @@ function displayword() {
             { spell: "ts", pron: "ts" },
             { spell: "dth", pron: "tθ" },
             { spell: "ds", pron: "dz" },
-            { spell: "x", pron: "ks" },
             { spell: "lmed", pron: "lmd" },
             { spell: "lped", pron: "lpt" },
             { spell: "lps", pron: "lps" },
@@ -348,8 +363,25 @@ function displayword() {
             { spell: "mmed", pron: "md" },
             { spell: "nged", pron: "ŋd" },
             { spell: "nged", pron: "ndʒd" },
+            { spell: "lp", pron: "lp" },
+            { spell: "lb", pron: "lb" },
+            { spell: "lt", pron: "lt" },
+            { spell: "ld", pron: "ld" },
+            { spell: "lch", pron: "ltʃ" },
+            { spell: "lge", pron: "ldʒ" },
+            { spell: "lk", pron: "lk" },
+            { spell: "lf", pron: "lf" },
+            { spell: "lve", pron: "lv" },
+            { spell: "nge", pron: "nʒ" },
+            { spell: "lth", pron: "lθ" },
+            { spell: "lse", pron: "ls" },
+            { spell: "lls", pron: "lz" },
+            { spell: "lsh", pron: "lʃ" },
+            { spell: "lm", pron: "lm" },
+            { spell: "ln", pron: "ln" },
             { spell: "xth", pron: "ksθ" },
             { spell: "xed", pron: "kst" },
+            { spell: "sks", pron: "sks" },
             { spell: "xths", pron: "ksθs" },
             { spell: "xts", pron: "ksts" }
         ]
@@ -366,7 +398,8 @@ function displayword() {
         "igga",
         "iga",
         "igger",
-        "neeg"
+        "neeg",
+        "gook"
     ]
     const badiffull = [
         "wog",
