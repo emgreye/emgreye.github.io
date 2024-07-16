@@ -132,7 +132,7 @@ function makeSyllable(info, stress) {
 
     if (nucleus['spell'].includes("_e")) {
         nucleus['spell'] = nucleus['spell'].slice(0, -2);
-        if(coda['spell'] = "ck"){
+        if(coda['spell'] === "ck"){
             coda['spell'] = "k";
         } if (coda['spell'].length === 1) {
             coda['spell'] += 'e';
