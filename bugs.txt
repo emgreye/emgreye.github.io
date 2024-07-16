@@ -1,4 +1,4 @@
 possible improvements:
-technically words like wag can't be make (a is pronounced typically)
+is there a better way to choose if wa is woh or wah?
 add comments for ease of navigation
 stress isn't quite right

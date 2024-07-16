@@ -89,6 +89,8 @@ function makeSyllable(info, stress) {
                 nucleus['pron'] = "e";
             }
         }
+    } else if (nucleus['pron'].length > 1 && coda['spell'] === "zz"){
+        coda['spell'] = "s"
     }
 
     if (coda['spell'].length > 1) {
@@ -130,7 +132,9 @@ function makeSyllable(info, stress) {
 
     if (nucleus['spell'].includes("_e")) {
         nucleus['spell'] = nucleus['spell'].slice(0, -2);
-        if (coda['spell'].length === 1) {
+        if(coda['spell'] = "ck"){
+            coda['spell'] = "k";
+        } if (coda['spell'].length === 1) {
             coda['spell'] += 'e';
         } else if (!coda['spell'].includes("e")){
             nucleus['spell'] = nucleus['altspell'];
@@ -201,7 +205,7 @@ function makeWord(info) {
             while (word['pron'].at(0) === syl['pron'].slice(-1) ||word['spell'].at(0) === syl['spell'].slice(-1) ||
             word['pron'].at(0) === "d" && syl['spell'].slice(-1) === "t" || word['pron'].at(0) === "z" && syl['spell'].slice(-1) === "s" ||
             word['pron'].at(0) === "j" || (syl['spell'].slice(-1) === "e" && ['a', 'e', 'i', 'o', 'u'].includes(word['spell'].at(0)))){
-                word = makesyllable(info, false);
+                word = makeSyllable(info, false);
             }
             if (vowelend.includes(syl['pron'].slice(-1)) && vowelend.includes(word['pron'][0])) {
                 word['pron'] = syl['pron'] + 'ɹ' + word['pron'];
@@ -389,7 +393,6 @@ function displayword() {
     const badwords = [
         "nig",
         "chink",
-        "coon",
         "koon",
         "gyp",
         "jip",
@@ -399,16 +402,20 @@ function displayword() {
         "iga",
         "igger",
         "neeg",
-        "gook"
+        "gook",
+        "fag"
     ]
     const badiffull = [
         "wog",
         "abo",
         "abbo",
+        "coon",
         "kike",
         "kyk",
         "lebo", 
-        "lebbo"
+        "lebbo",
+        "trannee",
+        "tranee"
     ]
     const word = makeWord(json)
     while (badiffull.includes(word['spell'])){
