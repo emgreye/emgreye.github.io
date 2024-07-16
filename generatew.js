@@ -56,7 +56,7 @@ function makeSyllable(info, stress) {
     else if (nucleus['pron'] === 'oː' && onset['pron'].at(-1) === 'w') {
         nucleus['spell'] = 'ar';
     }
-    else if (nucleus['pron'] === 'aː' && onset['pron'].at(-1) === 'w') {
+    else if (nucleus['pron'] === 'ɐː' && onset['pron'].at(-1) === 'w') {
         nucleus['pron'] = 'oː';
     }
     else if (nucleus['pron'] === 'æ' && onset['pron'].at(-1) === 'w' && Math.random() < 0.5) {
@@ -75,7 +75,7 @@ function makeSyllable(info, stress) {
         }
     }
 
-    if (coda['pron'] > 1 && (coda['pron'].slice(0,1) === "lk" || coda['pron'].slice(0,1) === "lc") && nucleus['pron'] === 'a') {
+    if (coda['pron'] > 1 && (coda['pron'].slice(0,1) === "lk" || coda['pron'].slice(0,1) === "lc") && nucleus['pron'] === 'ɐ') {
         nucleus['pron'] = 'ɔ';
     }
 
@@ -137,7 +137,7 @@ function makeSyllable(info, stress) {
         }
     } else if (coda['spell'] === "" && typeof(nucleus['altspell']) !== "undefined"){
         nucleus['spell'] = nucleus['altspell'];
-    } else if (coda['pron'] === "v" && nucleus['pron'] === "a"){
+    } else if (coda['pron'] === "v" && nucleus['pron'] === "ɐ"){
         nucleus['spell'] = "o";
     }
 
@@ -149,7 +149,7 @@ function makeSyllable(info, stress) {
         nucleus['spell'] = "ou";
         coda['spell'] = "ld";
     } else if (nucleus['pron'] === "æ" && (coda['spell'].slice(0,2) === "ft" || coda['spell'].slice(0,2) === "sk" || coda['spell'].slice(0,2) === "lm")){
-        nucleus['pron'] = "aː";
+        nucleus['pron'] = "ɐː";
     }
 
     if (!stress && Math.random() < 0.5 && nucleus['pron'].length === 1){
@@ -278,12 +278,12 @@ function displayword() {
             { spell: "i", pron: "ɪ", can_end: false },
             { spell: "e", pron: "e", can_end: false },
             { spell: "a", pron: "æ", can_end: false },
-            { spell: "u", pron: "a", can_end: false },
+            { spell: "u", pron: "ɐ", can_end: false },
             { spell: "o", pron: "ɔ", can_end: false },
             { spell: "oo", pron: "ʉw", can_end: true },
             { spell: "ea", pron: "ɪj", altspell: "ee", can_end: true },
             { spell: "or", pron: "oː", altspell: "aw", can_end: true },
-            { spell: "ar", pron: "aː", can_end: true },
+            { spell: "ar", pron: "ɐː", can_end: true },
             { spell: "o_e", pron: "əw", altspell: "oa", can_end: true },
             { spell: "a_e", pron: "æj", altspell: "ei", can_end: true },
             { spell: "i_e", pron: "ɑj", altspell: "y", can_end: true },

@@ -9,22 +9,43 @@
 h1 {
     font-weight: 800;
     text-align: center;
-    margin-bottom: 15%;
 }
 
 h2 {
     font-size:40pt;
+    margin-top: 15%;
+    text-align: center;
 }
 
 h3 {
     font-size: xx-large;
     font-weight: normal;
-    margin-bottom: 15%;
     color: lightgrey;
+    text-align: center;
+}
+
+p {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 80%;
+}
+
+a {
+    color:aqua;
+}
+
+a:visited {
+    color:rgb(62, 146, 255);
 }
 
 a#info {
-    on-hover
+    color: white;
+    text-decoration: none;
+}
+
+a#info:hover {
+    text-decoration: underline;
 }
 
 body {
@@ -34,6 +55,7 @@ body {
 }
 
 button.bigbutton {
+    margin-top: 12%;
     font-family: 'Noto Serif', serif;
     font-size: x-large;
     padding: 10px 20px 10px 20px;
