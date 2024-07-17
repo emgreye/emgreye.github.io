@@ -288,12 +288,12 @@ function displayword() {
             { spell: "ea", pron: "ɪj", altspell: "ee", can_end: true },
             { spell: "or", pron: "oː", altspell: "aw", can_end: true },
             { spell: "ar", pron: "ɐː", can_end: true },
-            { spell: "o_e", pron: "əw", altspell: "oa", can_end: true },
+            { spell: "o_e", pron: "ʌw", altspell: "oa", can_end: true },
             { spell: "a_e", pron: "æj", altspell: "ei", can_end: true },
             { spell: "i_e", pron: "ɑj", altspell: "y", can_end: true },
             { spell: "oo", pron: "ʊ", can_end: false },
             { spell: "air", pron: "eː", can_end: true },
-            { spell: "er", pron: "ɜː", can_end: true },
+            { spell: "er", pron: "ɘː", can_end: true },
             { spell: "u_e", pron: "jʉw", altspell: "ew", can_end: true },
             { spell: "ou", pron: "æw", altspell: "ow", can_end: true },
             { spell: "oi", pron: "oj", altspell:"oy", can_end: true },
@@ -417,7 +417,7 @@ function displayword() {
         "trannee",
         "tranee"
     ]
-    const word = makeWord(json)
+    const word = makeWord(json);
     while (badiffull.includes(word['spell'])){
         word = makeWord(json);
     }

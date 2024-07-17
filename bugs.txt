@@ -1,4 +1,5 @@
 possible improvements:
-is there a better way to choose if wa is woh or wah?
+is there a better way to choose if wa is wɔ or wæ?
 add comments for ease of navigation
 stress isn't quite right
+ʊ always has an onset

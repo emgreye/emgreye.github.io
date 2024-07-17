@@ -84,3 +84,21 @@ div.wordzone {
 #wordgen {
     text-align: center;
 }
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+td {
+    text-align: center;
+}
+
+div.space {
+    height: 320px;
+}
