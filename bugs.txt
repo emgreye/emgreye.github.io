@@ -5,3 +5,7 @@ stress isn't quite right
 ʊ always has an onset
 add "finspell" for when a vowel is final
 final y in long word is "ij" and "aj" in short words
+all followed by vowel is /æl/, not /oːl/
+do a check that changes spelling if last
+V_e should be in that form if final s, with e before the s
+change distribution - average of negative linear and bell curve if possible
