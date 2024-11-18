@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --bg-color:#191919;
+    --main-text: white;
+    --lighter-bg: #292929;
+}
+
+h1 {
+    font-weight: 800;
+    text-align: center;
+}
+
+h2 {
+    font-size:40pt;
+    margin-top: 15%;
+    text-align: center;
+}
+
+h3 {
+    font-size: xx-large;
+    font-weight: normal;
+    color: lightgrey;
+    text-align: center;
+}
+
+p {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 80%;
+}
+
+a {
+    color:aqua;
+}
+
+a:visited {
+    color:rgb(62, 146, 255);
+}
+
+a#info {
+    color: white;
+    text-decoration: none;
+}
+
+a#info:hover {
+    text-decoration: underline;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--main-text);
+    font-family: 'Noto Serif', serif;
+}
+
+button.bigbutton {
+    margin-top: 12%;
+    font-family: 'Noto Serif', serif;
+    font-size: x-large;
+    padding: 10px 20px 10px 20px;
+    background-color: var(--lighter-bg);
+    color: var(--main-text);
+    border: 1px solid var(--main-text);
+    border-radius: 5px;
+}
+
+button.bigbutton:hover {
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+button.bigbutton:active {
+    box-shadow: inset 2px 2px 5px 0px black;
+    text-decoration: none;
+}
+
+div.wordzone {
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+
+#wordgen {
+    text-align: center;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+td {
+    text-align: center;
+}
+
+div.space {
+    height: 320px;
+}

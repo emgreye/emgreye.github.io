@@ -9,3 +9,6 @@ all followed by vowel is /æl/, not /oːl/
 do a check that changes spelling if last
 V_e should be in that form if final s, with e before the s
 change distribution - average of negative linear and bell curve if possible
+stress should be first syllable of root
+maybe add word class and affixes
+nge as nzh spelling
