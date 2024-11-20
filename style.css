@@ -21,7 +21,6 @@ h1 {
   text-align: center;
   text-decoration: underline;
   text-decoration-color: var(--accent);
-  cursor: none;
 }
 
 h2 {
@@ -36,9 +35,10 @@ h2 {
 p {
   text-align: center;
   width: 900px;
-  font-size: 1.5em;
+  font-size: 1em;
   margin-left: auto;
   margin-right: auto;
+  color: grey;
 }
 
 img {
