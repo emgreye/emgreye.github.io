@@ -38,7 +38,22 @@ p {
   font-size: 1em;
   margin-left: auto;
   margin-right: auto;
-  color: grey;
+  color: lightgrey;
+}
+
+p>a{
+  color: var(--accent);
+  font-size: 2em;
+  font-style: italic;
+  margin-top: -10px;
+}
+
+p>a:hover{
+  color: white;
+}
+
+div.spacing{
+  height: 160px;
 }
 
 img {
