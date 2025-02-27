@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../Uni/CITS/projects/3200/Mediterranean-Lingua-Franca-1/data"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "lang_name"
+	}
+}
