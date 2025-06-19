@@ -20,43 +20,112 @@ function pick(arr) {
     return arr[randIndex];
 }
 
+function boringpick(arr) {
+    function randn_bm() {
+        let u = 0, v = 0;
+        while(u === 0) u = Math.random(); // Convert [0,1) to (0,1)
+        while(v === 0) v = Math.random();
+        return Math.sqrt(-1.0 * Math.log(u)) * Math.cos(16.0 * Math.PI * v);
+    }
+
+    randIndex = -1;
+
+    while (randIndex < 0) {
+        randIndex = Math.floor(randn_bm() * (arr.length / 6));
+    }
+    if (randIndex >= arr.length) randIndex = arr.length - 1;
+
+    if (Math.random() < 0.3){
+        randIndex = Math.floor(Math.random() * arr.length);
+    }
+
+    return arr[randIndex];
+}
+
 function makeSyllable(info, stress) {
-    let onset = pick(info['onset']);
-    let nucleus = pick(info['nucleus']);
+    let onset = "";
+    let nucleus = "";
     let coda = "";
     let finality = false;
-    //no double <u>s
-    if (onset['spell'].slice(-1) === "u"){
-        while (nucleus['spell'].at(0) === "u"){
-            nucleus = pick(info['nucleus']);
+
+    if (!stress && Math.random() < 0.2){
+        onset = boringpick(info['onset']);
+        nucleus = boringpick(info['nucleus']);
+        coda = "";
+
+        //no double <u>s
+        if (onset['spell'].slice(-1) === "u"){
+            while (nucleus['spell'].at(0) === "u"){
+                nucleus = boringpick(info['nucleus']);
+            }
+        //no double <i>s
+        } else if (onset['spell'].slice(-1) === "i"){
+            while (nucleus['spell'].at(0) === "i"){
+                nucleus = boringpick(info['nucleus']);
+            }
         }
-    //no double <i>s
-    } else if (onset['spell'].slice(-1) === "i"){
-        while (nucleus['spell'].at(0) === "i"){
-            nucleus = pick(info['nucleus']);
+
+        //only certain vowels can end a word/syllable
+        if (!nucleus['can_end']) {
+            coda = { 'pron': "", 'spell': "" };
+            while (coda['spell'] === "") {
+                coda = boringpick(info['coda']);
+            }
+        } else {
+            coda = boringpick(info['coda']);
+        }
+
+        // no words are spelled <_r_r_> (e.g scror would not be a word)
+        if (nucleus['spell'].slice(-1) === 'r') {
+            while (onset['spell'].slice(-1) === 'r') {
+                onset = boringpick(info['onset']);
+            }
+        }
+        // no words are spelled <_l_l_> (e.g clelk would not be a word)
+        else if (coda['spell'].at(0) === "l" && onset['spell'].length > 1) {
+            while (onset['spell'].slice(-1) === 'l') {
+                onset = boringpick(info['onset']);
+            }
         }
     }
+    else {
+        onset = pick(info['onset']);
+        nucleus = pick(info['nucleus']);
+        coda = "";
 
-    //only certain vowels can end a word/syllable
-    if (!nucleus['can_end']) {
-        coda = { 'pron': "", 'spell': "" };
-        while (coda['spell'] === "") {
+        //no double <u>s
+        if (onset['spell'].slice(-1) === "u"){
+            while (nucleus['spell'].at(0) === "u"){
+                nucleus = pick(info['nucleus']);
+            }
+        //no double <i>s
+        } else if (onset['spell'].slice(-1) === "i"){
+            while (nucleus['spell'].at(0) === "i"){
+                nucleus = pick(info['nucleus']);
+            }
+        }
+
+        //only certain vowels can end a word/syllable
+        if (!nucleus['can_end']) {
+            coda = { 'pron': "", 'spell': "" };
+            while (coda['spell'] === "") {
+                coda = pick(info['coda']);
+            }
+        } else {
             coda = pick(info['coda']);
         }
-    } else {
-        coda = pick(info['coda']);
-    }
 
-    // no words are spelled <_r_r_> (e.g scror would not be a word)
-    if (nucleus['spell'].slice(-1) === 'r') {
-        while (onset['spell'].slice(-1) === 'r') {
-            onset = pick(info['onset']);
+        // no words are spelled <_r_r_> (e.g scror would not be a word)
+        if (nucleus['spell'].slice(-1) === 'r') {
+            while (onset['spell'].slice(-1) === 'r') {
+                onset = pick(info['onset']);
+            }
         }
-    }
-    // no words are spelled <_l_l_> (e.g clelk would not be a word)
-    else if (coda['spell'].at(0) === "l" && onset['spell'].length > 1) {
-        while (onset['spell'].slice(-1) === 'l') {
-            onset = pick(info['onset']);
+        // no words are spelled <_l_l_> (e.g clelk would not be a word)
+        else if (coda['spell'].at(0) === "l" && onset['spell'].length > 1) {
+            while (onset['spell'].slice(-1) === 'l') {
+                onset = pick(info['onset']);
+            }
         }
     }
 
@@ -98,7 +167,7 @@ function makeSyllable(info, stress) {
     }
 
     //if <ul> is followed by a consonant, it is pronounced /ɔl/
-    if (coda['pron'] > 1 && (coda['pron'].slice(0,1) === "lk" || coda['pron'].slice(0,1) === "lc") && nucleus['pron'] === 'ɐ') {
+    if (coda['pron'] > 1 && (coda['pron'].slice(0,1) === "lk" || coda['pron'].slice(0,1) === "lc" || coda['pron'].slice(0,1) === "lp") && nucleus['pron'] === 'ɐ') {
         nucleus['pron'] = 'ɔ';
     }
 
@@ -182,7 +251,7 @@ function makeSyllable(info, stress) {
             coda['spell'] = "k";
         } if (coda['spell'].length === 1) {
             coda['spell'] += 'e';
-        } else if (!coda['spell'].includes("e")){
+        } else if (coda['spell'].includes("e")){
             nucleus['spell'] = nucleus['altspell'];
         }
     }
@@ -217,6 +286,21 @@ function makeSyllable(info, stress) {
         finality = true;
     }
 
+    // si as /ʒ/ should be zh before i
+    if (onset['spell']==='si' && nucleus['spell'][0]==='i'){
+        onset['spell'] = 'zh';
+    }
+
+    // don't mix up ise and ice
+    if (coda['spell'] === 'se' && coda['pron' === 's']){
+        coda['spell'] = 'ce';
+    }
+
+    // no double letters in uninportant syllables
+    if (coda['spell'].length > 1 && coda['spell'][0] === coda['spell'][1]){
+        coda['spell'] = coda['spell'].slice(1);
+    }
+
     return {
         'pron': onset['pron'] + nucleus['pron'] + coda['pron'],
         'spell': onset['spell'] + nucleus['spell'] + coda['spell'],
@@ -246,7 +330,7 @@ function makeWord(info) {
         while (nucleus['spell'].length > 1 && nucleus['spell'] != "i"){
             nucleus = pick(info['nucleus']);
         }
-        word['pron'] = "ˈ" + syl['pron'] + "ʒə" + coda['pron'];
+        word['pron'] = syl['pron'] + "ʒə" + coda['pron'];
         word['spell'] = syl['spell'] + "si" + nucleus['spell'] + coda['spell'];
     }
     for (let sylno = 1; sylno < syllables; sylno++) {
@@ -332,7 +416,7 @@ function displayword() {
             { spell: "tr", pron: "tʃɹ" },
             { spell: "dr", pron: "dʒɹ" },
             { spell: "cr", pron: "kɹ" },
-            { spell: "si", pron: "ʒ" },
+            { spell: "si", pron: "ʒ", altspell: "zh" },
             { spell: "gr", pron: "gɹ" },
             { spell: "fr", pron: "fɹ" },
             { spell: "shr", pron: "ʃɹ" },
