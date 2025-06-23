@@ -382,6 +382,16 @@ function makeWord(info) {
     return word;
 }
 
+function define(word) {
+    
+    
+    
+    return {
+        'pos': "Adjective",
+        'def': "big"
+    };
+}
+
 function displayword() {
     const json = {
         onset: [
@@ -604,6 +614,7 @@ function displayword() {
             word = makeWord(json);
         }
     }
+    def = define(word['spell'])
     const div = document.getElementById("wordgen")
     while (div.hasChildNodes()) {
         div.removeChild(div.firstChild);
@@ -614,5 +625,11 @@ function displayword() {
     const pron = document.createElement("h3");
     pron.innerHTML = "/" + word['pron'] + "/";
     div.insertBefore(pron, null);
+    const pos = document.createElement("div");
+    pos.innerHTML = "<i>" + def['pos']+"</i>";
+    div.insertBefore(pos, null);
+    const defin = document.createElement("div");
+    defin.innerHTML = def['def'];
+    div.insertBefore(defin, null);
 }
 
