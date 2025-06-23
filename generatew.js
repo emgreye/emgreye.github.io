@@ -297,7 +297,7 @@ function makeSyllable(info, stress) {
     }
 
     // no double letters in uninportant syllables
-    if (coda['spell'].length > 1 && coda['spell'][0] === coda['spell'][1]){
+    if (coda['spell'].length > 1 && coda['spell'][0] === coda['spell'][1] && !stress){
         coda['spell'] = coda['spell'].slice(1);
     }
 
