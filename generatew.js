@@ -15645,10 +15645,18 @@ function define(word, syls) {
                 def = "(pl.) zz";
             }
         }
-        else if (word.slice(-2)==="ed"){
-            pos = "simple past verb";
+        else if (word.slice(-2)==="ed" && word.length > 3){
+            let vowelc = 0;
+            word.slice(0,-3).forEach(letter => {
+                if (["a", "e", "i", "o", "u"].includes(letter)){
+                    vowelc = vowelc + 1;
+                }
+            });
+            if (vowelc > 0){
+                pos = "simple past verb";
+            }
         }
-        else if (word.slice(-2)==="ly"){
+        else if (word.slice(-2)==="ly" && syls > 1){
             pos = "adverb";
             def = "in a " + word.slice(0,-2) + " manner"
         }
