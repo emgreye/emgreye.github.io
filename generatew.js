@@ -15656,7 +15656,8 @@ function define(word, syls) {
             if (word.slice(-3)==="ing"){
                 if (Math.random() < 0.5){
                     pos = "adjective";
-                    def = "Ving";
+
+                    def = suffix(verb[Math.floor(Math.random() * verb.length)], "ing");
                 }
                 else {
                     pos = "present participle verb";
@@ -15684,8 +15685,8 @@ function define(word, syls) {
     }
     
     if (pos === "zz"){
-        //if (Math.random() < 1.0/3.0){
-        if (Math.random() < 1){
+        if (Math.random() < 1.0/3.0){
+        //if (Math.random() < 1){
             pos = "noun";
         }
         else if (Math.random() < 0.5){
@@ -15701,22 +15702,70 @@ function define(word, syls) {
         randn = Math.floor(Math.random() * noun.length);
         randa = Math.floor(Math.random() * adjective.length);
         randv = Math.floor(Math.random() * verb.length);
-        randav = Math.floor(Math.random() * adverb.length);
         if (Math.random() < 0.5){
-            def = def + "a " + noun[randn];
+            def = def + " a " + noun[randn];
         }
         else if (Math.random() < 0.5){
-            def = def + "a " + adjective[randa] + " " + noun[randn];
+            def = def + " a " + adjective[randa] + " " + noun[randn];
         }
         else if (Math.random() < 0.5){
-            def = def + "a " + noun[randn] + " that " + suffix(verb[randv], "s");
+            def = def + " a " + noun[randn] + " that " + suffix(verb[randv], "s");
         }
         else if (Math.random() < 0.5){
-            def = def + "the " + suffix(verb[randv], "ing") + " of a " + noun[randn];
+            def = def + "the " + suffix(verb[randv], "ing") + " of  a " + noun[randn];
         }
         else {
             def = def + "the " + noun[randn] + " in which someone "  + suffix(verb[randv], "s");
         }
+    }
+    else if (pos.slice(-4) === "verb" && def.slice(-2)==="zz"){
+        def = def.slice(0,-2);
+        randn = Math.floor(Math.random() * noun.length);
+        randa = Math.floor(Math.random() * adjective.length);
+        randv = Math.floor(Math.random() * verb.length);
+        randav = Math.floor(Math.random() * adverb.length);
+        if (Math.random() < 0.5){
+            def = def + "to " + verb[randv];
+        }
+        else if (Math.random() < 0.5){
+            def = def + "to " + verb[randv] + " " + adverb[randav];
+        }
+        else if (Math.random() < 0.5){
+            def = def + "to " + verb[randv] + " by " + suffix(verb[randv], "ing");
+        }
+        else if (Math.random() < 0.5){
+            def = def + "to " + verb[randv] + " something "  + advjective[randa];
+        }
+        else {
+            def = def + "to " + verb[randv] + " something "  + adverb[randav];
+        }
+    }
+    else if (pos === "adjective" && def.slice(-2)==="zz"){
+        def = def.slice(0,-2);
+        randn = Math.floor(Math.random() * noun.length);
+        randa = Math.floor(Math.random() * adjective.length);
+        randv = Math.floor(Math.random() * verb.length);
+        randav = Math.floor(Math.random() * adverb.length);
+        if (Math.random() < 0.5){
+            def = def + adjective[randa];
+        }
+        else if (Math.random() < 0.5){
+            def = def + "causing " + noun[randn];
+        }
+        else if (Math.random() < 0.5){
+            def = def + "having " + noun[randn];
+        }
+        else if (Math.random() < 0.5){
+            def = def + suffix(verb[randv], "ing");
+        }
+        else {
+            def = def + "not " + adjective[randa];
+        }
+    }
+
+    if (Math.random() < 0.05){
+        let disciplines = ["chemistry", "physics", "linguistics", "mathematics","medicine","computer science","biology"];
+        def = "(" + disciplines[Math.floor(Math.random() * disciplines.length)] + ") " + def;
     }
 
     def = def.replace(" a a"," an a");
@@ -15724,6 +15773,7 @@ function define(word, syls) {
     def = def.replace(" a i"," an i");
     def = def.replace(" a o"," an o");
     def = def.replace(" a u"," an u");
+    def = def.replace(" a","a");
     
     return {
         'pos': pos,
