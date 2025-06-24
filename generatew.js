@@ -16003,15 +16003,24 @@ function displayword() {
         "tranee",
         "mong"
     ]
-    let word = makeWord(json);
+    let word = {
+        'pron': "x",
+        'spell': "y"
+    };
     while (badiffull.includes(word['spell'])){
         word = makeWord(json);
     }
-    for (const bit of badwords){
-        if (word['spell'].includes(bit)){
-            word = makeWord(json);
+    let bad = true;
+    while (bad){
+        word = makeWord(json);
+        if (badiffull.includes(word['spell']) || word['spell'].includes(bit)){
+            bad = true;
+        }
+        else {
+            bad = false;
         }
     }
+
     def = define(word['spell'], word['syls'])
     const div = document.getElementById("wordgen")
     while (div.hasChildNodes()) {
