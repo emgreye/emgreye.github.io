@@ -15773,7 +15773,8 @@ function define(word, syls) {
     def = def.replace(" a i"," an i");
     def = def.replace(" a o"," an o");
     def = def.replace(" a u"," an u");
-    def = def.replace(" a","a");
+    def = def.replace(" a ","a ");
+    def = def.replace(" an ","an ");
     
     return {
         'pos': pos,
