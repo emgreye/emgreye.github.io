@@ -157,7 +157,7 @@ function makeSyllable(info, stress) {
             } else if (onset['pron'].slice(-1) === 'z') {
                 nucleus['pron'] = nucleus['pron'].slice(1);
                 onset['pron'] = 'ʒ';
-            } else if (['ɹ', 'l', 'w', 'ʃ', 'ʒ'].includes(onset['pron'].slice(-1))) {
+            } else if (['ɹ', 'l', 'w', 'ʃ', 'ʒ', 'j'].includes(onset['pron'].slice(-1))) {
                 nucleus['pron'] = nucleus['pron'].slice(1);
                 if (onset['pron'].slice(-1) == 'ʒ'){
                     onset['spell'] = 's';
@@ -251,6 +251,12 @@ function makeSyllable(info, stress) {
             coda['spell'] = "k";
         } if (coda['spell'].length === 1) {
             coda['spell'] += 'e';
+            if (coda['spell'] === 'se'){
+                coda['spell'] = 'ce';
+            }
+            else if (coda['spell'] === 'ze'){
+                coda['spell'] = 'se';
+            }
         } else if (coda['spell'].includes("e")){
             nucleus['spell'] = nucleus['altspell'];
         }
@@ -291,15 +297,21 @@ function makeSyllable(info, stress) {
         onset['spell'] = 'zh';
     }
 
-    // don't mix up ise and ice
-    if (coda['spell'] === 'se' && coda['pron' === 's']){
-        coda['spell'] = 'ce';
+    // /ʌwg/, /ɑjg/ and /æj/ are spelled ogue
+    if ((nucleus['pron'] === 'ʌw' || nucleus['pron'] === 'ɑj' || nucleus['pron'] === 'æj') && coda['pron'] === 'g'){
+        coda['spell'] = 'gue';
+    }
+
+    // /æws/ is spelled ouse
+    if ((nucleus['pron'] === 'æw') && coda['pron'] === 's'){
+        coda['spell'] = 'se'
     }
 
     // no double letters in uninportant syllables
     if (coda['spell'].length > 1 && coda['spell'][0] === coda['spell'][1] && !stress){
         coda['spell'] = coda['spell'].slice(1);
     }
+
 
     return {
         'pron': onset['pron'] + nucleus['pron'] + coda['pron'],
@@ -15647,7 +15659,8 @@ function define(word, syls) {
         }
         else if (word.slice(-2)==="ed" && word.length > 3){
             let vowelc = 0;
-            word.slice(0,-3).forEach(letter => {
+            let part = word.slice(0,-3)
+            part.forEach(letter => {
                 if (["a", "e", "i", "o", "u"].includes(letter)){
                     vowelc = vowelc + 1;
                 }
@@ -15742,7 +15755,7 @@ function define(word, syls) {
             def = def + "to " + verb[randv] + " by " + suffix(verb[randv], "ing");
         }
         else if (Math.random() < 0.5){
-            def = def + "to " + verb[randv] + " something "  + advjective[randa];
+            def = def + "to " + verb[randv] + " something "  + adjective[randa];
         }
         else {
             def = def + "to " + verb[randv] + " something "  + adverb[randav];
