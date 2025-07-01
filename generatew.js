@@ -65,15 +65,7 @@ function makeSyllable(info, stress) {
             }
         }
 
-        //only certain vowels can end a word/syllable
-        if (!nucleus['can_end']) {
-            coda = { 'pron': "", 'spell': "" };
-            while (coda['spell'] === "") {
-                coda = boringpick(info['coda']);
-            }
-        } else {
-            coda = boringpick(info['coda']);
-        }
+        coda = boringpick(info['coda']);
 
         // no words are spelled <_r_r_> (e.g scror would not be a word)
         if (nucleus['spell'].slice(-1) === 'r') {
@@ -181,6 +173,9 @@ function makeSyllable(info, stress) {
             if (coda['pron'].at(0) === "ŋ"){
                 nucleus['pron'] = "e";
             }
+            else if (onset['pron'].at(-1) === w){
+                nucleus['pron'] = 'ɔ';
+            }
         }
     // change the spelling depending on vowel length
     } else if (nucleus['pron'].length > 1){
@@ -194,7 +189,7 @@ function makeSyllable(info, stress) {
             coda['spell'] = "nks";
         }
         else if (coda['spell'].length > 1) {
-            if ((coda['spell'][0] === coda['spell'][1] || coda['spell'].substr(0, 2) === "ck") && nucleus['spell'] != "eː") {
+            if ((coda['spell'][0] === coda['spell'][1] || coda['spell'].substr(0, 2) === "ck") && nucleus['pron'] != "eː") {
                 coda['spell'] = coda['spell'].slice(1);
             }
         }
@@ -257,7 +252,7 @@ function makeSyllable(info, stress) {
             else if (coda['spell'] === 'ze'){
                 coda['spell'] = 'se';
             }
-        } else if (coda['spell'].includes("e")){
+        } else if (!coda['spell'].includes("e")){
             nucleus['spell'] = nucleus['altspell'];
         }
     }
@@ -390,6 +385,37 @@ function makeWord(info) {
             }
             word['spell'] = syl['spell'] + word['spell'];
         }
+    }
+    if (word['pron'].at(-1) === 'ɪ'){
+        word['pron'] = word['pron'].slice(0, -1) + "ɪj";
+    }
+    else if (word['pron'].at(-1) === 'e'){
+        word['pron'] = word['pron'].slice(0, -1);
+    }
+    else if (word['pron'].at(-1) === 'æ'){
+        word['pron'] = word['pron'].slice(0, -1) + "ə";
+    }
+    else if (word['pron'].at(-1) === 'ɐ'){
+        //simulate yod-coalescence and dropping
+        if (word['pron'].at(-2) === 't') {
+            word['pron'] = word['pron'].slice(0, -2) + "tʃʉw";
+        } else if (word['pron'].at(-2) === 'd') {
+            word['pron'] = word['pron'].slice(0, -2) + "dʒʉw";
+        } else if (word['pron'].at(-2) === 's') {
+            word['pron'] = word['pron'].slice(0, -2) + "ʃʉw";
+        } else if (word['pron'].at(-2) === 'z') {
+            word['pron'] = word['pron'].slice(0, -2) + "ʒʉw";
+        } else if (['ɹ', 'l', 'w', 'ʃ', 'ʒ', 'j'].includes(word['pron'].at(-2))) {
+            word['pron'] = word['pron'].slice(0, -1) + "ʉw";
+        } else {
+            word['pron'] = word['pron'].slice(0, -1) + "jʉw";
+        }
+    }
+    else if (word['pron'].at(-1) === 'ɔ'){
+        word['pron'] = word['pron'].slice(0, -1) + "ʌw";
+    }
+    else if (word['pron'].at(-1) === 'ʊ'){
+        word['pron'] = word['pron'].slice(0, -1) + "ʉw";
     }
     delete word['isfinal'];
     word['syls'] = sylno;
@@ -6449,7 +6475,7 @@ function define(word, syls) {
         "mobile",
         "mode",
         "model",
-        "mom",
+        "mum",
         "moment",
         "money",
         "monitor",
@@ -9345,7 +9371,6 @@ function define(word, syls) {
         "displode",
         "bunker",
         "maunder",
-        "Jew",
         "synonymise",
         "federalise",
         "nauseate",
@@ -15752,7 +15777,7 @@ function define(word, syls) {
             def = def + "to " + verb[randv] + " " + adverb[randav];
         }
         else if (Math.random() < 0.5){
-            def = def + "to " + verb[randv] + " by " + suffix(verb[randv], "ing");
+            def = def + "to " + verb[randv] + " by " + suffix(verb[Math.floor(Math.random() * verb.length)], "ing");
         }
         else if (Math.random() < 0.5){
             def = def + "to " + verb[randv] + " something "  + adjective[randa];
