@@ -174,7 +174,7 @@ function makeSyllable(info, stress) {
             if (coda['pron'].at(0) === "ŋ"){
                 nucleus['pron'] = "e";
             }
-            else if (onset['pron'].at(-1) === w){
+            else if (onset['pron'].at(-1) === 'w'){
                 nucleus['pron'] = 'ɔ';
             }
         }
