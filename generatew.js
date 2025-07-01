@@ -47,6 +47,7 @@ function makeSyllable(info, stress) {
     let nucleus = "";
     let coda = "";
     let finality = false;
+    console.log("test")
 
     if (!stress && Math.random() < 0.2){
         onset = boringpick(info['onset']);
