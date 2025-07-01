@@ -47,7 +47,6 @@ function makeSyllable(info, stress) {
     let nucleus = "";
     let coda = "";
     let finality = false;
-    console.log("test")
 
     if (!stress && Math.random() < 0.2){
         onset = boringpick(info['onset']);
@@ -15686,11 +15685,11 @@ function define(word, syls) {
         else if (word.slice(-2)==="ed" && word.length > 3){
             let vowelc = 0;
             let part = word.slice(0,-3)
-            part.forEach(letter => {
+            for (const letter of part){
                 if (["a", "e", "i", "o", "u"].includes(letter)){
                     vowelc = vowelc + 1;
                 }
-            });
+            }
             if (vowelc > 0){
                 pos = "simple past verb";
             }
