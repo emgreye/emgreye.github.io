@@ -16013,8 +16013,14 @@ function displayword() {
     let bad = true;
     while (bad){
         word = makeWord(json);
-        if (badiffull.includes(word['spell']) || word['spell'].includes(bit)){
+        if (badiffull.includes(word['spell'])){
             bad = true;
+        } else {
+            for (const bit of badwords){
+                if (word['spell'].includes(bit)){
+                    bad = true;
+                }
+            }
         }
         else {
             bad = false;
