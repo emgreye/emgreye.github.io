@@ -74,7 +74,7 @@ function makeSyllable(info, stress) {
             }
         }
         // no words are spelled <_l_l_> (e.g clelk would not be a word)
-        else if (coda['spell'].at(0) === "l" && onset['spell'].length > 1) {
+        else if (coda['spell'].at(0) === 'l' && onset['spell'].length > 1) {
             while (onset['spell'].slice(-1) === 'l') {
                 onset = boringpick(info['onset']);
             }
@@ -114,7 +114,7 @@ function makeSyllable(info, stress) {
             }
         }
         // no words are spelled <_l_l_> (e.g clelk would not be a word)
-        else if (coda['spell'].at(0) === "l" && onset['spell'].length > 1) {
+        else if (coda['spell'].at(0) === 'l' && onset['spell'].length > 1) {
             while (onset['spell'].slice(-1) === 'l') {
                 onset = pick(info['onset']);
             }
@@ -178,7 +178,7 @@ function makeSyllable(info, stress) {
             }
         }
     // change the spelling depending on vowel length
-    } else if (nucleus['pron'].length > 1){
+    } else if (nucleus['pron'].length > 1 || nucleus['pron'] === 'ʊ'){
         if (coda['spell'] === "zz"){
             coda['spell'] = "s"
         }
@@ -201,11 +201,11 @@ function makeSyllable(info, stress) {
     }
 
     // add /ə/ in between /j/ and /l/
-    if (coda['pron'].at(0) === "l" && nucleus['pron'].slice(-1) === "j"){
+    if (coda['pron'].at(0) === 'l' && nucleus['pron'].slice(-1) === 'j'){
         nucleus['pron'] += "ə";
     }
     // /oːl/ is typically spelled <all>
-    if (coda['pron'] === "l" && nucleus['pron'] === "oː"){
+    if (coda['pron'] === 'l' && nucleus['pron'] === 'oː'){
         nucleus['spell'] = 'a';
         coda['spell'] = 'll';
     }
@@ -246,7 +246,7 @@ function makeSyllable(info, stress) {
             coda['spell'] = "k";
         } if (coda['spell'].length === 1) {
             coda['spell'] += 'e';
-            if (coda['spell'] === 'se'){
+            if (coda['spell'] === 'se' && coda['pron'] === 's'){
                 coda['spell'] = 'ce';
             }
             else if (coda['spell'] === 'ze'){
@@ -277,34 +277,53 @@ function makeSyllable(info, stress) {
         nucleus['pron'] = "ɐː";
     }
 
-    // short vowels can become /ə/ in unstressed syllables
-    if (!stress && Math.random() < 0.5 && nucleus['pron'].length === 1){
-        nucleus['pron'] = "ə"; 
-    }
-
     // certain consonant clusters only appear in final syllables
     if (coda['pron'].length > 1 && ['t', 'd', 's', 'z', 'h'].includes(coda['spell'].at(-1))){
         finality = true;
     }
 
     // si as /ʒ/ should be zh before i
-    if (onset['spell']==='si' && nucleus['spell'][0]==='i'){
+    if (onset['spell']==='si' && nucleus['spell'].at(0)==='i'){
         onset['spell'] = 'zh';
     }
 
-    // /ʌwg/, /ɑjg/ and /æj/ are spelled ogue
+    // /ʌwg/, /ɑjg/ and /æjg/ are spelled ogue
     if ((nucleus['pron'] === 'ʌw' || nucleus['pron'] === 'ɑj' || nucleus['pron'] === 'æj') && coda['pron'] === 'g'){
         coda['spell'] = 'gue';
     }
 
     // /æws/ is spelled ouse
-    if ((nucleus['pron'] === 'æw') && coda['pron'] === 's'){
-        coda['spell'] = 'se'
+    if ((nucleus['pron'] === 'æw' || nucleus['pron'] === 'ʉw') && coda['pron'] === 's'){
+        coda['spell'] = 'se';
     }
 
-    // no double letters in uninportant syllables
-    if (coda['spell'].length > 1 && coda['spell'][0] === coda['spell'][1] && !stress){
+    // respell /oː/ as 'au' in some contexts
+    if ((nucleus['pron'] === 'oː' && coda['pron'].at(0) === 'l')){
+        nucleus['spell'] = 'au';
+    }
+
+    // /ʌwdʒ/ is spelled oadge
+    if ((nucleus['pron'] === 'ʌw') && coda['spell'].length > 2 && coda['spell'].at(-1) === 'e'){
+        nucleus['spell'] = 'oa';
+    }
+
+    // outch should be spelled ouch
+    if (nucleus['spell'] === 'ou' && coda['spell'] === 'tch'){
+        coda['spell'] = 'ch';
+    }
+
+    // no double letters in unimportant syllables or complex vowels
+    if (coda['spell'].length > 1 && coda['spell'].at(0) === coda['spell'].at(1) &&
+    (!stress || nucleus['spell'].length > 1)){
         coda['spell'] = coda['spell'].slice(1);
+    }
+    
+    // short vowels can become /ə/ in unstressed syllables
+    if (!stress && Math.random() < 0.7 && nucleus['pron'].length === 1 && (onset['pron'].length < 2 || coda['pron'].length < 2)){
+        nucleus['pron'] = "ə"; 
+    }
+    else if (!stress && Math.random() < 0.1 && nucleus['pron'].length === 1){
+        nucleus['pron'] = "ə"; 
     }
 
 
@@ -322,7 +341,14 @@ function makeWord(info) {
         vowelend.push(value['pron'][0]);
     });
 
-    let syllables = Math.floor(12 * Math.pow(300, -Math.random() - 0.2) + 1);
+    let done = false;
+    let syllables = 0;
+    while (!done){
+        syllables++;
+        if (Math.random() > Math.pow((1.0/3.0),syllables)){
+            done = true;
+        }
+    }
     let word = makeSyllable(info, true);
 
     if (word['pron'].at(0) === 'ʒ' && word['spell'].at(0) === 's'){
@@ -344,7 +370,7 @@ function makeWord(info) {
     let sylno = 1
     for (sylno = 1; sylno < syllables; sylno++) {
         let syl = makeSyllable(info, false);
-        if (Math.random() < 0.5){
+        if (Math.random() < 0.75){
             if (!word['isfinal']){
                 if (sylno === 1){
                     word['pron'] = "ˈ" + word['pron'];
@@ -416,6 +442,54 @@ function makeWord(info) {
     }
     else if (word['pron'].at(-1) === 'ʊ'){
         word['pron'] = word['pron'].slice(0, -1) + "ʉw";
+    }
+    if (Math.random() < 0.8){
+        word['spell'].replace('np','mp');
+        word['spell'].replace('ngp','mp');
+        word['pron'].replace('np','mp');
+        word['pron'].replace('ŋp','mp');
+
+        word['spell'].replace('nb','mb');
+        word['spell'].replace('ngb','mb');
+        word['pron'].replace('nb','mb');
+        word['pron'].replace('ŋb','mb');
+
+        word['spell'].replace('nm','mm');
+        word['spell'].replace('ngm','mm');
+        word['pron'].replace('nm','m');
+        word['pron'].replace('ŋm','m');
+
+        word['spell'].replace('mt','nt');
+        word['spell'].replace('ngt','nt');
+        word['pron'].replace('mt','nt');
+        word['pron'].replace('ŋt','nt');
+
+        word['spell'].replace('md','nd');
+        word['spell'].replace('ngd','nd');
+        word['pron'].replace('md','nd');
+        word['pron'].replace('ŋd','nd');
+
+        word['spell'].replace('mn','nn');
+        word['spell'].replace('ngn','nn');
+        word['pron'].replace('mn','n');
+        word['pron'].replace('ŋn','n');
+
+        word['spell'].replace('mk','nk');
+        word['spell'].replace('ngk','nk');
+        word['spell'].replace('mc','nc');
+        word['spell'].replace('ngc','nc');
+        word['pron'].replace('mk','ŋk');
+        word['pron'].replace('nk','ŋk');
+
+        word['spell'].replace('mg','ng');
+        word['spell'].replace('ngg','ng');
+        word['pron'].replace('mg','ŋg');
+        word['pron'].replace('ng','ŋg');
+
+        word['spell'].replace('ngn','ng');
+        word['spell'].replace('ngm','ng');
+        word['pron'].replace('mŋ','ng');
+        word['pron'].replace('nŋ','ng');
     }
     delete word['isfinal'];
     word['syls'] = sylno;
@@ -2253,7 +2327,7 @@ function define(word, syls) {
         "hypersensitive",
         "hypertensive",
         "hypnotic",
-        "hypnotizable",
+        "hypnotisable",
         "hypothetical",
         "hysterical",
         "icky",
@@ -3192,7 +3266,7 @@ function define(word, syls) {
         "orange",
         "ordinary",
         "organic",
-        "organizational",
+        "organisational",
         "original",
         "ornamental",
         "ornate",
@@ -3642,7 +3716,7 @@ function define(word, syls) {
         "reciprocal",
         "reckless",
         "reclusive",
-        "recognizable",
+        "recognisable",
         "recognised",
         "rectangular",
         "rectifiable",
@@ -4900,7 +4974,7 @@ function define(word, syls) {
         "unrealised",
         "unreasonable",
         "unreceptive",
-        "unrecognizable",
+        "unrecognisable",
         "unrecognised",
         "unredeemable",
         "unregulated",
@@ -6543,7 +6617,7 @@ function define(word, syls) {
         "orange",
         "order",
         "ordinary",
-        "organization",
+        "organisation",
         "original",
         "other",
         "outcome",
@@ -11826,7 +11900,7 @@ function define(word, syls) {
         "strangulate",
         "inherit",
         "berate",
-        "left",
+        "leave",
         "sentence",
         "plash",
         "alliterate",
@@ -15696,7 +15770,11 @@ function define(word, syls) {
         }
         else if (word.slice(-2)==="ly" && syls > 1){
             pos = "adverb";
-            def = "in a " + word.slice(0,-2) + " manner"
+            def = "in a " + word.slice(0,-2) + " manner";
+        }
+        else if (word.slice(-2)==="th" && !["a","e","i","o","u"].includes(word.at(-3)) && Math.random() > 0.3){
+            pos = "adjective";
+            def = "the ordinal form of the number " + word.slice(0,-2);
         }
         else if (word.length > 2 && syls > 1){
             if (word.slice(-3)==="ing"){
