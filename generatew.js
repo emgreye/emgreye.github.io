@@ -16013,6 +16013,7 @@ function displayword() {
     let bad = true;
     while (bad){
         word = makeWord(json);
+        bad = false;
         if (badiffull.includes(word['spell'])){
             bad = true;
         } else {
@@ -16021,9 +16022,6 @@ function displayword() {
                     bad = true;
                 }
             }
-        }
-        else {
-            bad = false;
         }
     }
 
