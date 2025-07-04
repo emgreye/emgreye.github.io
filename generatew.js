@@ -13,7 +13,7 @@ function pick(arr) {
     }
     if (randIndex >= arr.length) randIndex = arr.length - 1;
 
-    if (Math.random() < 0.3){
+    if (Math.random() < 0.1){
         randIndex = Math.floor(Math.random() * arr.length);
     }
 
@@ -35,7 +35,7 @@ function boringpick(arr) {
     }
     if (randIndex >= arr.length) randIndex = arr.length - 1;
 
-    if (Math.random() < 0.3){
+    if (Math.random() < 0.1){
         randIndex = Math.floor(Math.random() * arr.length);
     }
 
@@ -49,10 +49,14 @@ function makeSyllable(info, stress) {
     let finality = false;
     let syls = 1;
 
-    if (!stress && Math.random() < 0.2){
-        onset = boringpick(info['onset']);
+    if (!stress && Math.random() < 0.9){
+        if (Math.random() > 0.4){
+            onset = boringpick(info['onset']);
+        }
+        else {
+            onset = info['onset'][0]
+        }
         nucleus = boringpick(info['nucleus']);
-        coda = "";
 
         //no double <u>s
         if (onset['spell'].slice(-1) === "u"){
@@ -66,6 +70,12 @@ function makeSyllable(info, stress) {
             }
         }
 
+        if (Math.random() > 0.5 && onset['spell'] != ""){
+            coda = boringpick(info['coda']);
+        }
+        else {
+            coda = info['coda'][0]
+        }
         coda = boringpick(info['coda']);
 
         // no words are spelled <_r_r_> (e.g scror would not be a word)
@@ -517,7 +527,8 @@ function suffix(word, suffix){
         if (word.slice(-1)==="e"){
             word = word.slice(0,-1) + "ing";
         }
-        else if (word.slice(-1) != word.slice(-2,-1) && ["a","e","i","o","u"].includes(word.slice(-2,-1)) && word.slice(-1) != "w" && word.slice(-1) != "x"){
+        else if (word.slice(-1) != word.slice(-2,-1) && ["a","e","i","o","u"].includes(word.slice(-2,-1)) && word.slice(-1) != "w" && word.slice(-1) != "x"
+                && !["a","e","i","o","u"].includes(word.slice(-3,-2))){
             word = word + word.slice(-1) + "ing"
         }
         else{
