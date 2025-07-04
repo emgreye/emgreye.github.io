@@ -47,6 +47,7 @@ function makeSyllable(info, stress) {
     let nucleus = "";
     let coda = "";
     let finality = false;
+    let syls = 1;
 
     if (!stress && Math.random() < 0.2){
         onset = boringpick(info['onset']);
@@ -203,6 +204,7 @@ function makeSyllable(info, stress) {
     // add /ə/ in between /j/ and /l/
     if (coda['pron'].at(0) === 'l' && nucleus['pron'].slice(-1) === 'j'){
         nucleus['pron'] += "ə";
+        syls ++;
     }
     // /oːl/ is typically spelled <all>
     if (coda['pron'] === 'l' && nucleus['pron'] === 'oː'){
@@ -273,7 +275,7 @@ function makeSyllable(info, stress) {
         coda['spell'] = "ld";
     // historical /æ/ becomes /ɐː/ before certain consonant clusters
     } else if (nucleus['pron'] === "æ" && (coda['spell'].slice(0,2) === "ft" || coda['spell'].slice(0,2) === "sk" || coda['spell'].slice(0,2) === "lm" ||
-        coda['spell'].slice(0,2) === "st")){
+        coda['spell'].slice(0,2) === "st" || coda['spell'].slice(0,2) === "sp")){
         nucleus['pron'] = "ɐː";
     }
 
@@ -331,7 +333,7 @@ function makeSyllable(info, stress) {
         'pron': onset['pron'] + nucleus['pron'] + coda['pron'],
         'spell': onset['spell'] + nucleus['spell'] + coda['spell'],
         'isfinal': finality,
-        'syls':1
+        'syls': syls
     };
 }
 
@@ -367,9 +369,10 @@ function makeWord(info) {
         word['pron'] = syl['pron'] + "ʒə" + coda['pron'];
         word['spell'] = syl['spell'] + "si" + nucleus['spell'] + coda['spell'];
     }
-    let sylno = 1
+    let sylno = word['syls']
     for (sylno = 1; sylno < syllables; sylno++) {
         let syl = makeSyllable(info, false);
+        sylno += syl['syls'] - 1;
         if (Math.random() < 0.75){
             if (!word['isfinal']){
                 if (sylno === 1){
@@ -443,6 +446,7 @@ function makeWord(info) {
     else if (word['pron'].at(-1) === 'ʊ'){
         word['pron'] = word['pron'].slice(0, -1) + "ʉw";
     }
+    //simulating historical consonant assimilation
     if (Math.random() < 0.8){
         word['spell'].replace('np','mp');
         word['spell'].replace('ngp','mp');
