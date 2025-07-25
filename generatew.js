@@ -1,3 +1,202 @@
+function find_cluster(string, onset) {
+    clusters = [];
+    cluster = [];
+    if (onset) {
+        cluster = [
+            t,
+            d,
+            k,
+            g,
+            m,
+            n,
+            s,
+            z,
+            p,
+            b,
+            tʃ,
+            dʒ,
+            f,
+            v,
+            ʃ,
+            h,
+            ɹ,
+            j,
+            w,
+            l,
+            sb,
+            sg,
+            sd,
+            ʃdʒɹ,
+            sgɹ,
+            sm,
+            sn,
+            tʃɹ,
+            dʒɹ,
+            kɹ,
+            ʒ,
+            gɹ,
+            fɹ,
+            ʃɹ,
+            pl,
+            bl,
+            kl,
+            gl,
+            bɹ,
+            θ,
+            ð,
+            tw,
+            dw,
+            gw,
+            kw,
+            fl,
+            sl,
+            sw,
+            θw,
+            sf,
+            sbl,
+            sbɹ,
+            sgw
+        ]
+    }
+    else {
+        cluster = [
+            m,
+            n,
+            t,
+            d,
+            k,
+            g,
+            s,
+            z,
+            tʃ,
+            dʒ,
+            p,
+            b,
+            f,
+            v,
+            ft,
+            sp,
+            st,
+            sk,
+            θ,
+            ð,
+            ʃ,
+            ʒ,
+            ŋ,
+            l,
+            nθ,
+            ns,
+            nz,
+            nt,
+            nd,
+            ntʃ,
+            ŋk,
+            ks,
+            mp,
+            mz,
+            mθ,
+            ŋkθ,
+            ʃt,
+            θt,
+            zd,
+            ðd,
+            fθ,
+            fθs,
+            pt,
+            kt,
+            pts,
+            kts,
+            pθ,
+            ts,
+            tθ,
+            dz,
+            gz,
+            ps,
+            bz,
+            fs,
+            vz,
+            fts,
+            sps,
+            sts,
+            sks,
+            θs,
+            ðz,
+            ŋz,
+            lz,
+            lmd,
+            lpt,
+            lps,
+            lts,
+            lst,
+            lkt,
+            lks,
+            mpt,
+            mps,
+            nts,
+            ŋkt,
+            ŋks,
+            mt,
+            md,
+            ŋd,
+            ndʒd,
+            lp,
+            lb,
+            lt,
+            ld,
+            ltʃ,
+            ldʒ,
+            lk,
+            lf,
+            lv,
+            lvz,
+            nʒ,
+            lθ,
+            ls,
+            lʃ,
+            lm,
+            ln,
+            lmz,
+            lnz,
+            ksθ,
+            kst,
+            sks,
+            ksθs,
+            ksts
+        ]
+    }
+    i = 0
+    while (i < string.length){
+        j = Math.min(i+4, string.length)
+        while (j > i){
+            for (let k = 0; k < cluster.length; k++){
+                if (cluster[k] === string.substring(i,j)){
+                    k = cluster.length;
+                    clusters.push({ start: i, end: j});
+                    i = j - 1;
+                }
+            }
+            j--;
+        }
+        i++;
+    }
+    return clusters;
+}
+
+function can_end(string) {
+    clusters = find_cluster(string, false);
+    for (let i = 0; i < clusters.length; i++){
+        if (clusters[i]['end'] === string.length){
+            return true;
+        }
+    }
+    if (['ː', 'j', 'w'].includes(string.at(-1))){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function pick(arr) {
     function randn_bm() {
         let u = 0, v = 0;
@@ -132,7 +331,7 @@ function makeSyllable(info, stress) {
         }
     }
 
-    //<wor> in English is pronounced /wɘː/ (with a couple of exceptions: worry, sword)
+    //<wor> is pronounced /wɘː/ (with a couple of exceptions: worry, sword)
     if (nucleus['pron'] === 'oː' && onset['pron'].at(-1) === 'w') {
         nucleus['pron'] = 'ɘː';
     }
@@ -241,7 +440,7 @@ function makeSyllable(info, stress) {
     }
 
     // changes to alternate spelling if it's final
-    if (coda['spell'] === "" && typeof(nucleus['finspell']) !== "undefined"){
+    if (coda['spell'] === "" && typeof(nucleus['finspell']) != "undefined"){
         if (Math.random > 0.5){
             nucleus['spell'] = nucleus['finspell'];
             finality = true;
@@ -322,6 +521,11 @@ function makeSyllable(info, stress) {
     // outch should be spelled ouch
     if (nucleus['spell'] === 'ou' && coda['spell'] === 'tch'){
         coda['spell'] = 'ch';
+    }
+
+    // æl should be spelled al, not all
+    if (coda['spell'] === "ll" && nucleus['pron'] === "æ"){
+        coda['spell'] = "l";
     }
 
     // no double letters in unimportant syllables or complex vowels
@@ -425,7 +629,11 @@ function makeWord(info) {
             word['spell'] = syl['spell'] + word['spell'];
         }
     }
-    if (word['pron'].at(-1) === 'ɪ'){
+    //make non-final vowels final
+    if (word['pron'].at(-1) === 'ə'){
+        word['spell'] = word['spell'].slice(0, -1) + "er";
+    }
+    else if (word['pron'].at(-1) === 'ɪ'){
         word['pron'] = word['pron'].slice(0, -1) + "ɪj";
     }
     else if (word['pron'].at(-1) === 'e'){
@@ -456,6 +664,9 @@ function makeWord(info) {
     else if (word['pron'].at(-1) === 'ʊ'){
         word['pron'] = word['pron'].slice(0, -1) + "ʉw";
     }
+
+    stress_ind = word['pron'].indexOf("ˈ");
+    word['pron'] = word['pron'].replace("ˈ", "");
     //simulating historical consonant assimilation
     if (Math.random() < 0.8){
         word['spell'].replace('np','mp');
@@ -505,6 +716,13 @@ function makeWord(info) {
         word['pron'].replace('mŋ','ng');
         word['pron'].replace('nŋ','ng');
     }
+    clusters = find_cluster(word['pron'], true);
+    for (let i = 0; i < clusters.length; i++){
+        if (clusters['start'] < stress_ind && clusters['end'] > stress_ind){
+            stress_ind = clusters['start'];
+        }
+    }
+    word['pron'] = word['pron'].slice(0, stress_ind) + "ˈ" + word['pron'].slice(stress_ind)
     delete word['isfinal'];
     word['syls'] = sylno;
     console.log(word);
@@ -15762,7 +15980,7 @@ function define(word, syls) {
 
     //conditions
     if (word.length > 1){
-        if (word.slice(-1)==='s' && word.slice(-2) != 'ss'){
+        if (word.slice(-1)==='s' && word.slice(-2) != 'ss' && can_end(word.slice(0,-1))){
             if (Math.random() < 0.5){
                 pos = "simple present verb";
             }
@@ -15771,7 +15989,7 @@ function define(word, syls) {
                 def = "(pl.) zz";
             }
         }
-        else if (word.slice(-2)==="ed" && word.length > 3){
+        else if (word.slice(-2)==="ed" && word.length > 3 && can_end(word.slice(0,-2))){
             let vowelc = 0;
             let part = word.slice(0,-3)
             for (const letter of part){
@@ -15783,16 +16001,16 @@ function define(word, syls) {
                 pos = "simple past verb";
             }
         }
-        else if (word.slice(-2)==="ly" && syls > 1){
+        else if (word.slice(-2)==="ly" && syls > 1 && can_end(word.slice(0,-2))){
             pos = "adverb";
             def = "in a " + word.slice(0,-2) + " manner";
         }
-        else if (word.slice(-2)==="th" && !["a","e","i","o","u"].includes(word.at(-3)) && Math.random() > 0.3){
+        else if (word.slice(-2)==="th" && !["a","e","i","o","u"].includes(word.at(-3)) && Math.random() > 0.3 && can_end(word.slice(0,-2))){
             pos = "adjective";
             def = "the ordinal form of the number " + word.slice(0,-2);
         }
         else if (word.length > 2 && syls > 1){
-            if (word.slice(-3)==="ing"){
+            if (word.slice(-3)==="ing" && can_end(word.slice(0,-3))){
                 if (Math.random() < 0.5){
                     pos = "adjective";
 
@@ -15802,20 +16020,20 @@ function define(word, syls) {
                     pos = "present participle verb";
                 }
             }
-            else if (word.slice(-3)==="ise"){
+            else if (word.slice(-3)==="ise" && can_end(word.slice(0,-3))){
                 pos = "verb";
                 def = "to make something " + word.slice(0,-3);
             }
-            else if (word.slice(-3)==="ish"){
+            else if (word.slice(-3)==="ish" && can_end(word.slice(0,-3))){
                 pos = "adjective";
                 def = "resembling " + word.slice(0,-3);
             }
             else if (word.length > 3 ){
-                if (word.slice(-4)==="tion" || word.slice(-4)==="ment"){
+                if (can_end(word.slice(0,-4)) && (word.slice(-4)==="tion" || word.slice(-4)==="ment")){
                     pos = "noun";
                     def = "the act of" + suffix(word.slice(0,-4), "ing");
                 }
-                else if (word.slice(-4)==="able" || word.slice(-4)==="ible"){
+                else if (can_end(word.slice(0,-4)) && (word.slice(-4)==="able" || word.slice(-4)==="ible")){
                     pos = "adjective";
                     def = "able to be " + suffix(word.slice(0,-4), "ed");
                 }
@@ -15993,7 +16211,7 @@ function displayword() {
             { spell: "a_e", pron: "æj", altspell: "ei", finspell: "ay", can_end: true },
             { spell: "i_e", pron: "ɑj", altspell: "y", finspell: "ai", can_end: true },
             { spell: "oo", pron: "ʊ", can_end: false },
-            { spell: "air", pron: "eː", can_end: true },
+            { spell: "air", pron: "eː", finspell: "are", can_end: true },
             { spell: "er", pron: "ɘː", can_end: true },
             { spell: "u_e", pron: "jʉw", altspell: "ew", can_end: true },
             { spell: "ou", pron: "æw", finspell: "ow", can_end: true },
