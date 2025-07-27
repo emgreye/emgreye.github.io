@@ -261,22 +261,22 @@ function makeSyllable(info, stress, final) {
 
     if (!stress && Math.random() < 0.9){
         if (Math.random() > 0.4){
-            onset = boringpick(info['onset']);
+            onset = structuredClone(boringpick(info['onset']));
         }
         else {
             onset = info['onset'][0]
         }
-        nucleus = boringpick(info['nucleus']);
+        nucleus = structuredClone(boringpick(info['nucleus']));
 
         //no double <u>s
         if (onset['spell'].slice(-1) === "u"){
             while (nucleus['spell'].at(0) === "u"){
-                nucleus = boringpick(info['nucleus']);
+                nucleus = structuredClone(boringpick(info['nucleus']));
             }
         //no double <i>s
         } else if (onset['spell'].slice(-1) === "i"){
             while (nucleus['spell'].at(0) === "i"){
-                nucleus = boringpick(info['nucleus']);
+                nucleus = structuredClone(boringpick(info['nucleus']));
             }
         }
 
@@ -285,14 +285,14 @@ function makeSyllable(info, stress, final) {
             if (!nucleus['can_end'] && final) {
                 coda = { 'pron': "", 'spell': "" };
                 while (coda['spell'] === "") {
-                    coda = pick(info['coda']);
+                    coda = structuredClone(pick(info['coda']));
                 }
             } else {
-                coda = pick(info['coda']);
+                coda = structuredClone(pick(info['coda']));
             }
             // silent <e>s are rare if not in final syllables
             if (coda['spell'].at(-1) === "e"){
-                coda = pick(info['coda']);
+                coda = structuredClone(pick(info['coda']));
             }
         }
         else {
@@ -308,30 +308,30 @@ function makeSyllable(info, stress, final) {
                 nucleus['spell'] = "a";
             }
             while (onset['spell'].slice(-1) === 'r') {
-                onset = boringpick(info['onset']);
+                onset = structuredClone(boringpick(info['onset']));
             }
         }
         // no words are spelled <_l_l_> (e.g clelk would not be a word)
         else if (coda['spell'].at(0) === 'l' && onset['spell'].length > 1) {
             while (onset['spell'].slice(-1) === 'l') {
-                onset = boringpick(info['onset']);
+                onset = structuredClone(boringpick(info['onset']));
             }
         }
     }
     else {
-        onset = pick(info['onset']);
-        nucleus = pick(info['nucleus']);
+        onset = structuredClone(pick(info['onset']));
+        nucleus = structuredClone(pick(info['nucleus']));
         coda = "";
 
         //no double <u>s
         if (onset['spell'].slice(-1) === "u"){
             while (nucleus['spell'].at(0) === "u"){
-                nucleus = pick(info['nucleus']);
+                nucleus = structuredClone(pick(info['nucleus']));
             }
         //no double <i>s
         } else if (onset['spell'].slice(-1) === "i"){
             while (nucleus['spell'].at(0) === "i"){
-                nucleus = pick(info['nucleus']);
+                nucleus = structuredClone(pick(info['nucleus']));
             }
         }
 
@@ -339,14 +339,14 @@ function makeSyllable(info, stress, final) {
         if (!nucleus['can_end'] && final) {
             coda = { 'pron': "", 'spell': "" };
             while (coda['spell'] === "") {
-                coda = pick(info['coda']);
+                coda = structuredClone(pick(info['coda']));
             }
         } else {
-            coda = pick(info['coda']);
+            coda = structuredClone(pick(info['coda']));
         }
         // silent <e>s are rare if not in final syllables
         if (coda['spell'].at(-1) === "e"){
-            coda = pick(info['coda']);
+            coda = structuredClone(pick(info['coda']));
         }
 
         // no words are spelled <_r_r_> (e.g scror would not be a word)
@@ -358,19 +358,15 @@ function makeSyllable(info, stress, final) {
                 nucleus['spell'] = "a";
             }
             while (onset['spell'].slice(-1) === 'r') {
-                onset = pick(info['onset']);
+                onset = structuredClone(pick(info['onset']));
             }
         }
         // no words are spelled <_l_l_> (e.g clelk would not be a word)
         else if (coda['spell'].at(0) === 'l' && onset['spell'].length > 1) {
             while (onset['spell'].slice(-1) === 'l') {
-                onset = pick(info['onset']);
+                onset = structuredClone(pick(info['onset']));
             }
         }
-    }
-    //something is causing some vowels to become /ə/. I can't find it, so this will revert them in the meantime.
-    if (nucleus['pron'] === "ə"){
-        nucleus = boringpick(info['nucleus']);
     }
     //make non-final vowels final
     if (final && coda['pron'] === ""){
@@ -381,10 +377,18 @@ function makeSyllable(info, stress, final) {
         }
         else if (nucleus['pron'] === 'æ'){
             nucleus['pron'] = "ə";
+            if (stress){
+                nucleus['pron'] = "æj";
+                nucleus['spell'] = "ay"
+            }
         }
         else if (nucleus['pron'] === 'e'){
             nucleus['pron'] = "ə";
             nucleus['spell'] = "er";
+            if (stress){
+                nucleus['pron'] = "ɪj";
+                nucleus['spell'] = "ee"
+            }
         }
         else if (nucleus['pron'] === 'ɐ'){
             nucleus['pron'] = "jʉw";
@@ -691,11 +695,11 @@ function makeWord(info) {
         }
         coda = { 'pron': "", 'spell': "" };
         while (coda['spell'] === "") {
-            coda = pick(info['coda']);
+            coda = structuredClone(pick(info['coda']));
         }
         nucleus = { 'pron': "www", 'spell': "www" };
         while (nucleus['spell'].length > 1 && nucleus['spell'] != "i"){
-            nucleus = pick(info['nucleus']);
+            nucleus = structuredClone(pick(info['nucleus']));
         }
         word['pron'] = syl['pron'] + "ʒə" + coda['pron'];
         word['spell'] = syl['spell'] + "si" + nucleus['spell'] + coda['spell'];
