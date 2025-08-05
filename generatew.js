@@ -663,7 +663,11 @@ function makeSyllable(info, stress, final) {
     }
 
     if (nucleus['pron'] === "ə" && !["a","er"].includes(nucleus['spell']) && coda['spell'] === ""){
-        console.log("How did this happen? Readings say: " + final)
+        console.log("How did this happen? Readings say: " + final);
+    }
+
+    if (nucleus['pron'] === "ə" && onset['spell'].at(-1) === "r" && final && coda['spell'] == ""){
+        nucleus['spell'] = "a";
     }
 
     // short vowels and some others can become /ə/ in unstressed syllables
@@ -777,7 +781,7 @@ function makeWord(info) {
                 if (syl['spell'].at(0) === "j"){
                     syl['spell'] = "d" + syl['spell'];
                 }
-                    if (syl['pron'].at(-1) != "ə"){
+                else if (syl['pron'].at(-1) != "ə"){
                     if (syl['spell'].at(0) === "k"){
                         syl['spell'] = "c" + syl['spell'];
                     }
@@ -824,7 +828,7 @@ function makeWord(info) {
                 if (word['spell'].at(0) === "j"){
                     word['spell'] = "d" + word['spell'];
                 }
-                    if (word['pron'].at(-1) != "ə"){
+                else if (word['pron'].at(-1) != "ə"){
                     if (word['spell'].at(0) === "k"){
                         word['spell'] = "c" + word['spell'];
                     }
