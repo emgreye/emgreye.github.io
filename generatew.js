@@ -567,7 +567,7 @@ function makeSyllable(info, stress, final) {
         if(coda['spell'] === "ck"){
             coda['spell'] = "k";
         }
-        if (coda['spell'].length === 1 && !final) {
+        if (coda['spell'].length === 1 && final) {
             coda['spell'] += 'e';
             if (coda['spell'] === 'se' && coda['pron'] === 's'){
                 coda['spell'] = 'ce';
@@ -767,22 +767,30 @@ function makeWord(info) {
             if (['a', 'e', 'i', 'o', 'u', 'y'].includes(syl['spell'].at(0)) && ((word['pron'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ'].includes(word['pron'].at(-2))
             &&  !['j', 'w', 'ː'].includes(word['pron'].at(-1)) && ['a', 'e', 'i', 'o', 'u', 'y'].includes(word['spell'].at(-2))) || (word['pron'].length > 2 &&
             word['pron'].slice(-3, -1) === "eː"))){
+                if (syl['pron'].slice(-3, -1) === "eː"){
+                    syl['pron'] = syl['pron'].slice(0, -2) + syl['pron'].slice(-1);
+                }
                 word['spell'] = word['spell'] + word['spell'].at(-1);
             }
             else if (syl['spell'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ', 'ə'].includes(word['pron'].at(-1)) &&
             ['a', 'e', 'i', 'o', 'u'].includes(syl['spell'].at(1))){
-                if (syl['spell'].at(0) === "k" && syl['pron'].at(-1) != "ə"){
-                    syl['spell'] = "c" + syl['spell'];
-                }
-                else if (syl['spell'].at(0) === "c" && syl['pron'].at(-1) != "ə"){
-                    syl['spell'] = "ck" + syl['spell'].slice(1);
-                }
-                else if (syl['spell'].at(0) === "j"){
+                if (syl['spell'].at(0) === "j"){
                     syl['spell'] = "d" + syl['spell'];
                 }
-                else {
-                    syl['spell'] = syl['spell'].at(0) + syl['spell'];
-                } 
+                    if (syl['pron'].at(-1) != "ə"){
+                    if (syl['spell'].at(0) === "k"){
+                        syl['spell'] = "c" + syl['spell'];
+                    }
+                    else if (syl['spell'].at(0) === "c"){
+                        syl['spell'] = "ck" + syl['spell'].slice(1);
+                    }
+                    else {
+                        syl['spell'] = syl['spell'].at(0) + syl['spell'];
+                    } 
+                }
+            }
+            else if (syl['spell'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ'].includes(word['pron'].at(-1)) && syl['spell'].slice(0,2) === "ch"){
+                syl['spell'] = "t" + syl['spell'];
             }
             if (['a', 'e', 'i', 'o', 'u'].includes(syl['spell'].at(0)) && word['altspell'] != ""){
                 word['spell'] = word['altspell'];
@@ -804,24 +812,32 @@ function makeWord(info) {
             }
             // double consonant if short vowel
             if (['a', 'e', 'i', 'o', 'u', 'y'].includes(word['spell'].at(0)) && ((syl['pron'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ'].includes(syl['pron'].at(-2))
-                &&  !['j', 'w', 'ː'].includes(syl['pron'].at(-1)) && ['a', 'e', 'i', 'o', 'u', 'y'].includes(syl['spell'].at(-2))) || (syl['pron'].length > 2 &&
-                syl['pron'].slice(-3, -1) === "eː"))){
+            &&  !['j', 'w', 'ː'].includes(syl['pron'].at(-1)) && ['a', 'e', 'i', 'o', 'u', 'y'].includes(syl['spell'].at(-2))) || (syl['pron'].length > 2 &&
+            syl['pron'].slice(-3, -1) === "eː"))){
+                if (syl['pron'].slice(-3, -1) === "eː"){
+                    syl['pron'] = syl['pron'].slice(0, -2) + syl['pron'].slice(-1);
+                }
                 syl['spell'] = syl['spell'] + syl['spell'].at(-1);
             }
             else if (word['spell'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ', 'ə'].includes(syl['pron'].at(-1)) &&
             ['a', 'e', 'i', 'o', 'u'].includes(word['spell'].at(1))){
-                if (word['spell'].at(0) === "k" && syl['pron'].at(-1) != "ə"){
-                    word['spell'] = "c" + word['spell'];
-                }
-                else if (word['spell'].at(0) === "c" && syl['pron'].at(-1) != "ə"){
-                    word['spell'] = "ck" + word['spell'].slice(1);
-                }
-                else if (word['spell'].at(0) === "j"){
+                if (word['spell'].at(0) === "j"){
                     word['spell'] = "d" + word['spell'];
                 }
-                else {
-                    word['spell'] = word['spell'].at(0) + word['spell'];
+                    if (word['pron'].at(-1) != "ə"){
+                    if (word['spell'].at(0) === "k"){
+                        word['spell'] = "c" + word['spell'];
+                    }
+                    else if (word['spell'].at(0) === "c"){
+                        word['spell'] = "ck" + word['spell'].slice(1);
+                    }
+                    else {
+                        word['spell'] = word['spell'].at(0) + word['spell'];
+                    } 
                 }
+            }
+            else if (syl['spell'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ'].includes(word['pron'].at(-1)) && syl['spell'].slice(0,2) === "ch"){
+                syl['spell'] = "t" + syl['spell'];
             }
             else if (word['pron'].at(0) == 'ʒ' && !(['a', 'e', 'i', 'o', 'u', 'y', 'r'].includes(syl['spell'].at(-1)))){
                 word['pron'][0] = 'ʃ';
@@ -868,8 +884,10 @@ function makeWord(info) {
             word['pron'].replace('ŋ'+ust, 'ŋk');
         }
     }
-    else {
-        console.log("didn't do it");
+    
+    //multi-syllable words ending in /ɘː/ should spell it <eur>
+    if (syllables > 1 && word['pron'].slice(-2) === "ɘː"){
+        word['spell'] = word['spell'].slice(-2) + "eur";
     }
 
     //simulate yod-dropping and yod-coalescence
@@ -893,7 +911,9 @@ function makeWord(info) {
             stored_stress = clusters[i]['start'];
         }
     }
-    stress_ind = stored_stress;
+    if (stored_stress != -1){
+        stress_ind = stored_stress;
+    }
     if (stress_ind != -1){
         word['pron'] = word['pron'].slice(0, stress_ind) + "ˈ" + word['pron'].slice(stress_ind);
     }
@@ -16379,7 +16399,7 @@ function displayword() {
             { spell: "i_e", pron: "ɑj", altspell: "y", finspell: "igh", can_end: true },
             { spell: "oo", pron: "ʊ", can_end: false },
             { spell: "air", pron: "eː", finspell: "are", can_end: true },
-            { spell: "er", pron: "ɘː", can_end: true },
+            { spell: "ur", pron: "ɘː", can_end: true },
             { spell: "u_e", pron: "jʉw", altspell: "ew", finspell: "ue", can_end: true },
             { spell: "ou", pron: "æw", finspell: "ow", can_end: true },
             { spell: "oi", pron: "oj", finspell:"oy", can_end: true },
