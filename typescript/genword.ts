@@ -1,5 +1,6 @@
 // TODO: Make <changes which are dependant on consonant clusters> work across syllables and
-// TODO: If schwa occurs after/before two clusters, it shouldn't be schwa (e.g. in modvish, the <i> shouldn't be schwa, but in moddish, it should be)
+
+// TODO: add changes made externally (small fix, bits and bobs)
 
 interface SylPart {spell: string, pron: string, finspell?: string, altspell?: string, can_end?: boolean};
 interface Syllable {pron: string, spell: string, syls: number, altspell: string};
@@ -211,7 +212,7 @@ function can_end(string: string): boolean {
     }
 }
 
-function pick(arr: SylPart[]) {
+function pick(arr: SylPart[]): SylPart {
     function randn_bm() {
         let u = 0, v = 0;
         while(u === 0) u = Math.random(); // Convert [0,1) to (0,1)
@@ -233,7 +234,7 @@ function pick(arr: SylPart[]) {
     return arr[randIndex];
 }
 
-function boringpick(arr: SylPart[]) {
+function boringpick(arr: SylPart[]): SylPart {
     function randn_bm() {
         let u = 0, v = 0;
         while(u === 0) u = Math.random(); // Convert [0,1) to (0,1)
@@ -255,7 +256,7 @@ function boringpick(arr: SylPart[]) {
     return arr[randIndex];
 }
 
-function makeSyllable(info: {onset: SylPart[], nucleus: SylPart[], coda: SylPart[]}, stress: boolean, final: boolean) {
+function makeSyllable(info: {onset: SylPart[], nucleus: SylPart[], coda: SylPart[]}, stress: boolean, final: boolean): Syllable {
 
     let onset: SylPart = {spell: "default", pron: "default"};
     let nucleus: SylPart = {spell: "default", pron: "default"};
@@ -16307,7 +16308,7 @@ function define(word: string, syls: number): {'pos': string, 'def': string} {
     };
 }
 
-function displayword() {
+function displayword(): void {
     const json: {onset: SylPart[], nucleus: SylPart[], coda: SylPart[]} = {
         onset: [
             { spell: "", pron: "" },
