@@ -1,9 +1,12 @@
 // TODO: Make <changes which are dependant on consonant clusters> work across syllables and
 // TODO: If schwa occurs after/before two clusters, it shouldn't be schwa (e.g. in modvish, the <i> shouldn't be schwa, but in moddish, it should be)
 
-function find_cluster(string, onset) {
-    clusters = [];
-    cluster = [];
+interface SylPart {spell: string, pron: string, finspell?: string, altspell?: string, can_end?: boolean};
+interface Syllable {pron: string, spell: string, syls: number, altspell: string};
+
+function find_cluster(string: string, onset: boolean): {'start': number, 'end': number}[] {
+    let clusters: {'start': number, 'end': number}[] = [];
+    let cluster: string[] = [];
     if (onset) {
         cluster = [
             "t",
@@ -175,14 +178,14 @@ function find_cluster(string, onset) {
             "ksts"
         ]
     }
-    i = 0
+    let i: number = 0;
     while (i < string.length){
-        j = Math.min(i+4, string.length)
+        let j: number = Math.min(i+4, string.length)
         while (j > i){
             for (let k = 0; k < cluster.length; k++){
                 if (cluster[k] === string.substring(i,j)){
                     k = cluster.length;
-                    clusters.push({ start: i, end: j});
+                    clusters.push({ 'start': i, 'end': j});
                     i = j - 1;
                 }
             }
@@ -193,14 +196,14 @@ function find_cluster(string, onset) {
     return clusters;
 }
 
-function can_end(string) {
-    clusters = find_cluster(string, false);
-    for (let i = 0; i < clusters.length; i++){
-        if (clusters[i]['end'] === string.length){
+function can_end(string: string): boolean {
+    let clusters: {'start': number, 'end': number}[] = find_cluster(string, false);
+    for (let i:number = 0; i < clusters.length; i++){
+        if (clusters[i]?.end === string.length){
             return true;
         }
     }
-    if (['ː', 'j', 'w'].includes(string.at(-1))){
+    if (['ː', 'j', 'w'].includes(string.at(-1)!)){
         return true;
     }
     else {
@@ -208,7 +211,7 @@ function can_end(string) {
     }
 }
 
-function pick(arr) {
+function pick(arr: SylPart[]) {
     function randn_bm() {
         let u = 0, v = 0;
         while(u === 0) u = Math.random(); // Convert [0,1) to (0,1)
@@ -216,7 +219,7 @@ function pick(arr) {
         return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
     }
 
-    randIndex = -1;
+    let randIndex: number = -1;
 
     while (randIndex < 0) {
         randIndex = Math.floor(randn_bm() * (arr.length / 6));
@@ -230,7 +233,7 @@ function pick(arr) {
     return arr[randIndex];
 }
 
-function boringpick(arr) {
+function boringpick(arr: SylPart[]) {
     function randn_bm() {
         let u = 0, v = 0;
         while(u === 0) u = Math.random(); // Convert [0,1) to (0,1)
@@ -238,7 +241,7 @@ function boringpick(arr) {
         return Math.sqrt(-1.0 * Math.log(u)) * Math.cos(16.0 * Math.PI * v);
     }
 
-    randIndex = -1;
+    let randIndex: number = -1;
 
     while (randIndex < 0) {
         randIndex = Math.floor(randn_bm() * (arr.length / 6));
@@ -252,30 +255,31 @@ function boringpick(arr) {
     return arr[randIndex];
 }
 
-function makeSyllable(info, stress, final) {
-    let onset = "";
-    let nucleus = "";
-    let coda = "";
-    let syls = 1;
+function makeSyllable(info: {onset: SylPart[], nucleus: SylPart[], coda: SylPart[]}, stress: boolean, final: boolean) {
+
+    let onset: SylPart = {spell: "default", pron: "default"};
+    let nucleus: SylPart = {spell: "default", pron: "default"};
+    let coda: SylPart = {spell: "default", pron: "default"};
+    let syls: number = 1;
 
     if (!stress && Math.random() < 0.9){
         if (Math.random() > 0.4){
-            onset = structuredClone(boringpick(info['onset']));
+            onset = structuredClone(boringpick(info['onset']))!;
         }
         else {
-            onset = info['onset'][0]
+            onset = info['onset'][0]!;
         }
-        nucleus = structuredClone(boringpick(info['nucleus']));
+        nucleus = structuredClone(boringpick(info['nucleus']))!;
 
         //no double <u>s
         if (onset['spell'].at(-1) === "u"){
             while (nucleus['spell'].at(0) === "u"){
-                nucleus = structuredClone(boringpick(info['nucleus']));
+                nucleus = structuredClone(boringpick(info['nucleus']))!;
             }
         //no double <i>s
         } else if (onset['spell'].at(-1) === "i"){
             while (nucleus['spell'].at(0) === "i"){
-                nucleus = structuredClone(boringpick(info['nucleus']));
+                nucleus = structuredClone(boringpick(info['nucleus']))!;
             }
         }
 
@@ -284,24 +288,24 @@ function makeSyllable(info, stress, final) {
             if (!nucleus['can_end'] && final) {
                 coda = { 'pron': "", 'spell': "" };
                 while (coda['spell'] === "") {
-                    coda = structuredClone(pick(info['coda']));
+                    coda = structuredClone(pick(info['coda']))!;
                 }
             } else {
-                coda = structuredClone(pick(info['coda']));
+                coda = structuredClone(pick(info['coda']))!;
             }
             // silent <e>s are rare if not in final syllables
             if (coda['spell'].at(-1) === "e"){
-                coda = structuredClone(pick(info['coda']));
+                coda = structuredClone(pick(info['coda']))!;
             }
         }
         else {
-            coda = info['coda'][0]
+            coda = info['coda'][0]!
         }
 
         // certain consonant clusters only appear in final syllables
         while (!final && coda['pron'].length > 1 && typeof(coda['finspell']) === "undefined" &&
         (coda['spell'].slice(-2) === "ed" || coda['spell'].at(-1) === "s")){
-            coda = structuredClone(pick(info['coda']));
+            coda = structuredClone(pick(info['coda']))!;
         }
 
         // no words are spelled <_r_r_> (e.g scror would not be a word)
@@ -309,34 +313,33 @@ function makeSyllable(info, stress, final) {
             if (typeof(nucleus['altspell']) != "undefined"){
                 nucleus['spell'] = nucleus['altspell'];
             }
-            else if (nucleus['pron'] === "eː" && coda['pron'].length > 0 && ["n","m"].includes(coda['pron'].at(0))){
+            else if (nucleus['pron'] === "eː" && coda['pron'].length > 0 && ["n","m"].includes(coda['pron'].at(0)!)){
                 nucleus['spell'] = "a";
             }
             while (onset['spell'].slice(-1) === 'r') {
-                onset = structuredClone(boringpick(info['onset']));
+                onset = structuredClone(boringpick(info['onset']))!;
             }
         }
         // no words are spelled <_l_l_> (e.g clelk would not be a word)
         else if (coda['spell'].at(0) === 'l' && onset['spell'].length > 1) {
             while (onset['spell'].slice(-1) === 'l') {
-                onset = structuredClone(boringpick(info['onset']));
+                onset = structuredClone(boringpick(info['onset']))!;
             }
         }
     }
     else {
-        onset = structuredClone(pick(info['onset']));
-        nucleus = structuredClone(pick(info['nucleus']));
-        coda = "";
+        onset = structuredClone(pick(info['onset']))!;
+        nucleus = structuredClone(pick(info['nucleus']))!;
 
         //no double <u>s
         if (onset['spell'].at(-1) === "u"){
             while (nucleus['spell'].at(0) === "u"){
-                nucleus = structuredClone(pick(info['nucleus']));
+                nucleus = structuredClone(pick(info['nucleus']))!;
             }
         //no double <i>s
         } else if (onset['spell'].at(-1) === "i"){
             while (nucleus['spell'].at(0) === "i"){
-                nucleus = structuredClone(pick(info['nucleus']));
+                nucleus = structuredClone(pick(info['nucleus']))!;
             }
         }
 
@@ -344,20 +347,20 @@ function makeSyllable(info, stress, final) {
         if (!nucleus['can_end'] && final) {
             coda = { 'pron': "", 'spell': "" };
             while (coda['spell'] === "") {
-                coda = structuredClone(pick(info['coda']));
+                coda = structuredClone(pick(info['coda']))!;
             }
         } else {
-            coda = structuredClone(pick(info['coda']));
+            coda = structuredClone(pick(info['coda']))!;
         }
         // silent <e>s are rare if not in final syllables
         if (coda['spell'].at(-1) === "e"){
-            coda = structuredClone(pick(info['coda']));
+            coda = structuredClone(pick(info['coda']))!;
         }
 
         // certain consonant clusters only appear in final syllables
         while (!final && coda['pron'].length > 1 && typeof(coda['finspell']) === "undefined" &&
         (coda['spell'].slice(-2) === "ed" || coda['spell'].at(-1) === "s")){
-            coda = structuredClone(pick(info['coda']));
+            coda = structuredClone(pick(info['coda']))!;
         }
 
         // no words are spelled <_r_r_> (e.g scror would not be a word)
@@ -365,17 +368,17 @@ function makeSyllable(info, stress, final) {
             if (typeof(nucleus['altspell']) != "undefined"){
                 nucleus['spell'] = nucleus['altspell'];
             }
-            else if (nucleus['pron'] === "eː" && coda['pron'].length > 0 && ["n","m"].includes(coda['pron'].at(0))){
+            else if (nucleus['pron'] === "eː" && coda['pron'].length > 0 && ["n","m"].includes(coda['pron'].at(0)!)){
                 nucleus['spell'] = "a";
             }
             while (onset['spell'].slice(-1) === 'r') {
-                onset = structuredClone(pick(info['onset']));
+                onset = structuredClone(pick(info['onset']))!;
             }
         }
         // no words are spelled <_l_l_> (e.g clelk would not be a word)
         else if (coda['spell'].at(0) === 'l' && onset['spell'].length > 1) {
             while (onset['spell'].slice(-1) === 'l') {
-                onset = structuredClone(pick(info['onset']));
+                onset = structuredClone(pick(info['onset']))!;
             }
         }
     }
@@ -527,7 +530,7 @@ function makeSyllable(info, stress, final) {
     }
 
     // 50% chance of spelling ite as ight
-    if (nucleus['pron'] === "ɑj" && (coda['spell'].at(0) === "t" || coda['spell'] === "") && Math.random > 0.5){
+    if (nucleus['pron'] === "ɑj" && (coda['spell'].at(0) === "t" || coda['spell'] === "") && Math.random() > 0.5){
         nucleus['spell'] = "igh";
     }
 
@@ -559,7 +562,7 @@ function makeSyllable(info, stress, final) {
 
     // deals with <[vowel]_e> words
     if (nucleus['spell'].includes("_e")) {
-        if (!final){
+        if (!final && nucleus['altspell'] !== undefined){
             altnuc = nucleus['altspell'];
             altcod = coda['spell'];
         }
@@ -575,16 +578,16 @@ function makeSyllable(info, stress, final) {
             else if (coda['spell'] === 'ze'){
                 coda['spell'] = 'se';
             }
-        } else if (final && coda['spell'] === ""){
+        } else if (final && coda['spell'] === "" && nucleus['finspell'] !== undefined){
             nucleus['spell'] = nucleus['finspell'];
         }
-        else if (!coda['spell'].includes("e")){
+        else if (!coda['spell'].includes("e") && nucleus['altspell'] !== undefined){
             nucleus['spell'] = nucleus['altspell'];
         }
     }
 
     // /k/ can be spelled as <k> when it's before <e>, <i>, or <y>
-    if (['e', 'i', 'y'].includes(nucleus['spell'].at(0)) && onset['spell'].at(-1) === "c"){
+    if (['e', 'i', 'y'].includes(nucleus['spell'].at(0)!) && onset['spell'].at(-1) === "c"){
             onset['spell'] = onset['spell'].slice(0, -1) + "k";
     }
 
@@ -616,7 +619,7 @@ function makeSyllable(info, stress, final) {
     }
 
     // some nucleus combinations with /g/ are spelled gue word-finally
-    if (coda['pron'] === 'g' & final){
+    if (coda['pron'] === 'g' && final){
         if (nucleus['pron'] === 'ʌw' || nucleus['pron'] === 'æj' || nucleus['pron'] === 'ɑj'){
             coda['spell'] = 'gue';
         }
@@ -672,7 +675,7 @@ function makeSyllable(info, stress, final) {
             && (onset['pron'].length < 2 || coda['pron'].length < 2)){
             nucleus['pron'] = "ə"; 
         }
-        else if (!stress && Math.random() < 0.7 && (nucleus['pron'] === "ɘː" || (nucleus['pron'] === "eː" && ["m","n"].includes(coda['pron'].at(0))))){
+        else if (!stress && Math.random() < 0.7 && (nucleus['pron'] === "ɘː" || (nucleus['pron'] === "eː" && ["m","n"].includes(coda['pron'].at(0)!)))){
             nucleus['pron'] = "ə"; 
         }
         else if (!stress && nucleus['pron'].length === 1 && nucleus['spell'].length === 1 && coda['pron'] === "" && onset['pron'] === ""){
@@ -686,37 +689,37 @@ function makeSyllable(info, stress, final) {
         altcod = onset['spell'] + altnuc + altcod
     }
 
-    final = {
+    let finsyl: Syllable = {
         'pron': onset['pron'] + nucleus['pron'] + coda['pron'],
         'spell': onset['spell'] + nucleus['spell'] + coda['spell'],
         'syls': syls,
         'altspell': altcod
     };
 
-    console.log(structuredClone(final));
+    console.log(structuredClone(finsyl));
 
-    return final;
+    return finsyl;
 }
 
-function makeWord(info) {
-    let vowelend = ['ː'];
+function makeWord(info: {onset: SylPart[], nucleus: SylPart[], coda: SylPart[]}): Syllable {
+    let vowelend: string[] = ['ː'];
     info['nucleus'].forEach(value => {
-        vowelend.push(value['pron'][0]);
+        vowelend.push(value['pron'][0]!);
     });
 
-    let done = false;
-    let syllables = 0;
+    let done: boolean = false;
+    let syllables: number = 0;
     while (!done){
         syllables++;
         if (Math.random() > Math.pow((1.0/2.0),syllables)){
             done = true;
         }
     }
-    let s_syl = Math.floor(Math.random() * syllables)
+    let s_syl: number = Math.floor(Math.random() * syllables)
     if (Math.random() < 0.5){
         s_syl = 0;
     }
-    let word = []
+    let word: Syllable = {pron: "", spell: "", syls: 0, altspell: ""};
     if (syllables - 1 === s_syl){
         word = makeSyllable(info, true, true);
     }
@@ -728,17 +731,17 @@ function makeWord(info) {
         word['pron'] = "ˈ" + word['pron'];
     }
     if (word['pron'].at(0) === 'ʒ' && word['spell'].at(0) === 's'){
-        syl = makeSyllable(info, true, false);
-        while (vowelend.includes(syl['pron'].at(-1))){
+        let syl: Syllable = makeSyllable(info, true, false);
+        while (vowelend.includes(syl['pron'].at(-1)!)){
             syl = makeSyllable(info, true, false);
         }
-        coda = { 'pron': "", 'spell': "" };
+        let coda: SylPart = { 'pron': "", 'spell': "" };
         while (coda['spell'] === "") {
-            coda = structuredClone(pick(info['coda']));
+            coda = structuredClone(pick(info['coda']))!;
         }
-        nucleus = { 'pron': "www", 'spell': "www" };
+        let nucleus: SylPart = { 'pron': "www", 'spell': "www" };
         while (nucleus['spell'].length > 1 && nucleus['spell'] != "i"){
-            nucleus = structuredClone(pick(info['nucleus']));
+            nucleus = structuredClone(pick(info['nucleus']))!;
         }
         word['pron'] = syl['pron'] + "ʒə" + coda['pron'];
         word['spell'] = syl['spell'] + "si" + nucleus['spell'] + coda['spell'];
@@ -746,7 +749,7 @@ function makeWord(info) {
     let sylno = word['syls']
     for (sylno = 0; sylno < syllables; sylno++) {
         if (sylno > s_syl){
-            let syl = [];
+            let syl: Syllable = {pron: "", spell: "", syls: 0, altspell: ""};
             if (sylno = syllables - 1){
                 syl = makeSyllable(info, false, true);
             }
@@ -754,7 +757,7 @@ function makeWord(info) {
                 syl = makeSyllable(info, false, false);
             }
             while (syl['pron'].at(0) === word['pron'].slice(-1) || syl['pron'].at(0) === word['pron'].slice(-1) ||
-            (['æ', 'e', 'ɪ', 'ɔ', 'ɐ', 'ə'].includes(word['pron'].at(-1)) && ['a', 'e', 'i', 'o', 'u'].includes(syl['spell'].at(0)))){
+            (['æ', 'e', 'ɪ', 'ɔ', 'ɐ', 'ə'].includes(word['pron'].at(-1)!) && ['a', 'e', 'i', 'o', 'u'].includes(syl['spell'].at(0)!))){
                 console.log("last word scrapped");
                 if (sylno === syllables - 1){
                     syl = makeSyllable(info, false, true);
@@ -764,13 +767,13 @@ function makeWord(info) {
                 }
             }
             // double consonant if short vowel
-            if (['a', 'e', 'i', 'o', 'u', 'y'].includes(syl['spell'].at(0)) && ((word['pron'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ'].includes(word['pron'].at(-2))
-            &&  !['j', 'w', 'ː'].includes(word['pron'].at(-1)) && ['a', 'e', 'i', 'o', 'u', 'y'].includes(word['spell'].at(-2))) || (word['pron'].length > 2 &&
+            if (['a', 'e', 'i', 'o', 'u', 'y'].includes(syl['spell'].at(0)!) && ((word['pron'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ'].includes(word['pron'].at(-2)!)
+            &&  !['j', 'w', 'ː'].includes(word['pron'].at(-1)!) && ['a', 'e', 'i', 'o', 'u', 'y'].includes(word['spell'].at(-2)!)) || (word['pron'].length > 2 &&
             word['pron'].slice(-3, -1) === "eː"))){
                 word['spell'] = word['spell'] + word['spell'].at(-1);
             }
-            else if (syl['spell'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ', 'ə'].includes(word['pron'].at(-1)) &&
-            ['a', 'e', 'i', 'o', 'u'].includes(syl['spell'].at(1))){
+            else if (syl['spell'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ', 'ə'].includes(word['pron'].at(-1)!) &&
+            ['a', 'e', 'i', 'o', 'u'].includes(syl['spell'].at(1)!)){
                 if (syl['spell'].at(0) === "k" && syl['pron'].at(-1) != "ə"){
                     syl['spell'] = "c" + syl['spell'];
                 }
@@ -784,13 +787,13 @@ function makeWord(info) {
                     syl['spell'] = syl['spell'].at(0) + syl['spell'];
                 } 
             }
-            if (['a', 'e', 'i', 'o', 'u'].includes(syl['spell'].at(0)) && word['altspell'] != ""){
+            if (['a', 'e', 'i', 'o', 'u'].includes(syl['spell'].at(0)!) && word['altspell'] != ""){
                 word['spell'] = word['altspell'];
             }
-            if (syl['pron'].at(0) == 'ʒ' && !(['a', 'e', 'i', 'o', 'u', 'y', 'r'].includes(word['spell'].at(-1)))){
-                syl['pron'][0] = 'ʃ';
+            if (syl['pron'].at(0) == 'ʒ' && !(['a', 'e', 'i', 'o', 'u', 'y', 'r'].includes(word['spell'].at(-1)!))){
+                syl['pron'] = 'ʃ' + syl['spell'].slice(1);
             }
-            if (vowelend.includes(word['pron'].slice(-1)) && vowelend.includes(syl['pron'][0])) {
+            if (vowelend.includes(word['pron'].slice(-1)) && vowelend.includes(syl['pron'][0]!)) {
                 word['pron'] += 'ɹ' + syl['pron'];
             } else {
                 word['pron'] += syl['pron'];
@@ -799,17 +802,17 @@ function makeWord(info) {
         } else if (sylno < s_syl){
             let syl = makeSyllable(info, false, false);
             while (word['pron'].at(0) === syl['pron'].slice(-1) ||word['spell'].at(0) === syl['spell'].slice(-1) ||
-            (['æ', 'e', 'ɪ', 'ɔ', 'ɐ', 'ə'].includes(syl['pron'].at(-1)) && ['a', 'e', 'i', 'o', 'u'].includes(word['spell'].at(0)))){
+            (['æ', 'e', 'ɪ', 'ɔ', 'ɐ', 'ə'].includes(syl['pron'].at(-1)!) && ['a', 'e', 'i', 'o', 'u'].includes(word['spell'].at(0)!))){
                 syl = makeSyllable(info, false, false);
             }
             // double consonant if short vowel
-            if (['a', 'e', 'i', 'o', 'u', 'y'].includes(word['spell'].at(0)) && ((syl['pron'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ'].includes(syl['pron'].at(-2))
-                &&  !['j', 'w', 'ː'].includes(syl['pron'].at(-1)) && ['a', 'e', 'i', 'o', 'u', 'y'].includes(syl['spell'].at(-2))) || (syl['pron'].length > 2 &&
+            if (['a', 'e', 'i', 'o', 'u', 'y'].includes(word['spell'].at(0)!) && ((syl['pron'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ'].includes(syl['pron'].at(-2)!)
+                &&  !['j', 'w', 'ː'].includes(syl['pron'].at(-1)!) && ['a', 'e', 'i', 'o', 'u', 'y'].includes(syl['spell'].at(-2)!)) || (syl['pron'].length > 2 &&
                 syl['pron'].slice(-3, -1) === "eː"))){
                 syl['spell'] = syl['spell'] + syl['spell'].at(-1);
             }
-            else if (word['spell'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ', 'ə'].includes(syl['pron'].at(-1)) &&
-            ['a', 'e', 'i', 'o', 'u'].includes(word['spell'].at(1))){
+            else if (word['spell'].length > 1 && ['æ', 'e', 'ɪ', 'ɔ', 'ɐ', 'ə'].includes(syl['pron'].at(-1)!) &&
+            ['a', 'e', 'i', 'o', 'u'].includes(word['spell'].at(1)!)){
                 if (word['spell'].at(0) === "k" && syl['pron'].at(-1) != "ə"){
                     word['spell'] = "c" + word['spell'];
                 }
@@ -823,13 +826,13 @@ function makeWord(info) {
                     word['spell'] = word['spell'].at(0) + word['spell'];
                 }
             }
-            else if (word['pron'].at(0) == 'ʒ' && !(['a', 'e', 'i', 'o', 'u', 'y', 'r'].includes(syl['spell'].at(-1)))){
-                word['pron'][0] = 'ʃ';
+            else if (word['pron'].at(0) == 'ʒ' && !(['a', 'e', 'i', 'o', 'u', 'y', 'r'].includes(syl['spell'].at(-1)!))){
+                word['pron'] = 'ʃ' + word['spell'].slice(1);
             }
-            if (['a', 'e', 'i', 'o', 'u'].includes(word['spell'].at(0)) && syl['altspell'] != ""){
+            if (['a', 'e', 'i', 'o', 'u'].includes(word['spell'].at(0)!) && syl['altspell'] != ""){
                 syl['spell'] = syl['altspell'];
             }
-            if (vowelend.includes(syl['pron'].slice(-1)) && vowelend.includes(word['pron'][0])) {
+            if (vowelend.includes(syl['pron'].slice(-1)) && vowelend.includes(word['pron'][0]!)) {
                 word['pron'] = syl['pron'] + 'ɹ' + word['pron'];
             } else {
                 word['pron'] = syl['pron'] + word['pron'];
@@ -838,11 +841,11 @@ function makeWord(info) {
         }
     }
 
-    stress_ind = word['pron'].indexOf("ˈ");
+    let stress_ind: number = word['pron'].indexOf("ˈ");
     word['pron'] = word['pron'].replace("ˈ", "");
     //simulating historical consonant assimilation
     if (Math.random() < 0.8){
-        for (nas in ['m','n','ŋ']){
+        for (var nas of ['m','n','ŋ']){
             word['spell'].replace('m'+nas,'mm');
             word['pron'].replace('m'+nas,'m');
             word['spell'].replace('n'+nas,'nn');
@@ -850,7 +853,7 @@ function makeWord(info) {
             word['spell'].replace('ng'+nas,'ng');
             word['pron'].replace('ŋ'+nas,'ŋ');
         }
-        for (vst in ['b','d','g']){
+        for (var vst of ['b','d','g']){
             word['spell'].replace('m'+vst,'mb');
             word['pron'].replace('m'+vst,'mb');
             word['spell'].replace('n'+vst,'nd');
@@ -858,7 +861,7 @@ function makeWord(info) {
             word['spell'].replace('ng'+vst,'ng');
             word['pron'].replace('ŋ'+vst, 'ŋg');
         }
-        for (ust in ['b','d','g']){
+        for (var ust of ['b','d','g']){
             word['spell'].replace('m'+ust,'mp');
             word['pron'].replace('m'+ust,'mp');
             word['spell'].replace('n'+ust,'nt');
@@ -877,7 +880,7 @@ function makeWord(info) {
     word['pron'].replace('dj','dʒ');
     word['pron'].replace('sj','ʃ');
     word['pron'].replace('zj','ʒ');
-    for (letter in ['ɹ', 'l', 'w', 'ʃ', 'ʒ', 'j']){
+    for (var letter of ['ɹ', 'l', 'w', 'ʃ', 'ʒ', 'j']){
         word['pron'].replace(letter + 'j',letter);
     }
 
@@ -886,11 +889,11 @@ function makeWord(info) {
             word['pron'] = word['pron'].slice(0, i) + word['pron'].slice(i+2);
         }
     }
-    clusters = find_cluster(word['pron'], true);
-    stored_stress = -1;
-    for (let i = 0; i < clusters.length; i++){
-        if (clusters[i]['start'] <= stress_ind && clusters[i]['end'] >= stress_ind){
-            stored_stress = clusters[i]['start'];
+    let clusters: {'start': number, 'end': number}[] = find_cluster(word['pron'], true);
+    let stored_stress: number = -1;
+    for (let i:number = 0; i < clusters.length; i++){
+        if (clusters[i]?.start <= stress_ind && clusters[i]?.end >= stress_ind){
+            stored_stress = clusters[i]?.start!;
         }
     }
     stress_ind = stored_stress;
@@ -902,7 +905,7 @@ function makeWord(info) {
     return word;
 }
 
-function suffix(word, suffix){
+function suffix(word: string, suffix: string): string {
     if (suffix==="s" && word.length > 1){
         if (word.slice(-1)==='s' || word.slice(-1)==='z' || word.slice(-2)==='ch' || word.slice(-2)==='sh' || word.slice(-2)==='zh'){
             word = word + "es";
@@ -943,8 +946,8 @@ function suffix(word, suffix){
     return word;
 }
 
-function define(word, syls) {
-    adjective = [
+function define(word: string, syls: number): {'pos': string, 'def': string} {
+    let adjective: string[] = [
         "abandoned",
         "abdominal",
         "abhorrent",
@@ -5785,7 +5788,7 @@ function define(word, syls) {
         "zonked",
         "zoological"
     ];
-    adverb = [
+    let adverb: string[] = [
         "abnormally",
         "absentmindedly",
         "accidentally",
@@ -6117,7 +6120,7 @@ function define(word, syls) {
         "zestfully",
         "zestily"
     ];
-    noun = [
+    let noun: string[] = [
         "a",
         "ability",
         "abroad",
@@ -7643,7 +7646,7 @@ function define(word, syls) {
         "youth",
         "zone"
     ];
-    verb = [
+    let verb: string[] = [
         "convolute",
         "fawn",
         "foul",
@@ -16172,7 +16175,7 @@ function define(word, syls) {
             pos = "adverb";
             def = "in a " + word.slice(0,-2) + " manner";
         }
-        else if (word.slice(-2)==="th" && !["a","e","i","o","u"].includes(word.at(-3)) && Math.random() > 0.3 && can_end(word.slice(0,-2))){
+        else if (word.slice(-2)==="th" && !["a","e","i","o","u"].includes(word.at(-3)!) && Math.random() > 0.3 && can_end(word.slice(0,-2))){
             pos = "adjective";
             def = "the ordinal form of the number " + word.slice(0,-2);
         }
@@ -16181,7 +16184,7 @@ function define(word, syls) {
                 if (Math.random() < 0.5){
                     pos = "adjective";
 
-                    def = suffix(verb[Math.floor(Math.random() * verb.length)], "ing");
+                    def = suffix(verb[Math.floor(Math.random() * verb.length)]!, "ing");
                 }
                 else {
                     pos = "present participle verb";
@@ -16223,9 +16226,9 @@ function define(word, syls) {
 
     if (pos === "noun" && def.slice(-2)==="zz"){
         def = def.slice(0,-2);
-        randn = Math.floor(Math.random() * noun.length);
-        randa = Math.floor(Math.random() * adjective.length);
-        randv = Math.floor(Math.random() * verb.length);
+        let randn: number = Math.floor(Math.random() * noun.length);
+        let randa: number = Math.floor(Math.random() * adjective.length);
+        let randv: number = Math.floor(Math.random() * verb.length);
         if (Math.random() < 0.5){
             def = def + " a " + noun[randn];
         }
@@ -16233,21 +16236,20 @@ function define(word, syls) {
             def = def + " a " + adjective[randa] + " " + noun[randn];
         }
         else if (Math.random() < 0.5){
-            def = def + " a " + noun[randn] + " that " + suffix(verb[randv], "s");
+            def = def + " a " + noun[randn] + " that " + suffix(verb[randv]!, "s");
         }
         else if (Math.random() < 0.5){
-            def = def + "the " + suffix(verb[randv], "ing") + " of  a " + noun[randn];
+            def = def + "the " + suffix(verb[randv]!, "ing") + " of  a " + noun[randn];
         }
         else {
-            def = def + "the " + noun[randn] + " in which someone "  + suffix(verb[randv], "s");
+            def = def + "the " + noun[randn] + " in which someone "  + suffix(verb[randv]!, "s");
         }
     }
     else if (pos.slice(-4) === "verb" && def.slice(-2)==="zz"){
         def = def.slice(0,-2);
-        randn = Math.floor(Math.random() * noun.length);
-        randa = Math.floor(Math.random() * adjective.length);
-        randv = Math.floor(Math.random() * verb.length);
-        randav = Math.floor(Math.random() * adverb.length);
+        let randa: number = Math.floor(Math.random() * adjective.length);
+        let randv: number = Math.floor(Math.random() * verb.length);
+        let randav: number = Math.floor(Math.random() * adverb.length);
         if (Math.random() < 0.5){
             def = def + "to " + verb[randv];
         }
@@ -16255,7 +16257,7 @@ function define(word, syls) {
             def = def + "to " + verb[randv] + " " + adverb[randav];
         }
         else if (Math.random() < 0.5){
-            def = def + "to " + verb[randv] + " by " + suffix(verb[Math.floor(Math.random() * verb.length)], "ing");
+            def = def + "to " + verb[randv] + " by " + suffix(verb[Math.floor(Math.random() * verb.length)]!, "ing");
         }
         else if (Math.random() < 0.5){
             def = def + "to " + verb[randv] + " something "  + adjective[randa];
@@ -16266,10 +16268,9 @@ function define(word, syls) {
     }
     else if (pos === "adjective" && def.slice(-2)==="zz"){
         def = def.slice(0,-2);
-        randn = Math.floor(Math.random() * noun.length);
-        randa = Math.floor(Math.random() * adjective.length);
-        randv = Math.floor(Math.random() * verb.length);
-        randav = Math.floor(Math.random() * adverb.length);
+        let randn: number = Math.floor(Math.random() * noun.length);
+        let randa: number = Math.floor(Math.random() * adjective.length);
+        let randv: number = Math.floor(Math.random() * verb.length);
         if (Math.random() < 0.5){
             def = def + adjective[randa];
         }
@@ -16280,7 +16281,7 @@ function define(word, syls) {
             def = def + "having " + noun[randn];
         }
         else if (Math.random() < 0.5){
-            def = def + suffix(verb[randv], "ing");
+            def = def + suffix(verb[randv]!, "ing");
         }
         else {
             def = def + "not " + adjective[randa];
@@ -16307,7 +16308,7 @@ function define(word, syls) {
 }
 
 function displayword() {
-    const json = {
+    const json: {onset: SylPart[], nucleus: SylPart[], coda: SylPart[]} = {
         onset: [
             { spell: "", pron: "" },
             { spell: "t", pron: "t" },
@@ -16342,7 +16343,7 @@ function displayword() {
             { spell: "sn", pron: "sn" },
             { spell: "gr", pron: "gɹ" },
             { spell: "fr", pron: "fɹ" },
-            { spell: "si", pron: "ʒ", altspell: "zh" },
+            { spell: "si", pron: "ʒ" },
             { spell: "shr", pron: "ʃɹ" },
             { spell: "pl", pron: "pl" },
             { spell: "bl", pron: "bl" },
@@ -16519,9 +16520,11 @@ function displayword() {
         "tranee",
         "mong"
     ]
-    let word = {
+    let word: Syllable = {
         'pron': "x",
-        'spell': "y"
+        'spell': "y",
+        'syls': 0,
+        'altspell': ""
     };
     while (badiffull.includes(word['spell'])){
         word = makeWord(json);
@@ -16541,10 +16544,10 @@ function displayword() {
         }
     }
 
-    def = define(word['spell'], word['syls'])
-    const div = document.getElementById("wordgen")
+    let def: {def: string, pos: string} = define(word['spell'], word['syls'])
+    const div: HTMLElement = document.getElementById("wordgen")!;
     while (div.hasChildNodes()) {
-        div.removeChild(div.firstChild);
+        div.removeChild(div.firstChild!);
     }
     const spel = document.createElement("h2");
     spel.innerHTML = word['spell'];
@@ -16559,4 +16562,3 @@ function displayword() {
     defin.innerHTML = def['def'];
     div.insertBefore(defin, null);
 }
-
