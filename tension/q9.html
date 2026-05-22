@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tension</title>
+    <link rel="icon" href="../images/10.png">
+    <link rel="stylesheet" type="text/css" href="tension.css" />
+    <script src="tension.js"></script>
+</head>
+<body>
+    <main class="qgrid">
+        <div class="back"><a href="../tension.html">⮪ Back</a></div>
+        <p>What are the most common phonemes <em>(sounds)</em> in English? <em>This is based on their frequency in spoken British English.</em></p>
+        <button onclick="toggle('1', true)" id="a1">1 Point</button>
+        <button onclick="toggle('1', false)" type="button" id="r1" style="display:none">/ə/, as in butt<u>o</u>n</button>
+        <button onclick="toggle('2', true)" type="button" id="a2">2 Points</button>
+        <button onclick="toggle('2', false)" type="button" id="r2" style="display:none">/n/, as in <u>n</u>ice</button>
+        <button onclick="toggle('3', true)" type="button" id="a3">3 Point</button>
+        <button onclick="toggle('3', false)" type="button" id="r3" style="display:none">/ɹ/, as in me<u>rr</u>y</button>
+        <button onclick="toggle('4', true)" type="button" id="a4">4 Points</button>
+        <button onclick="toggle('4', false)" type="button" id="r4" style="display:none">/t/, as in <u>t</u>able</button>
+        <button onclick="toggle('5', true)" type="button" id="a5">5 Point</button>
+        <button onclick="toggle('5', false)" type="button" id="r5" style="display:none">/ɪ/, as in <u>i</u>nch</button>
+        <button onclick="toggle('6', true)" type="button" id="a6">6 Points</button>
+        <button onclick="toggle('6', false)" type="button" id="r6" style="display:none">/s/, as in <u>s</u>mack</button>
+        <button onclick="toggle('7', true)" type="button" id="a7">7 Point</button>
+        <button onclick="toggle('7', false)" type="button" id="r7" style="display:none">/d/, as in su<u>dd</u>en</button>
+        <button onclick="toggle('8', true)" type="button" id="a8">8 Points</button>
+        <button onclick="toggle('8', false)" type="button" id="r8" style="display:none">/l/, as in <u>l</u>ate</button>
+        <button onclick="toggle('9', true)" type="button" id="a9">9 Point</button>
+        <button onclick="toggle('9', false)" type="button" id="r9" style="display:none">/ɪj/, as in sh<u>ee</u>p</button>
+        <button onclick="toggle('10', true)" type="button" id="a10">10 Points</button>
+        <button onclick="toggle('10', false)" type="button" id="r10" style="display:none">/k/, as in <u>k</u>ettle</button>
+        <button onclick="toggle('t1', true)" type="button" class="tension" id="at1">-5 points</button>
+        <button onclick="toggle('t1', false)" type="button" class="tension" id="rt1" style="display:none">/ð/, as in o<u>th</u>er</button>
+        <button onclick="toggle('t2', true)" type="button" class="tension" id="at2">-5 points</button>
+        <button onclick="toggle('t2', false)" type="button" class="tension" id="rt2" style="display:none">/e/, as in b<u>e</u>nch</button>
+        <button onclick="toggle('t3', true)" type="button" class="tension" id="at3">-5 points</button>
+        <button onclick="toggle('t3', false)" type="button" class="tension" id="rt3" style="display:none">/m/, as in <u>m</u>ouse</button>
+        <button onclick="toggle('t4', true)" type="button" class="tension" id="at4">-5 points</button>
+        <button onclick="toggle('t4', false)" type="button" class="tension" id="rt4" style="display:none">/z/, as in dog<u>s</u></button>
+        <button onclick="toggle('t5', true)" type="button" class="tension" id="at5">-5 points</button>
+        <button onclick="toggle('t5', false)" type="button" class="tension" id="rt5" style="display:none">/p/, as in <u>p</u>asta</button>
+        <button onclick="toggle('t6', true)" type="button" class="tension" id="at6">-5 points</button>
+        <button onclick="toggle('t6', false)" type="button" class="tension" id="rt6" style="display:none">/æ/, as in <u>a</u>pple</button>
+    </main>
+</body>
+</html>

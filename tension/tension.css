@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 0px;
-    grid-template-rows: 25vh 25vh 25vh 25vh;
+    grid-template-rows: repeat(5, 20vh);
 }
 
 .qgrid{
@@ -47,10 +47,11 @@ em{
 h1 {
     font-size: 2vh;
     text-align: center;
-    padding: 10vh 2vh 10vh 2vh;
+    padding: 7.5vh 2vh 7.5vh 2vh;
     margin: 0.7vh;
     border: 0.3vh solid rgb(230, 243, 242);
     font-family: "Alfa Slab One", serif;
+    font-weight: 300;
 }
 
 button {
@@ -63,12 +64,11 @@ button {
 
 a {
     color: white;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
 }
 
 a:visited {
-    color: rgb(137, 178, 201);
-}
-
-.back a:visited{
     color: rgb(137, 178, 201);
 }
