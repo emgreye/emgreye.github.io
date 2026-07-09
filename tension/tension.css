@@ -4,17 +4,22 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 0px;
-    grid-template-rows: repeat(5, 20vh);
+    grid-template-rows: repeat(5, 18vh);
 }
 
 .qgrid{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 6.25vh 12.5vh repeat(13, 6.25vh);
+    grid-template-rows: 6.25vh 12.5vh repeat(13, 9vh);
     margin: 0px;
 }
 
-.qgrid button, .qgrid p, .qgrid div{
+/* .qgrid button, .qgrid p, .qgrid div{
+    grid-column-start: 1;
+    grid-column-end: 3;
+} */
+
+.qgrid p, .qgrid div{
     grid-column-start: 1;
     grid-column-end: 3;
 }
@@ -47,7 +52,7 @@ em{
 h1 {
     font-size: 2vh;
     text-align: center;
-    padding: 7.5vh 2vh 7.5vh 2vh;
+    padding: 6.5vh 2vh 6.5vh 2vh;
     margin: 0.7vh;
     border: 0.3vh solid rgb(230, 243, 242);
     font-family: "Alfa Slab One", serif;
