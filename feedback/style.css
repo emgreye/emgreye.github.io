@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+body{
+    background-color: rgb(9, 56, 46);
+    color: lightyellow;
+    padding: 10vh 20vh 0 20vh;
+    font-family: "Arvo", serif;
+}
+strong{
+    color: rgb(231, 255, 167);
+    margin-top:5vh;
+}
+p,li{
+    background-image: linear-gradient(to right, rgb(13, 71, 49), rgb(9, 56, 46));
+    padding-left: 0.2em;
+}
+p#workspace{
+    margin-top:10vh;
+}
+body::selection{
+    background-color:rgb(229, 243, 191);
+    color:rgb(9, 56, 46)
+}
+h1{
+    color: yellow;
+}
+textarea{
+    font-size:large;
+    padding:1em;
+    background-color: rgb(229, 243, 191);
+    border-color: lightyellow;
+    border-style:solid;
+    font-family: "Arvo", serif;
+}
+textarea::selection{
+    background-color: yellow;
+    color: black;
+}
+button{
+    margin-top:2px;
+    background-color: rgb(229, 243, 191);
+    border-color: lightyellow;
+    border-style:solid;
+    padding: 0.5em;
+    font-family: "Arvo", serif;
+    font-weight:600;
+    font-size:large;
+}
+button:active{
+    border-color:yellow;
+    color: yellow;
+}
