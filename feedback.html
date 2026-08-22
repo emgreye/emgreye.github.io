@@ -10,52 +10,25 @@
 <body>
     <textarea id="textarea" placeholder="Values here." name="textarea" rows="16" cols="60"></textarea><br>
     <button type="button" id="format">Format</button>
-    <button type="button" id="copy">Copy questions</button><br>
+    <button type="button" id="copy">Copy questions</button>
+    
+    <label class="ticker" for="assessor">Treat final line as assessor name:</label>
+    <label class="container">&nbsp;
+        <input type="checkbox" id="assessor">
+        <span class="tick"></span>
+    </label>
+    <label class="ticker" for="date">Include date:</label>
+    <label class="container">&nbsp;
+        <input type="checkbox" id="date">
+        <span class="tick"></span>
+    </label>
+    
 
     <h1 id="info"></h1>
 
     <div id="result">
-
     </div>
 
-    <!-- <p>
-        <strong>Resubmit needed.</strong><br>
-        Good job Leah. Only one question needs to be changed:
-    </p>
-    <ul style="list-style-type:none">
-        <li>Q1 - The 1st column should just include the words primary, secondary or tertiary. The 2nd column should include what you wrote in the first column.</li>
-    </ul>
-    <p>
-        Please only change your answer to this question and leave all others blank.<br>
-        Jake McAuliffe.
-    </p>
-
-    <p>
-        <strong>Resubmit needed.</strong><br>
-        Good job Kristian, but 3 questions need to be changed:
-    </p>
-    <ul style="list-style-type:none">
-        <li>Item 1: Include your photo ID.</li>
-        <li>Item 9: On the final slide, summarise your key points.</li>
-    </ul>
-    <p>
-        Please only change your answer to these questions and leave all others blank.<br>
-        Jake McAuliffe.
-    </p>
-
-    <p>
-        Satisfactory.<br>
-        Well done, Max.<br>
-        Jake McAuliffe<br>
-    </p>
-
-    <p id="workspace">
-        Kristian Micro Oral
-    </p>
-    <ul style="list-style-type:none">
-        <li>Item 1: Include your photo ID.</li>
-        <li>Item 9: On the final slide, summarise your key points.</li>
-    </ul> -->
 </body>
 <script src="feedback/format.js"></script>
 </html>
