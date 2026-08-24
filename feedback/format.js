@@ -41,7 +41,7 @@ function formatText() {
             resubmit = Number(strings[0][strings[0].length-1]);
         }
         console.log(`Resubmit count: ${resubmit}`)
-        if (strings[1][0] != "Q"){
+        if (strings.length > 1 && strings[1][0] != "Q"){
             things = true;
         }
         if (document.getElementById("assessor").checked){
