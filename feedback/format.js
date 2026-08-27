@@ -5,8 +5,19 @@
 function initiate() {
     document.getElementById('format').onclick = formatText;
     document.getElementById('copy').onclick = copyFeedback;
+    document.getElementById('light').onclick = lightMode;
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+    });
+    if (params.mode == "light"){
+        lightMode();
+    }
 }
 window.onload = initiate;
+
+function lightMode(){
+    document.body.classList.toggle("light");
+}
 
 function formatText() {
     let strings = document.getElementById("textarea").value.split("\n");
@@ -55,9 +66,16 @@ function formatText() {
         switch (strings.length) {
             case 1:
                 node = document.createElement("p");
-                node.appendChild(document.createTextNode("Satisfactory."));
-                node.appendChild(document.createElement("br"));
-                node.appendChild(document.createTextNode(`Well done, ${name}.`));
+                if (resubmit > 1){
+                    node.appendChild(document.createTextNode(`The combined result of your ${resubmit} attempts is satisfactory.`));
+                    node.appendChild(document.createElement("br"));
+                    node.appendChild(document.createTextNode(`Good job, ${name}.`));
+                }
+                else{
+                    node.appendChild(document.createTextNode("Satisfactory."));
+                    node.appendChild(document.createElement("br"));
+                    node.appendChild(document.createTextNode(`Well done, ${name}.`));
+                }
                 node.appendChild(document.createElement("br"));
                 node.appendChild(document.createTextNode(assessor));
                 document.getElementById("result").appendChild(node);
@@ -66,10 +84,14 @@ function formatText() {
             case 2:
                 node = document.createElement("p");
                 strong = document.createElement("strong");
+                let phrasing1 = ", but"
+                let phrasing2 = "still needs";
                 switch (resubmit) {
                     case 0:
                     case 1:
                         strong.appendChild(document.createTextNode("Resubmit needed."));
+                        phrasing1 = ". Only";
+                        phrasing2 = "needs";
                         break;
                     case 2:
                         strong.appendChild(document.createTextNode("2nd resubmit needed."));
@@ -83,10 +105,10 @@ function formatText() {
                 node.appendChild(strong);
                 node.appendChild(document.createElement("br"));
                 if (things){
-                    node.appendChild(document.createTextNode(`Good job, ${name}. Only one thing needs to be changed:`));
+                    node.appendChild(document.createTextNode(`Good job, ${name}${phrasing1} one thing ${phrasing2} to be changed:`));
                 }
                 else{
-                    node.appendChild(document.createTextNode(`Good job, ${name}. Only one question needs to be changed:`));
+                    node.appendChild(document.createTextNode(`Good job, ${name}${phrasing1} one question ${phrasing2} to be changed:`));
                 }
                 document.getElementById("result").appendChild(node);
 
@@ -99,21 +121,27 @@ function formatText() {
                 document.getElementById("result").appendChild(holder);
 
                 node2 = document.createElement("p");
-                if (!things){
-                    node2.appendChild(document.createTextNode("Please only change your answer to this question and leave all others blank."));
-                    node2.appendChild(document.createElement("br"));
+                if (document.getElementById("kal").checked){
+                    node2.appendChild(document.createTextNode("For more detail, check the feedback section under each question in the attached document."));
+                } else {
+                    if (!things){
+                        node2.appendChild(document.createTextNode("Please only change your answer to this question and leave all others blank."));
+                        node2.appendChild(document.createElement("br"));
+                    }
+                    node2.appendChild(document.createTextNode(assessor));
                 }
-                node2.appendChild(document.createTextNode(assessor));
                 document.getElementById("result").appendChild(node2);
                 break;
 
             default:
                 node = document.createElement("p");
                 strong = document.createElement("strong");
+                let phrasing = "still need";
                 switch (resubmit) {
                     case 0:
                     case 1:
                         strong.appendChild(document.createTextNode("Resubmit needed."));
+                        phrasing = "need";
                         break;
                     case 2:
                         strong.appendChild(document.createTextNode("2nd resubmit needed."));
@@ -140,20 +168,24 @@ function formatText() {
                     }
                 }
                 if (things){
-                    node.appendChild(document.createTextNode(`Good job, ${name}, but ${qs} things need to be changed:`));
+                    node.appendChild(document.createTextNode(`Good job, ${name}, but ${qs} things ${phrasing} to be changed:`));
                 }
                 else {
-                    node.appendChild(document.createTextNode(`Good job, ${name}, but ${qs} questions need to be changed:`));
+                    node.appendChild(document.createTextNode(`Good job, ${name}, but ${qs} questions ${phrasing} to be changed:`));
                 }
                 document.getElementById("result").appendChild(node);
                 document.getElementById("result").appendChild(holder);
 
                 node2 = document.createElement("p");
-                if (!things){
-                    node2.appendChild(document.createTextNode("Please only change your answers to these questions and leave all others blank."));
-                    node2.appendChild(document.createElement("br"));
-                }
-                node2.appendChild(document.createTextNode(assessor));
+                if (document.getElementById("kal").checked){
+                    node2.appendChild(document.createTextNode("For more detail, check the feedback section under each question in the attached document."));
+                } else {
+                    if (!things){
+                        node2.appendChild(document.createTextNode("Please only change your answers to these questions and leave all others blank."));
+                        node2.appendChild(document.createElement("br"));
+                    }
+                    node2.appendChild(document.createTextNode(assessor));
+                } 
                 document.getElementById("result").appendChild(node2);
         }
     }

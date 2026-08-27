@@ -4,21 +4,42 @@
     --dark:rgb(9, 56, 46);
     --darkish:rgb(13, 71, 49);
     --light:rgb(229, 243, 191);
+    --accent:yellow;
+    --border:lightyellow;
+    --llightish:rgb(227, 231, 231);
+    --llight:white;
+    --ldark:rgb(1,1,1);
+    --ldarkish:rgb(47, 49, 51);
+    --laccent:rgb(0, 54, 202);
+    --lborder:rgb(158, 216, 255);
 }
 
 body{
     background-color: var(--dark);
-    color: lightyellow;
+    color: var(--border);
     padding: 10vh 20vh 0 20vh;
     font-family: "Arvo", serif;
 }
+body.light{
+    background-color: var(--llightish);
+    color:var(--ldark);
+}
 strong{
-    color: rgb(231, 255, 167);
+    color: var(--light);
     margin-top:5vh;
+}
+.light strong{
+    color: var(--ldarkish);
 }
 p,li{
     background-image: linear-gradient(to right, var(--darkish), var(--dark));
     padding-left: 0.2em;
+}
+.light p, .light li{
+    background-image: linear-gradient(to right, var(--llight), var(--llightish));
+}
+li {
+    line-height: 1.5em;
 }
 p#workspace{
     margin-top:10vh;
@@ -28,38 +49,61 @@ body::selection{
     color:var(--dark);
 }
 h1{
-    color: yellow;
+    color: var(--accent);
+}
+.light h1{
+    color: var(--laccent);
 }
 textarea{
     font-size:large;
     padding:1em;
     background-color: var(--light);
-    border-color: lightyellow;
+    border-color: var(--border);
     border-style:solid;
     font-family: "Arvo", serif;
+    line-height: 1.5em;
+}
+.light textarea{
+    background-color: var(--llight);
+    border-color: var(--lborder);    
 }
 textarea::selection{
-    background-color: yellow;
-    color: black;
+    background-color: var(--accent);
+    color: var(--ldark);
+}
+.light textarea::selection{
+    background-color: var(--laccent);
+    color: var(--llight);
 }
 button{
     margin-top:2px;
     background-color: var(--light);
-    border-color: lightyellow;
+    border-color: var(--border);
     border-style:solid;
     padding: 0.5em;
     font-family: "Arvo", serif;
     font-weight:400;
     font-size:large;
 }
+.light button{
+    background-color: var(--llight);
+    border-color: var(--lborder);
+}
 button:hover{
     border-color: var(--darkish);
 }
-button:active{
-    border-color:yellow;
-    color: yellow;
+.light button:hover{
+    border-color: var(--laccent);
 }
-
+button:active{
+    border-color:var(--accent);
+    color: var(--accent);
+}
+.light button:active{
+    border-color:var(--laccent);
+    background-color:var(--laccent);
+    color: var(--llight);
+}
 .ticker{
     margin-left: 0.6em;
 }
@@ -97,17 +141,27 @@ button:active{
   height: 25px;
   width: 25px;
   background-color: var(--light);
-  border: solid lightyellow 2px;;
+  border: solid var(--border) 2px;;
+}
+.light .tick{
+    background-color: var(--llight);
+    border-color: var(--lborder);
 }
 
 /* On mouse-over, add a grey background color */
 .container:hover input ~ .tick {
   border-color: var(--darkish);
 }
+.light .container:hover input ~ .tick {
+  border-color: var(--laccent);
+}
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .tick {
-  background-color: yellow;
+  background-color: var(--accent);
+}
+.light .container input:checked ~ .tick {
+  background-color: var(--laccent);
 }
 
 /* Create the tick/indicator (hidden when not checked) */
@@ -133,4 +187,7 @@ button:active{
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+.light .container .tick:after {
+    border-color: var(--llight);
 }
