@@ -11,12 +11,27 @@ function initiate() {
     });
     if (params.mode == "light"){
         lightMode();
+    } else if (params.mode == "dark"){
+        lightMode();
+        lightMode();
     }
 }
 window.onload = initiate;
+let mode = "default";
 
 function lightMode(){
-    document.body.classList.toggle("light");
+    if (mode == "default"){
+        mode = "light";
+        document.body.classList.toggle("light");
+    }
+    else if (mode == "light"){
+        mode = "dark";
+        document.body.classList.toggle("light");
+        document.body.classList.toggle("dark");
+    } else {
+        mode = "default"
+        document.body.classList.toggle("dark");
+    }
 }
 
 function formatText() {
@@ -24,6 +39,7 @@ function formatText() {
     let node;
     let node2;
     let strong;
+    let satis;
     let holder;
     let point;
     let things = false;
@@ -65,14 +81,18 @@ function formatText() {
         let name = strings[0].split(" ")[0];
         switch (strings.length) {
             case 1:
+                satis = document.createElement("strong");
                 node = document.createElement("p");
                 if (resubmit > 1){
-                    node.appendChild(document.createTextNode(`The combined result of your ${resubmit} attempts is satisfactory.`));
+                    node.appendChild(document.createTextNode(`The combined result of your ${resubmit} attempts is `));
+                    satis.appendChild(document.createTextNode("satisfactory."));
+                    node.appendChild(satis);
                     node.appendChild(document.createElement("br"));
                     node.appendChild(document.createTextNode(`Good job, ${name}.`));
                 }
                 else{
-                    node.appendChild(document.createTextNode("Satisfactory."));
+                    satis.appendChild(document.createTextNode("Satisfactory."));
+                    node.appendChild(satis);
                     node.appendChild(document.createElement("br"));
                     node.appendChild(document.createTextNode(`Well done, ${name}.`));
                 }

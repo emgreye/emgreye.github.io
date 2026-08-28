@@ -12,6 +12,11 @@
     --ldarkish:rgb(47, 49, 51);
     --laccent:rgb(0, 54, 202);
     --lborder:rgb(158, 216, 255);
+    --ddark:rgb(33, 38, 39);
+    --ddarkish:rgb(47, 57, 59);
+    --daccent:rgb(6, 182, 153);
+    --dborder:rgb(15, 74, 78);
+    --dlight:rgb(191, 243, 221);
 }
 
 body{
@@ -24,6 +29,10 @@ body.light{
     background-color: var(--llightish);
     color:var(--ldark);
 }
+body.dark{
+    background-color: var(--ddark);
+    color:var(--dlight);
+}
 strong{
     color: var(--light);
     margin-top:5vh;
@@ -31,12 +40,18 @@ strong{
 .light strong{
     color: var(--ldarkish);
 }
+.dark strong{
+    color: var(--dlight);
+}
 p,li{
-    background-image: linear-gradient(to right, var(--darkish), var(--dark));
+    background-image: linear-gradient(to right, var(--darkish), rgba(0,0,0,0));
     padding-left: 0.2em;
 }
 .light p, .light li{
-    background-image: linear-gradient(to right, var(--llight), var(--llightish));
+    background-image: linear-gradient(to right, var(--llight), rgba(0,0,0,0));
+}
+.dark p, .dark li{
+    background-image: linear-gradient(to right, var(--ddarkish), rgba(0,0,0,0));
 }
 li {
     line-height: 1.5em;
@@ -54,6 +69,9 @@ h1{
 .light h1{
     color: var(--laccent);
 }
+.dark h1{
+    color: var(--daccent);
+}
 textarea{
     font-size:large;
     padding:1em;
@@ -67,6 +85,11 @@ textarea{
     background-color: var(--llight);
     border-color: var(--lborder);    
 }
+.dark textarea{
+    background-color: var(--ddarkish);
+    border-color: var(--dborder);   
+    color: var(--dlight); 
+}
 textarea::selection{
     background-color: var(--accent);
     color: var(--ldark);
@@ -74,6 +97,10 @@ textarea::selection{
 .light textarea::selection{
     background-color: var(--laccent);
     color: var(--llight);
+}
+.dark textarea::selection{
+    background-color: var(--daccent);
+    color: var(--ddark);
 }
 button{
     margin-top:2px;
@@ -89,11 +116,19 @@ button{
     background-color: var(--llight);
     border-color: var(--lborder);
 }
+.dark button{
+    background-color: var(--ddarkish);
+    border-color: var(--dborder);
+    color: var(--dlight);
+}
 button:hover{
     border-color: var(--darkish);
 }
 .light button:hover{
     border-color: var(--laccent);
+}
+.dark button:hover{
+    border-color: var(--ddarkish);
 }
 button:active{
     border-color:var(--accent);
@@ -103,6 +138,10 @@ button:active{
     border-color:var(--laccent);
     background-color:var(--laccent);
     color: var(--llight);
+}
+.light button:active{
+    border-color:var(--daccent);
+    color: var(--daccent);
 }
 .ticker{
     margin-left: 0.6em;
@@ -147,6 +186,10 @@ button:active{
     background-color: var(--llight);
     border-color: var(--lborder);
 }
+.dark .tick{
+    background-color: var(--ddarkish);
+    border-color: var(--dborder);
+}
 
 /* On mouse-over, add a grey background color */
 .container:hover input ~ .tick {
@@ -155,6 +198,9 @@ button:active{
 .light .container:hover input ~ .tick {
   border-color: var(--laccent);
 }
+.dark .container:hover input ~ .tick {
+  border-color: var(--ddarkish);
+}
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .tick {
@@ -162,6 +208,9 @@ button:active{
 }
 .light .container input:checked ~ .tick {
   background-color: var(--laccent);
+}
+.dark .container input:checked ~ .tick {
+  background-color: var(--daccent);
 }
 
 /* Create the tick/indicator (hidden when not checked) */
@@ -190,4 +239,7 @@ button:active{
 }
 .light .container .tick:after {
     border-color: var(--llight);
+}
+.dark .container .tick:after {
+    border-color: var(--ddark);
 }
