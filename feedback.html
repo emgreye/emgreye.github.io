@@ -8,29 +8,35 @@
     <link rel="stylesheet" href="feedback/style.css">
 </head>
 <body>
-    <textarea id="textarea" placeholder="Values here." name="textarea" rows="10" cols="72"></textarea><br>
-    <button type="button" id="format">Format</button>
-    <button type="button" id="copy">Copy questions</button>
-    <button type="button" id="light">Switch mode</button>
+    <textarea id="textarea" placeholder="Feedback here." name="textarea" rows="10" cols="72"></textarea>
+    <div id="buttons">
+        <button type="button" id="format">Format</button>
+        <button type="button" id="copy">Copy questions</button>
+        <button type="button" id="light">Switch mode</button>
+        <button type="button" id="help"><a id="helplink" href="/fb-help.html" target="_blank">Help</a></button>
+    </div>
+    <div class="checker">
+        <label for="date">Include date:</label>
+        <label class="container">&nbsp;
+            <input type="checkbox" id="date">
+            <span class="tick"></span>
+        </label>
+    </div>
+    <div class="checker">
+        <label class="ticker" for="kal">Document mode:</label>
+        <label class="container">&nbsp;
+            <input type="checkbox" id="kal">
+            <span class="tick"></span>
+        </label>
+    </div>
+    <div class="checker" style="display:none">
+        <label class="ticker" for="assessor">Final line is assessor:</label>
+        <label class="container">&nbsp;
+            <input type="checkbox" id="assessor">
+            <span class="tick"></span>
+        </label>
+    </div>
     
-    <br><br>
-    <label for="assessor">Final line is assessor:</label>
-    <label class="container">&nbsp;
-        <input type="checkbox" id="assessor">
-        <span class="tick"></span>
-    </label>
-    <label class="ticker" for="date">Include date:</label>
-    <label class="container">&nbsp;
-        <input type="checkbox" id="date">
-        <span class="tick"></span>
-    </label>
-    <label class="ticker" for="kal">Kalgoorlie mode:</label>
-    <label class="container">&nbsp;
-        <input type="checkbox" id="kal">
-        <span class="tick"></span>
-    </label>
-    
-
     <h1 id="info"></h1>
 
     <div id="result">
