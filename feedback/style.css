@@ -22,7 +22,7 @@
 body{
     background-color: var(--dark);
     color: var(--border);
-    padding: 10vh 20vh 0 20vh;
+    padding: 5vh 20vh 0 20vh;
     font-family: "Arvo", serif;
 }
 body.light{
@@ -85,6 +85,9 @@ textarea, blockquote{
     font-family: "Arvo", serif;
     line-height: 1.5em;
     color: var(--ldark);
+}
+textarea{
+    margin-top: 5vh;
 }
 .light textarea, .light blockquote{
     background-color: var(--llight);
