@@ -132,7 +132,12 @@ function formatText() {
                 satis = document.createElement("strong");
                 node = document.createElement("p");
                 if (resubmit > 1){
-                    node.appendChild(document.createTextNode(`The combined result of your ${resubmit} attempts is `));
+                    if (document.getElementById("kal").checked){
+                        node.appendChild(document.createTextNode(`The result of this attempt is `));
+                    }
+                    else{
+                        node.appendChild(document.createTextNode(`The combined result of your ${resubmit} attempts is `));
+                    }
                     satis.appendChild(document.createTextNode("satisfactory."));
                     node.appendChild(satis);
                     node.appendChild(document.createElement("br"));
@@ -144,8 +149,10 @@ function formatText() {
                     node.appendChild(document.createElement("br"));
                     node.appendChild(document.createTextNode(`Well done, ${name}.`));
                 }
-                node.appendChild(document.createElement("br"));
-                node.appendChild(document.createTextNode(assessor));
+                if (!document.getElementById("kal").checked){
+                    node.appendChild(document.createElement("br"));
+                    node.appendChild(document.createTextNode(assessor));
+                }
                 document.getElementById("result").appendChild(node);
                 break;
 
@@ -212,7 +219,9 @@ function formatText() {
                     if (single){
                         bottomtext = "For more detail, check the feedback section under the question in the attached document.";
                     }
-                    bottomtext = "For more detail, check the feedback section under each question in the attached document.";
+                    else{
+                        bottomtext = "For more detail, check the feedback section under each question in the attached document.";
+                    }
                     if (!kal2){
                         bottomtext = bottomtext.slice(0,-26) + ".";
                     }
