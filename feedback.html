@@ -8,10 +8,16 @@
     <link rel="stylesheet" href="feedback/style.css">
 </head>
 <body>
-    <textarea id="textarea" placeholder="Feedback here." name="textarea" rows="10" cols="72"></textarea>
+    <textarea id="textarea" placeholder="Feedback goes here." name="textarea" rows="10" cols="72"></textarea>
     <div id="buttons">
         <button type="button" id="format">Format</button>
         <button type="button" id="copy">Copy questions</button>
+        <button type="button" id="snq">SNQ</button>
+        <select name="linetype" id="linetype">
+            <option value="auto">Auto</option>
+            <option value="question">Questions</option>
+            <option value="thing">Things</option>
+        </select>
         <button type="button" id="light">Switch mode</button>
         <button type="button" id="help"><a id="helplink" href="/fb-help.html" target="_blank">Help</a></button>
     </div>
@@ -26,6 +32,20 @@
         <label class="ticker" for="kal">Document mode:</label>
         <label class="container">&nbsp;
             <input type="checkbox" id="kal">
+            <span class="tick"></span>
+        </label>
+    </div>
+    <div class="checker">
+        <label class="ticker" for="upperq">Count Qs:</label>
+        <label class="container">&nbsp;
+            <input type="checkbox" id="upperq">
+            <span class="tick"></span>
+        </label>
+    </div>
+    <div class="checker">
+        <label class="ticker" for="hl">Highlight:</label>
+        <label class="container">&nbsp;
+            <input type="checkbox" id="hl">
             <span class="tick"></span>
         </label>
     </div>

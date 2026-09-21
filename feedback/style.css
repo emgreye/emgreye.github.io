@@ -43,14 +43,16 @@ strong{
 .dark strong{
     color: var(--dlight);
 }
-p,li{
+div#result{
     background-image: linear-gradient(to right, var(--darkish), rgba(0,0,0,0));
-    padding-left: 0.2em;
+    padding-left: 1em;
+    padding-top: 0.01em;
+    padding-bottom: 0.01em;
 }
-.light p, .light li{
+.light div#result{
     background-image: linear-gradient(to right, var(--llight), rgba(0,0,0,0));
 }
-.dark p, .dark li{
+.dark div#result{
     background-image: linear-gradient(to right, var(--ddarkish), rgba(0,0,0,0));
 }
 li {
@@ -110,11 +112,12 @@ textarea::selection{
     background-color: var(--daccent);
     color: var(--ddark);
 }
-button{
+button, select{
     margin-top:2px;
     background-color: var(--light);
     border-color: var(--border);
     border-style:solid;
+    border-width: 2px;
     padding: 0.5em;
     font-family: "Arvo", serif;
     font-weight:400;
@@ -127,22 +130,22 @@ button a{
 .dark button a{
     color: var(--dlight);
 }
-.light button{
+.light button, .light select{
     background-color: var(--llight);
     border-color: var(--lborder);
 }
-.dark button{
+.dark button, .dark select{
     background-color: var(--ddarkish);
     border-color: var(--dborder);
     color: var(--dlight);
 }
-button:hover{
+button:hover, select:hover{
     border-color: var(--darkish);
 }
-.light button:hover{
+.light button:hover, .light select:hover{
     border-color: var(--laccent);
 }
-.dark button:hover{
+.dark button:hover, .dark select:hover{
     border-color: var(--ddarkish);
 }
 button:active{
@@ -157,6 +160,9 @@ button:active{
 .light button:active{
     border-color:var(--daccent);
     color: var(--daccent);
+}
+option:hover, option:focus{
+    background-color: var(--accent);
 }
 .ticker{
     margin-left: 0.6em;
