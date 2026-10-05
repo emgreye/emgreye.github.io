@@ -113,15 +113,27 @@ textarea::selection{
     color: var(--ddark);
 }
 button, select{
-    margin-top:2px;
+    margin-top: 2px;
     background-color: var(--light);
     border-color: var(--border);
     border-style:solid;
     border-width: 2px;
-    padding: 0.5em;
     font-family: "Arvo", serif;
     font-weight:400;
     font-size:large;
+    margin-right: 2px;
+}
+button {
+    padding: 0.5em;
+    padding-right: 0.7em;
+    margin-top: 1px;
+}
+select{
+    padding: calc(0.5em + 0.5px);
+    padding-left: 0.2em;
+}
+button#options{
+    padding-right: 0.5em;
 }
 button a{
     color:black;
@@ -172,7 +184,10 @@ div.checker{
 }
 
 div#buttons{
-    margin-bottom:2em;
+    margin-bottom:1em;
+}
+div.spacer{
+    padding-bottom: 12vh;
 }
 
 
@@ -315,4 +330,3 @@ div#buttons{
         margin-left: 0px;
     }
 }
-

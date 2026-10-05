@@ -5,6 +5,7 @@ function initiate() {
         document.getElementById('format').onclick = formatText;
         document.getElementById('copy').onclick = copyFeedback;
         document.getElementById('snq').onclick = formatNeeds;
+        document.getElementById('options').onclick = hideOptions;
     }
     catch (error){
         console.log("Help page loading...")
@@ -22,11 +23,8 @@ function initiate() {
     if (params.assessor !== null){
         asr = params.assessor.replace("_"," ");
     }
-    if (params.hidden == "true"){
-        let els = document.getElementsByClassName("checker");
-        for (let i = 0; i < els.length; i++){
-            els[i].style.display = 'none';
-        }
+    if (params.hidden == "false"){
+        hideOptions();
     }
     if (params.date == "true") {
         document.getElementById("date").checked = true;
@@ -37,9 +35,12 @@ function initiate() {
     if (params.hl == "true") {
         document.getElementById("hl").checked = true;
     }
+    if (params.pa == "true") {
+        document.getElementById("pa").checked = true;
+    }
     if (params.doc == "true") {
         document.getElementById("kal").checked = true;
-        document.getElementById("copy").innerHTML = "LMS Format";
+        document.getElementById("copy").innerHTML = "📎 LMS Format";
         document.getElementById("snq").style.display = 'none';
     }
 }
@@ -48,6 +49,19 @@ window.onload = initiate;
 let mode = "default";
 let kal2 = false;
 let needs = false;
+
+function hideOptions(){
+    let els = document.getElementsByClassName("checker");
+    if (els[0].style.display == "none"){
+        for (let i = 0; i < els.length; i++){
+            els[i].style.display = 'inline';
+        }
+    } else {
+        for (let i = 0; i < els.length; i++){
+            els[i].style.display = 'none';
+        }
+    }
+}
 
 function lightMode(){
     if (mode == "default"){
@@ -99,6 +113,10 @@ function formatText() {
     if (assessor == ""){
         assessor = "Jake McAuliffe"
     }
+    if (document.getElementById("kal").checked){
+        document.getElementById("copy").innerHTML = "📎 LMS Format";
+        document.getElementById("snq").style.display = 'none';
+    }
     if (strings.length === 0 || strings[0] == ""){
         alert("Incorrect format!");
     } else {
@@ -110,9 +128,9 @@ function formatText() {
         while (jim.hasChildNodes()) {
             jim.removeChild(jim.firstChild);
         }
-        if (document.getElementById("assessor").checked){
-            assessor = strings.pop();
-        }
+        // if (document.getElementById("assessor").checked){
+        //     assessor = strings.pop();
+        // }
         if (document.getElementById("upperq").checked){
             upperq = true;
         }
@@ -168,7 +186,7 @@ function formatText() {
                     }
             }
             let qs = 0;
-            if (upperq){
+            if (upperq && strings[1][0] == "Q"){
                 for (let i = 1; i < strings.length; i++){
                     qs += strings[i].split("Q").length - 1
                 }
@@ -191,7 +209,9 @@ function formatText() {
                         satis.appendChild(document.createTextNode("satisfactory."));
                         node.appendChild(satis);
                         node.appendChild(document.createElement("br"));
-                        node.appendChild(document.createTextNode(`Good job, ${name}.`));
+                        if (!document.getElementById("pa").checked){
+                            node.appendChild(document.createTextNode(`Good job, ${name}.`));
+                        }
                     }
                     else{
                         satis.appendChild(document.createTextNode("Satisfactory."));
@@ -199,7 +219,7 @@ function formatText() {
                         node.appendChild(document.createElement("br"));
                         node.appendChild(document.createTextNode(`Well done, ${name}.`));
                     }
-                    if (!document.getElementById("kal").checked){
+                    if (!document.getElementById("kal").checked || kal2){
                         node.appendChild(document.createElement("br"));
                         node.appendChild(document.createTextNode(assessor));
                     }
@@ -266,11 +286,14 @@ function formatText() {
                         }
                         holder.appendChild(point);
                     }
+                    let string = "question"
                     if (things){
-                        node.appendChild(document.createTextNode(`Good job, ${name}${phrasing1} ${qs} thing${plural} ${phrasing2} to be changed:`));
+                        string = "thing"
                     }
-                    else {
-                        node.appendChild(document.createTextNode(`Good job, ${name}${phrasing1} ${qs} question${plural} ${phrasing2} to be changed:`));
+                    if (document.getElementById("pa").checked){
+                        node.appendChild(document.createTextNode(`Hi, ${name}. ${qs} ${string}${plural} ${phrasing2} to be changed:`));
+                    } else {
+                        node.appendChild(document.createTextNode(`Good job, ${name}${phrasing1} ${qs} ${string}${plural} ${phrasing2} to be changed:`));
                     }
                     document.getElementById("result").appendChild(node);
                     document.getElementById("result").appendChild(holder);
@@ -288,8 +311,10 @@ function formatText() {
                             bottomtext = bottomtext.slice(0,-26) + ".";
                         }
                         node2.appendChild(document.createTextNode(bottomtext));
-                        document.getElementById("copy").innerHTML = "LMS Format";
-                        document.getElementById("snq").style.display = 'none';
+                        if (kal2){
+                            node2.appendChild(document.createElement("br"));
+                            node2.appendChild(document.createTextNode(assessor));
+                        }
                     } else {
                         if (!things){
                             if (single){
@@ -301,7 +326,7 @@ function formatText() {
                             node2.appendChild(document.createElement("br"));
                         }
                         node2.appendChild(document.createTextNode(assessor));
-                        document.getElementById("copy").innerHTML = "Copy questions";
+                        document.getElementById("copy").innerHTML = "📋 Copy Qs";
                         document.getElementById("snq").style.display = 'inline-block';
                     } 
                     document.getElementById("result").appendChild(node2);

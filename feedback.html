@@ -10,39 +10,40 @@
 <body>
     <textarea id="textarea" placeholder="Feedback goes here." name="textarea" rows="10" cols="72"></textarea>
     <div id="buttons">
-        <button type="button" id="format">Format</button>
-        <button type="button" id="copy">Copy questions</button>
-        <button type="button" id="snq">SNQ</button>
+        <button type="button" id="format">🖊️ Format</button>
+        <button type="button" id="copy">➕ Copy Qs</button>
+        <button type="button" id="snq">🔰 SNQ</button>
         <select name="linetype" id="linetype">
-            <option value="auto">Auto</option>
-            <option value="question">Questions</option>
-            <option value="thing">Things</option>
+            <option value="auto">❓Auto</option>
+            <option value="question">❓Questions</option>
+            <option value="thing">❓Things</option>
         </select>
-        <button type="button" id="light">Switch mode</button>
-        <button type="button" id="help"><a id="helplink" href="/fb-help.html" target="_blank">Help</a></button>
+        <button type="button" id="light">🔄 Mode</button>
+        <button type="button" id="help"><a id="helplink" href="/fb-help.html" target="_blank">📙 Help</a></button>
+        <button type="button" id="options">⚙️</button>
     </div>
-    <div class="checker">
-        <label for="date">Include date:</label>
+    <div class="checker" style="display:none">
+        <label for="date">Date:</label>
         <label class="container">&nbsp;
             <input type="checkbox" id="date">
             <span class="tick"></span>
         </label>
     </div>
-    <div class="checker">
-        <label class="ticker" for="kal">Document mode:</label>
+    <div class="checker" style="display:none">
+        <label class="ticker" for="kal">Document:</label>
         <label class="container">&nbsp;
             <input type="checkbox" id="kal">
             <span class="tick"></span>
         </label>
     </div>
-    <div class="checker">
+    <div class="checker" style="display:none">
         <label class="ticker" for="upperq">Count Qs:</label>
         <label class="container">&nbsp;
             <input type="checkbox" id="upperq">
             <span class="tick"></span>
         </label>
     </div>
-    <div class="checker">
+    <div class="checker" style="display:none">
         <label class="ticker" for="hl">Highlight:</label>
         <label class="container">&nbsp;
             <input type="checkbox" id="hl">
@@ -50,12 +51,19 @@
         </label>
     </div>
     <div class="checker" style="display:none">
+        <label class="ticker" for="pa">PA:</label>
+        <label class="container">&nbsp;
+            <input type="checkbox" id="pa">
+            <span class="tick"></span>
+        </label>
+    </div>
+    <!-- <div class="checker" style="display:none">
         <label class="ticker" for="assessor">Final line is assessor:</label>
         <label class="container">&nbsp;
             <input type="checkbox" id="assessor">
             <span class="tick"></span>
         </label>
-    </div>
+    </div> -->
     
     <h1 id="info"></h1>
 
