@@ -113,7 +113,6 @@ textarea::selection{
     color: var(--ddark);
 }
 button, select{
-    margin-top: 2px;
     background-color: var(--light);
     border-color: var(--border);
     border-style:solid;
@@ -131,6 +130,7 @@ button {
 select{
     padding: calc(0.5em + 0.5px);
     padding-left: 0.2em;
+    transform: translateY(-1px)
 }
 button#options{
     padding-right: 0.5em;
