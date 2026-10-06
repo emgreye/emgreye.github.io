@@ -186,7 +186,7 @@ function formatText() {
                     }
             }
             let qs = 0;
-            if (upperq && strings[1][0] == "Q"){
+            if (upperq && strings.length > 1 && strings[1][0] == "Q"){
                 for (let i = 1; i < strings.length; i++){
                     qs += strings[i].split("Q").length - 1
                 }
