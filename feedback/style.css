@@ -87,6 +87,8 @@ textarea, blockquote{
     font-family: "Arvo", serif;
     line-height: 1.5em;
     color: var(--ldark);
+    width: calc(100vw - 40vh - 54px);
+    height: 24vh;
 }
 textarea{
     margin-top: 5vh;
@@ -113,7 +115,6 @@ textarea::selection{
     color: var(--ddark);
 }
 button, select{
-    margin-top: 2px;
     background-color: var(--light);
     border-color: var(--border);
     border-style:solid;
@@ -131,6 +132,7 @@ button {
 select{
     padding: calc(0.5em + 0.5px);
     padding-left: 0.2em;
+    transform: translateY(-1px);
 }
 button#options{
     padding-right: 0.5em;
@@ -161,16 +163,16 @@ button:hover, select:hover{
     border-color: var(--ddarkish);
 }
 button:active{
-    border-color:var(--accent);
+    border-color:var(--accent) !important;
     color: var(--accent);
 }
 .light button:active{
-    border-color:var(--laccent);
+    border-color:var(--laccent) !important;
     background-color:var(--laccent);
     color: var(--llight);
 }
 .light button:active{
-    border-color:var(--daccent);
+    border-color:var(--daccent) !important;
     color: var(--daccent);
 }
 option:hover, option:focus{
@@ -179,8 +181,8 @@ option:hover, option:focus{
 .ticker{
     margin-left: 0.6em;
 }
-div.checker{
-    display:inline;
+div.vis{
+    display:inline !important;
 }
 
 div#buttons{
@@ -294,11 +296,12 @@ div.spacer{
         max-width:90vw;
         margin:0;
     }
-    button{
+    button, select{
         font-size: small;
+        margin-bottom: 4px;
     }
     textarea{
-        max-width:84vw;
+        width:84vw;
         padding:3vw;
     }
     div, h1{
@@ -314,16 +317,15 @@ div.spacer{
     .ticker{
         margin-left: 0em;
     }
-    div.checker{
-        display:block;
-        margin-bottom:2.5em;
+    div.vis{
+        display: block !important;
+        margin-bottom: 2.5em;
     }
     div.checker label:nth-child(2){
-        display:flex;
-        float:right;
+        display: flex;
+        float: right;
     }
     div#buttons{
-        display:flex;
         justify-content: space-between;
     }
     label.container{

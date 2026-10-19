@@ -5,6 +5,7 @@ function initiate() {
         document.getElementById('format').onclick = formatText;
         document.getElementById('copy').onclick = copyFeedback;
         document.getElementById('snq').onclick = formatNeeds;
+        document.getElementById('roa').onclick = formatRecord;
         document.getElementById('options').onclick = hideOptions;
     }
     catch (error){
@@ -49,18 +50,13 @@ window.onload = initiate;
 let mode = "default";
 let kal2 = false;
 let needs = false;
+let rec = false;
 
 function hideOptions(){
     let els = document.getElementsByClassName("checker");
-    if (els[0].style.display == "none"){
         for (let i = 0; i < els.length; i++){
-            els[i].style.display = 'inline';
+            els[i].classList.toggle("vis");
         }
-    } else {
-        for (let i = 0; i < els.length; i++){
-            els[i].style.display = 'none';
-        }
-    }
 }
 
 function lightMode(){
@@ -120,6 +116,12 @@ function formatText() {
     if (strings.length === 0 || strings[0] == ""){
         alert("Incorrect format!");
     } else {
+        try{
+            document.getElementById("resulta").id = "result"
+        }
+        catch{
+            console.log("new text")
+        }
         let list = document.getElementById("result");
         while (list.hasChildNodes()) {
             list.removeChild(list.firstChild);
@@ -156,6 +158,39 @@ function formatText() {
             node.appendChild(holder);
             document.getElementById("result").appendChild(node);
         }
+        else if (rec){
+            let unit = strings[0].split(" ")[1].toLowerCase();
+            switch (unit){
+                case "pc":
+                    unit = "PREPHC405"
+                    break;
+                case "as":
+                    unit = "PREASU403"
+                    break;
+                case "micro":
+                    unit = "PREMHS402"
+                    break;
+                case "ap":
+                    unit = "PREAPU401"
+                    break;
+                case "maths":
+                    unit = "PREMHA404"
+                    break;
+                case "td":
+                case "bsb":
+                    unit = "BSBTEC301"
+                    break;
+                case "med":
+                case "mt":
+                    unit = "BSBMED301"
+                    break;    
+            }
+            node = document.createElement("p");
+            node.appendChild(document.createTextNode(`Hi, ${name}. Please resubmit this once all ${unit} assessments have been completed and marked satisfactory.`));
+            node.appendChild(document.createElement("br"));
+            node.appendChild(document.createTextNode(assessor));
+            document.getElementById("result").appendChild(node);
+        }
         else {
             document.getElementById("info").append(document.createTextNode(strings[0]));
             for (let line = 1; line < strings.length; line++){
@@ -186,7 +221,7 @@ function formatText() {
                     }
             }
             let qs = 0;
-            if (upperq && strings[1][0] == "Q"){
+            if (upperq && strings.length > 1 && strings[1][0] == "Q"){
                 for (let i = 1; i < strings.length; i++){
                     qs += strings[i].split("Q").length - 1
                 }
@@ -351,6 +386,12 @@ function formatNeeds(){
     needs = true;
     formatText();
     needs = false;
+}
+
+function formatRecord(){
+    rec = true;
+    formatText();
+    rec = false;
 }
 
 async function copyText(id) {
