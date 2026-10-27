@@ -186,14 +186,33 @@ div.vis{
 }
 
 div#buttons{
-    margin-bottom:1em;
+    margin-bottom:0.5em;
 }
 div.spacer{
     padding-bottom: 12vh;
 }
 
+#buttons button{
+    margin-bottom:3px;
+}
 
-/* The container */
+.checker button{
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    margin-top: calc(3px + 0.5em);
+}
+
+input#assr{
+    height:25px;
+    background-color: var(--light);
+    border: solid var(--border) 2px;
+    padding-left:3px;
+    margin-left: 0.6em;
+}
+
+input#assr::selection{
+    background-color: var(--accent);
+}
+
 .container {
   margin-left: 0.3em;
   margin-right: -0.3em;
@@ -208,7 +227,7 @@ div.spacer{
   user-select: none;
 }
 
-/* Hide the browser's default checkbox */
+/*Hides default tickbox*/
 .container input {
   position: absolute;
   opacity: 0;
@@ -217,7 +236,7 @@ div.spacer{
   width: 0;
 }
 
-/* Create a custom checkbox */
+/*Custom tickbox*/
 .tick {
   position: absolute;
   top: 0;
@@ -236,7 +255,6 @@ div.spacer{
     border-color: var(--dborder);
 }
 
-/* On mouse-over, add a grey background color */
 .container:hover input ~ .tick {
   border-color: var(--darkish);
 }
@@ -247,7 +265,6 @@ div.spacer{
   border-color: var(--ddarkish);
 }
 
-/* When the checkbox is checked, add a blue background */
 .container input:checked ~ .tick {
   background-color: var(--accent);
 }
@@ -258,19 +275,16 @@ div.spacer{
   background-color: var(--daccent);
 }
 
-/* Create the tick/indicator (hidden when not checked) */
 .tick:after {
   content: "";
   position: absolute;
   display: none;
 }
 
-/* Show the tick when checked */
 .container input:checked ~ .tick:after {
   display: block;
 }
 
-/* Style the tick/indicator */
 .container .tick:after {
   left: 9px;
   top: 5px;

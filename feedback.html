@@ -10,18 +10,18 @@
 <body>
     <textarea id="textarea" placeholder="Feedback goes here." name="textarea" ></textarea>
     <div id="buttons">
-        <button type="button" id="format">🖊️ Format</button>
-        <button type="button" id="copy">➕ Copy Qs</button>
-        <button type="button" id="snq">🔰 SNQ</button>
-        <button type="button" id="roa">🈸 ROA</button>
+        <button type="button" title="Format text" id="format">🖊️ Format</button>
+        <button type="button" title="Copy questions" id="copy">➕ Copy Qs</button>
+        <button type="button" title="Format as Student Needs Questionnaire" id="snq">🔰 SNQ</button>
+        <button type="button" title="Format as Record of Assessment" id="roa">🈸 ROA</button>
         <select name="linetype" id="linetype">
             <option value="auto">❓Auto</option>
             <option value="question">❓Questions</option>
             <option value="thing">❓Things</option>
         </select>
-        <button type="button" id="light">🔄 Theme</button>
-        <button type="button" id="help"><a id="helplink" href="/fb-help.html" target="_blank">📙 Help</a></button>
-        <button type="button" id="options">⚙️</button>
+        <button type="button" title="Change theme" id="light">🔄 Theme</button>
+        <button type="button" title="Open help page" id="help"><a id="helplink" href="/fb-help.html" target="_blank">📙 Help</a></button>
+        <button type="button" title="Open options" id="options">⚙️</button>
     </div>
     <div class="checker" style="display:none">
         <label for="date">Date:</label>
@@ -57,6 +57,14 @@
             <input type="checkbox" id="pa">
             <span class="tick"></span>
         </label>
+    </div>
+    <div class="checker" style="display:none">
+        <label class="ticker" for="assr">Assessor:</label>
+        <input type="text" name="Assessor" id="assr">
+    </div>
+    <br/>
+    <div class="checker" style="display:none">
+        <button type="button" title="Save options in new tab" id="saveopt">Save options</button>
     </div>
     <!-- <div class="checker" style="display:none">
         <label class="ticker" for="assessor">Final line is assessor:</label>

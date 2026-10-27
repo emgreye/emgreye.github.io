@@ -2,11 +2,12 @@
 
 function initiate() {
     try{
-        document.getElementById('format').onclick = formatText;
+        document.getElementById('format').onclick = function() {formatText("N")};
         document.getElementById('copy').onclick = copyFeedback;
-        document.getElementById('snq').onclick = formatNeeds;
-        document.getElementById('roa').onclick = formatRecord;
+        document.getElementById('snq').onclick = function() {formatText("S")};
+        document.getElementById('roa').onclick = function() {formatText("R")};
         document.getElementById('options').onclick = hideOptions;
+        document.getElementById('saveopt').onclick = newTab;
     }
     catch (error){
         console.log("Help page loading...")
@@ -48,9 +49,6 @@ function initiate() {
 let asr = ""
 window.onload = initiate;
 let mode = "default";
-let kal2 = false;
-let needs = false;
-let rec = false;
 
 function hideOptions(){
     let els = document.getElementsByClassName("checker");
@@ -92,7 +90,7 @@ function lightMode(){
     }
 }
 
-function formatText() {
+function formatText(preset) {
     let strings = document.getElementById("textarea").value.split("\n");
     let node;
     let node2;
@@ -109,6 +107,9 @@ function formatText() {
     if (assessor == ""){
         assessor = "Jake McAuliffe"
     }
+    if (document.getElementById("assr").value != ""){
+        assessor = document.getElementById("assr").value;
+    }
     if (document.getElementById("kal").checked){
         document.getElementById("copy").innerHTML = "📎 LMS Format";
         document.getElementById("snq").style.display = 'none';
@@ -120,7 +121,7 @@ function formatText() {
             document.getElementById("resulta").id = "result"
         }
         catch{
-            console.log("new text")
+            // this does nothing
         }
         let list = document.getElementById("result");
         while (list.hasChildNodes()) {
@@ -141,7 +142,7 @@ function formatText() {
             assessor += ", " + today.toLocaleDateString("en-GB", {weekday: "long", year: "numeric", month: "long", day: "numeric"}).replace(",","")
         }
         let name = strings[0].split(" ")[0].replace("_"," ");
-        if (needs){
+        if (preset == "S"){
             node = document.createElement("p");
             node.appendChild(document.createTextNode(`Thank you for submitting your work, ${name}. It has been received and assessed as completed.`));
             holder = document.createElement("p");
@@ -158,35 +159,48 @@ function formatText() {
             node.appendChild(holder);
             document.getElementById("result").appendChild(node);
         }
-        else if (rec){
-            let unit = strings[0].split(" ")[1].toLowerCase();
-            switch (unit){
-                case "pc":
-                    unit = "PREPHC405"
-                    break;
-                case "as":
-                    unit = "PREASU403"
-                    break;
-                case "micro":
-                    unit = "PREMHS402"
-                    break;
-                case "ap":
-                    unit = "PREAPU401"
-                    break;
-                case "maths":
-                    unit = "PREMHA404"
-                    break;
-                case "td":
-                case "bsb":
-                    unit = "BSBTEC301"
-                    break;
-                case "med":
-                case "mt":
-                    unit = "BSBMED301"
-                    break;    
+        else if (preset == "R"){
+            let unit;
+            if (strings[0].split(" ").length < 2){
+                unit = "N/A";
+            }
+            else {
+                unit = strings[0].split(" ")[1].toLowerCase();
+                switch (unit){
+                    case "pc":
+                        unit = "PREPHC405"
+                        break;
+                    case "as":
+                        unit = "PREASU403"
+                        break;
+                    case "micro":
+                        unit = "PREMHS402"
+                        break;
+                    case "ap":
+                        unit = "PREAPU401"
+                        break;
+                    case "maths":
+                        unit = "PREMHA404"
+                        break;
+                    case "td":
+                    case "bsb":
+                        unit = "BSBTEC301"
+                        break;
+                    case "med":
+                    case "mt":
+                        unit = "BSBMED301"
+                        break;    
+                    default:
+                        unit = "N/A"
+                }
             }
             node = document.createElement("p");
-            node.appendChild(document.createTextNode(`Hi, ${name}. Please resubmit this once all ${unit} assessments have been completed and marked satisfactory.`));
+            if (unit == "N/A"){
+                node.appendChild(document.createTextNode(`Hi, ${name}. Please resubmit this once all assessments in this unit have been completed and marked satisfactory.`));
+            }
+            else{
+                node.appendChild(document.createTextNode(`Hi, ${name}. Please resubmit this once all ${unit} assessments have been completed and marked satisfactory.`));
+            }
             node.appendChild(document.createElement("br"));
             node.appendChild(document.createTextNode(assessor));
             document.getElementById("result").appendChild(node);
@@ -254,7 +268,7 @@ function formatText() {
                         node.appendChild(document.createElement("br"));
                         node.appendChild(document.createTextNode(`Well done, ${name}.`));
                     }
-                    if (!document.getElementById("kal").checked || kal2){
+                    if (!document.getElementById("kal").checked || preset == "K"){
                         node.appendChild(document.createElement("br"));
                         node.appendChild(document.createTextNode(assessor));
                     }
@@ -342,11 +356,11 @@ function formatText() {
                         else{
                             bottomtext = "For more detail, check the feedback section under each question in the attached document.";
                         }
-                        if (!kal2){
+                        if (preset != "K"){
                             bottomtext = bottomtext.slice(0,-26) + ".";
                         }
                         node2.appendChild(document.createTextNode(bottomtext));
-                        if (kal2){
+                        if (preset == "K"){
                             node2.appendChild(document.createElement("br"));
                             node2.appendChild(document.createTextNode(assessor));
                         }
@@ -367,31 +381,46 @@ function formatText() {
                     document.getElementById("result").appendChild(node2);
             }
         }
+        copyText("result");
     }
-    copyText("result");
 }
 
 function copyFeedback(){ 
     if (document.getElementById("kal").checked){
-        kal2 = true;
-        formatText();
-        kal2 = false;
+        formatText("K");
     }
     else{
         copyText("middle");
     }
 }
 
-function formatNeeds(){
-    needs = true;
-    formatText();
-    needs = false;
-}
-
-function formatRecord(){
-    rec = true;
-    formatText();
-    rec = false;
+function newTab(){
+    let url = "https://emgreye.github.io/feedback?";
+    if (document.getElementById("date").checked){
+        url += "date=true&";
+    }
+    if (document.getElementById("kal").checked){
+        url += "doc=true&";
+    }
+    if (document.getElementById("upperq").checked){
+        url += "qs=true&";
+    }
+    if (document.getElementById("hl").checked){
+        url += "hl=true&";
+    }
+    if (document.getElementById("pa").checked){
+        url += "pa=true&";
+    }
+    if (document.getElementById("assr").value != ""){
+        url += `assessor=${document.getElementById("assr").value.replace(" ","_")}&`;
+    }
+    if (mode != "default"){
+        url += `mode=${mode}&`;
+    }
+    url = url.slice(0, -1);
+    alert('The new tab will have your options saved in the URL.');
+    window.open(url,"_blank");
+    
 }
 
 async function copyText(id) {
