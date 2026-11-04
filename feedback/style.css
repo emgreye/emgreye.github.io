@@ -33,6 +33,9 @@ body.dark{
     background-color: var(--ddark);
     color:var(--dlight);
 }
+p{
+    word-spacing:0.1em;
+}
 strong{
     color: var(--light);
     margin-top:5vh;
@@ -55,6 +58,7 @@ div#result{
 .dark div#result{
     background-image: linear-gradient(to right, var(--ddarkish), rgba(0,0,0,0));
 }
+
 li {
     line-height: 1.5em;
 }
@@ -74,24 +78,28 @@ h1, h3{
 .dark h1, .dark h3{
     color: var(--daccent);
 }
+
 blockquote{
     max-width: 600px;
     border-width:1px;
 }
 textarea, blockquote{
-    font-size:large;
-    padding:1em;
+    font-size: large;
+    padding: 1em;
     background-color: var(--light);
     border-color: var(--border);
-    border-style:solid;
+    border-style: solid;
+    border-width: 2px;
     font-family: "Arvo", serif;
     line-height: 1.5em;
     color: var(--ldark);
     width: calc(100vw - 40vh - 54px);
-    height: 24vh;
+    word-spacing: 0.1em;
+    kerning: normal;
 }
 textarea{
     margin-top: 5vh;
+    height: 24vh;
 }
 .light textarea, .light blockquote{
     background-color: var(--llight);
@@ -129,11 +137,34 @@ button {
     padding-right: 0.7em;
     margin-top: 1px;
 }
+button.activated{
+    background-color: var(--accent);
+}
+.light button.activated{
+    background-color: var(--laccent);
+}
+.dark button.activated{
+    background-color: var(--daccent);
+}
+.dark button.activated:hover{
+    border-color: var(--ddark);
+}
 select{
     padding: calc(0.5em + 0.5px);
     padding-left: 0.2em;
-    transform: translateY(-1px);
+    /* transform: translateY(-1px); */
 }
+
+mark{
+    background-color: var(--accent);
+}
+.light mark{
+    background-color: var(--laccent);
+}
+.dark mark{
+    background-color: var(--daccent);
+}
+
 button#options{
     padding-right: 0.5em;
 }
@@ -155,6 +186,7 @@ button a{
 }
 button:hover, select:hover{
     border-color: var(--darkish);
+    cursor: pointer;
 }
 .light button:hover, .light select:hover{
     border-color: var(--laccent);
@@ -162,27 +194,85 @@ button:hover, select:hover{
 .dark button:hover, .dark select:hover{
     border-color: var(--ddarkish);
 }
-button:active{
+button:active, a#helplink:active{
     border-color:var(--accent) !important;
     color: var(--accent);
 }
-.light button:active{
+.light button:active, .light a#helplink:active{
     border-color:var(--laccent) !important;
     background-color:var(--laccent);
     color: var(--llight);
 }
-.light button:active{
+.dark button:active, .dark a#helplink:active{
     border-color:var(--daccent) !important;
     color: var(--daccent);
 }
 option:hover, option:focus{
     background-color: var(--accent);
 }
-.ticker{
-    margin-left: 0.6em;
+.checker{
+    margin-inline: 0.6em;
 }
-div.vis{
-    display:inline !important;
+.checker label{
+    margin-bottom: 5em;
+}
+.vis{
+    display:inline-block !important;
+}
+div.vis label{
+    display: inline;
+}
+
+hr {
+    border: 2px solid var(--dark);
+    margin-bottom: 1em;
+    border-radius: 2px;
+}
+.light hr {
+    border-color: var(--llightish);
+}
+hr {
+    border-color: var(--ddark);
+}
+
+.holdinfo{
+    background-color: var(--darkish);
+    padding: 1em 1em 0 1em;
+    border-radius: 0.5em;
+    margin-bottom:1em;
+}
+.dark .holdinfo{
+    background-color: var(--ddarkish);
+}
+.light .holdinfo{
+    background-color: var(--llight);
+}
+
+.holdinfo h2{
+    margin-top:0px;
+    margin-bottom: 0em;
+}
+
+.columns {
+    column-count: 2;
+    column-gap:2em; 
+}
+
+.columns h3 {
+    margin-top: 0px;
+}
+
+.columns p {
+    margin-bottom: 2em;
+}
+
+div#optis{
+    margin-bottom:0.5em;
+    transform:translateX(-0.6em);
+}
+
+label:nth-child(even){
+    transform:translateX(-0.5em);
 }
 
 div#buttons{
@@ -198,19 +288,42 @@ div.spacer{
 
 .checker button{
     padding: 0.2em 0.5em 0.2em 0.5em;
-    margin-top: calc(3px + 0.5em);
 }
 
 input#assr{
     height:25px;
     background-color: var(--light);
     border: solid var(--border) 2px;
-    padding-left:3px;
-    margin-left: 0.6em;
+    padding-left:0.8em;
+    font-family: "Arvo", serif;
+    margin-bottom: 12px;
 }
-
 input#assr::selection{
     background-color: var(--accent);
+}
+input#assr:hover{
+    border-color: var(--darkish);
+}
+.light input#assr{
+    background-color: var(--llight);
+    border: solid var(--lborder) 2px;
+}
+.light input#assr::selection{
+    background-color: var(--laccent);
+}
+.light input#assr:hover{
+    border-color: var(--laccent);
+}
+.dark input#assr{
+    background-color: var(--ddarkish);
+    border: solid var(--dborder) 2px;
+    color: var(--dlight);
+}
+.dark input#assr::selection{
+    background-color: var(--daccent);
+}
+.dark input#assr:hover{
+    border-color: var(--ddarkish);
 }
 
 .container {
@@ -313,6 +426,9 @@ input#assr::selection{
     button, select{
         font-size: small;
         margin-bottom: 4px;
+    }
+    .holdinfo {
+        column-count: 1;
     }
     textarea{
         width:84vw;

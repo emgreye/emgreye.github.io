@@ -10,69 +10,60 @@
 <body>
     <textarea id="textarea" placeholder="Feedback goes here." name="textarea" ></textarea>
     <div id="buttons">
-        <button type="button" title="Format text" id="format">🖊️ Format</button>
+        <button type="button" title="Format text" id="format">✍️ Format</button>
         <button type="button" title="Copy questions" id="copy">➕ Copy Qs</button>
         <button type="button" title="Format as Student Needs Questionnaire" id="snq">🔰 SNQ</button>
         <button type="button" title="Format as Record of Assessment" id="roa">🈸 ROA</button>
         <select name="linetype" id="linetype">
-            <option value="auto">❓Auto</option>
+            <option value="auto" selected>❓Auto</option>
             <option value="question">❓Questions</option>
             <option value="thing">❓Things</option>
+        </select>
+        <select name="accent" id="accent">
+            <option value="bold" selected>🖊️ Bold</option>
+            <option value="italic">🖊️ Italics</option>
+            <option value="hl">🖊️ Highlight</option>
         </select>
         <button type="button" title="Change theme" id="light">🔄 Theme</button>
         <button type="button" title="Open help page" id="help"><a id="helplink" href="/fb-help.html" target="_blank">📙 Help</a></button>
         <button type="button" title="Open options" id="options">⚙️</button>
     </div>
-    <div class="checker" style="display:none">
-        <label for="date">Date:</label>
-        <label class="container">&nbsp;
+    <div id="optis">
+        <label class="checker" style="display:none" for="date">Date:</label>
+        <label class="container checker" style="display:none">&nbsp;
             <input type="checkbox" id="date">
             <span class="tick"></span>
         </label>
-    </div>
-    <div class="checker" style="display:none">
-        <label class="ticker" for="kal">Document:</label>
-        <label class="container">&nbsp;
+        <label class="checker" style="display:none" for="kal">Document:</label>
+        <label class="container checker" style="display:none">&nbsp;
             <input type="checkbox" id="kal">
             <span class="tick"></span>
         </label>
-    </div>
-    <div class="checker" style="display:none">
-        <label class="ticker" for="upperq">Count Qs:</label>
-        <label class="container">&nbsp;
+        <label class="checker" style="display:none" for="upperq">Count Qs:</label>
+        <label class="container checker" style="display:none">&nbsp;
             <input type="checkbox" id="upperq">
             <span class="tick"></span>
         </label>
-    </div>
-    <div class="checker" style="display:none">
-        <label class="ticker" for="hl">Highlight:</label>
-        <label class="container">&nbsp;
-            <input type="checkbox" id="hl">
-            <span class="tick"></span>
-        </label>
-    </div>
-    <div class="checker" style="display:none">
-        <label class="ticker" for="pa">PA:</label>
-        <label class="container">&nbsp;
+        <label class="checker" style="display:none" for="pa">PA:</label>
+        <label class="container checker" style="display:none">&nbsp;
             <input type="checkbox" id="pa">
             <span class="tick"></span>
         </label>
-    </div>
-    <div class="checker" style="display:none">
-        <label class="ticker" for="assr">Assessor:</label>
-        <input type="text" name="Assessor" id="assr">
-    </div>
-    <br/>
-    <div class="checker" style="display:none">
-        <button type="button" title="Save options in new tab" id="saveopt">Save options</button>
-    </div>
-    <!-- <div class="checker" style="display:none">
-        <label class="ticker" for="assessor">Final line is assessor:</label>
-        <label class="container">&nbsp;
-            <input type="checkbox" id="assessor">
+        <label class="checker" style="display:none" for="ai">AI:</label>
+        <label class="container checker" style="display:none">&nbsp;
+            <input type="checkbox" id="ai">
             <span class="tick"></span>
         </label>
-    </div> -->
+        <label class="checker" style="display:none" for="assr">Assessor:</label>
+        <label class="checker" style="display:none">
+            <input type="text" name="Assessor" id="assr" placeholder="Jake McAuliffe">
+        </label>
+        <br/>
+        <div class="checker" style="display:none">
+            <button type="button" title="Save options in new tab" id="saveopt">Export options</button>
+        </div>
+    </div>
+    
     
     <h1 id="info"></h1>
 

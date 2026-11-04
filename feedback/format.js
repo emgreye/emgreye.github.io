@@ -6,8 +6,9 @@ function initiate() {
         document.getElementById('copy').onclick = copyFeedback;
         document.getElementById('snq').onclick = function() {formatText("S")};
         document.getElementById('roa').onclick = function() {formatText("R")};
-        document.getElementById('options').onclick = hideOptions;
+        document.getElementById('options').onclick = toggleOptions;
         document.getElementById('saveopt').onclick = newTab;
+        document.getElementById('kal').onclick = enableDocs;
     }
     catch (error){
         console.log("Help page loading...")
@@ -24,9 +25,10 @@ function initiate() {
     }
     if (params.assessor !== null){
         asr = params.assessor.replace("_"," ");
+        document.getElementById("assr").placeholder = asr;
     }
     if (params.hidden == "false"){
-        hideOptions();
+        toggleOptions();
     }
     if (params.date == "true") {
         document.getElementById("date").checked = true;
@@ -34,27 +36,36 @@ function initiate() {
     if (params.qs == "true") {
         document.getElementById("upperq").checked = true;
     }
-    if (params.hl == "true") {
-        document.getElementById("hl").checked = true;
+    if (params.accent == "italic") {
+        document.getElementById("accent").value = "italic";
+    }
+    else if (params.accent == "hl") {
+        document.getElementById("accent").value = "hl";
+    }
+    if (params.linetype == "question") {
+        document.getElementById("linetype").value = "question";
+    }
+    else if (params.linetype == "thing") {
+        document.getElementById("linetype").value = "thing";
     }
     if (params.pa == "true") {
         document.getElementById("pa").checked = true;
     }
     if (params.doc == "true") {
         document.getElementById("kal").checked = true;
-        document.getElementById("copy").innerHTML = "📎 LMS Format";
-        document.getElementById("snq").style.display = 'none';
+        enableDocs();
     }
 }
 let asr = ""
 window.onload = initiate;
 let mode = "default";
 
-function hideOptions(){
+function toggleOptions(){
     let els = document.getElementsByClassName("checker");
         for (let i = 0; i < els.length; i++){
             els[i].classList.toggle("vis");
         }
+    document.getElementById("options").classList.toggle("activated");
 }
 
 function lightMode(){
@@ -99,6 +110,7 @@ function formatText(preset) {
     let holder;
     let point;
     let bolden;
+    let ital;
     let things = false;
     let single = false;
     let upperq = false;
@@ -109,10 +121,6 @@ function formatText(preset) {
     }
     if (document.getElementById("assr").value != ""){
         assessor = document.getElementById("assr").value;
-    }
-    if (document.getElementById("kal").checked){
-        document.getElementById("copy").innerHTML = "📎 LMS Format";
-        document.getElementById("snq").style.display = 'none';
     }
     if (strings.length === 0 || strings[0] == ""){
         alert("Incorrect format!");
@@ -213,14 +221,18 @@ function formatText(preset) {
                     line--;
                 }
             }
-            if (/\d$/.test(strings[0])){
-                if (/\d(?=.$)/.test(strings[0])){
-                    resubmit = Number(strings[0].slice(-2));
-                }
-                else{
-                    resubmit = Number(strings[0][strings[0].length-1]);
-                }
+            let firstline = strings[0].split(/[\s,.]+/)
+            if (!isNaN(firstline[firstline.length-1])){
+                resubmit = Number(firstline[firstline.length-1]);
             }
+            // if (/\d$/.test(strings[0])){
+            //     if (/\d(?=.$)/.test(strings[0])){
+            //         resubmit = Number(strings[0].slice(-2));
+            //     }
+            //     else{
+            //         resubmit = Number(strings[0][strings[0].length-1]);
+            //     }
+            // }
             console.log(`Resubmit count: ${resubmit}`)
             switch (document.getElementById("linetype").value){
                 case "thing":
@@ -257,8 +269,8 @@ function formatText(preset) {
                         }
                         satis.appendChild(document.createTextNode("satisfactory."));
                         node.appendChild(satis);
-                        node.appendChild(document.createElement("br"));
                         if (!document.getElementById("pa").checked){
+                            node.appendChild(document.createElement("br"));
                             node.appendChild(document.createTextNode(`Good job, ${name}.`));
                         }
                     }
@@ -267,6 +279,10 @@ function formatText(preset) {
                         node.appendChild(satis);
                         node.appendChild(document.createElement("br"));
                         node.appendChild(document.createTextNode(`Well done, ${name}.`));
+                    }
+                    if (document.getElementById("ai").checked){
+                        node.appendChild(document.createElement("br"));
+                        node.appendChild(document.createTextNode("However, some of your responses resemble AI. From now on, please only use AI for proofreading answers you wrote yourself."));
                     }
                     if (!document.getElementById("kal").checked || preset == "K"){
                         node.appendChild(document.createElement("br"));
@@ -299,14 +315,26 @@ function formatText(preset) {
                                 phrasing2 = "need";
                             }
                             break;
-                        case 2:
-                            strong.appendChild(document.createTextNode("2nd resubmit needed."));
-                            break;
-                        case 3:
-                            strong.appendChild(document.createTextNode("3rd resubmit needed."));
-                            break;
+                        // case 2:
+                        //     strong.appendChild(document.createTextNode("2nd resubmit needed."));
+                        //     break;
+                        // case 3:
+                        //     strong.appendChild(document.createTextNode("3rd resubmit needed."));
+                        //     break;
                         default:
-                            strong.appendChild(document.createTextNode(`${resubmit}th resubmit needed.`));
+                            if (Math.floor(resubmit/10) != 1){
+                                if (resubmit%10 == 1){
+                                    strong.appendChild(document.createTextNode(`${resubmit}st resubmit needed.`));
+                                } else if (resubmit%10 == 2){
+                                    strong.appendChild(document.createTextNode(`${resubmit}nd resubmit needed.`));
+                                } else if (resubmit%10 == 3){
+                                    strong.appendChild(document.createTextNode(`${resubmit}rd resubmit needed.`));
+                                } else {
+                                    strong.appendChild(document.createTextNode(`${resubmit}th resubmit needed.`));
+                                }
+                            } else {
+                                strong.appendChild(document.createTextNode(`${resubmit}th resubmit needed.`));
+                            }
                     }
                     node.appendChild(strong);
                     node.appendChild(document.createElement("br"));
@@ -323,10 +351,15 @@ function formatText(preset) {
                                 point.appendChild(document.createTextNode(bolden[j]));
                             } else {
                                 let bolded;
-                                if (document.getElementById("hl").checked){
-                                    bolded = document.createElement("mark");
-                                } else {
-                                    bolded = document.createElement("strong");
+                                switch (document.getElementById("accent").value){
+                                    case "hl":
+                                        bolded = document.createElement("mark");
+                                        break;
+                                    case "italic":
+                                        bolded = document.createElement("em");
+                                        break;
+                                    default:
+                                        bolded = document.createElement("strong");
                                 }
                                 
                                 bolded.appendChild(document.createTextNode(bolden[j]));
@@ -351,19 +384,16 @@ function formatText(preset) {
                     if (document.getElementById("kal").checked){
                         let bottomtext = ""
                         if (single){
-                            bottomtext = "For more detail, check the feedback section under the question in the attached document.";
+                            bottomtext = `For more detail, check the feedback section under the question in the attached document.`;
                         }
                         else{
-                            bottomtext = "For more detail, check the feedback section under each question in the attached document.";
+                            bottomtext = `For more detail, check the feedback section under each question in the attached document.`;
                         }
                         if (preset != "K"){
                             bottomtext = bottomtext.slice(0,-26) + ".";
                         }
                         node2.appendChild(document.createTextNode(bottomtext));
-                        if (preset == "K"){
-                            node2.appendChild(document.createElement("br"));
-                            node2.appendChild(document.createTextNode(assessor));
-                        }
+                        node2.appendChild(document.createElement("br"));
                     } else {
                         if (!things){
                             if (single){
@@ -374,11 +404,15 @@ function formatText(preset) {
                             }
                             node2.appendChild(document.createElement("br"));
                         }
-                        node2.appendChild(document.createTextNode(assessor));
-                        document.getElementById("copy").innerHTML = "📋 Copy Qs";
-                        document.getElementById("snq").style.display = 'inline-block';
                     } 
-                    document.getElementById("result").appendChild(node2);
+                    if (document.getElementById("ai").checked){
+                        node2.appendChild(document.createTextNode("Some of your responses resemble AI. From now on, please only use AI for proofreading answers you wrote yourself."));
+                        node2.appendChild(document.createElement("br"));
+                    }
+                    if (preset == "K" || !document.getElementById("kal").checked){
+                            node2.appendChild(document.createTextNode(assessor));
+                        }
+                    document.getElementById("result").appendChild(node2);   
             }
         }
         copyText("result");
@@ -394,6 +428,19 @@ function copyFeedback(){
     }
 }
 
+function enableDocs(){
+    if (document.getElementById("kal").checked){
+        document.getElementById("copy").innerHTML = "📎 LMS Format";
+        document.getElementById("snq").style.display = 'none';
+        document.getElementById("roa").style.display = 'none';
+    }
+    else {
+        document.getElementById("copy").innerHTML = "➕ Copy Qs";
+        document.getElementById("snq").style.display = 'inline-block';
+        document.getElementById("roa").style.display = 'inline-block';
+    }
+}
+
 function newTab(){
     let url = "https://emgreye.github.io/feedback?";
     if (document.getElementById("date").checked){
@@ -405,8 +452,11 @@ function newTab(){
     if (document.getElementById("upperq").checked){
         url += "qs=true&";
     }
-    if (document.getElementById("hl").checked){
-        url += "hl=true&";
+    if (document.getElementById("accent").value != "bold"){
+        url += `accent=${document.getElementById("accent").value}&`;
+    }
+    if (document.getElementById("linetype").value != "auto"){
+        url += `linetype=${document.getElementById("linetype").value}&`;
     }
     if (document.getElementById("pa").checked){
         url += "pa=true&";
