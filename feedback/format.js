@@ -7,8 +7,10 @@ function initiate() {
         document.getElementById('snq').onclick = function() {formatText("S")};
         document.getElementById('roa').onclick = function() {formatText("R")};
         document.getElementById('options').onclick = toggleOptions;
+        document.getElementById('display').onclick = toggleDisplay;
         document.getElementById('saveopt').onclick = newTab;
-        document.getElementById('kal').onclick = enableDocs;
+        document.getElementById('kal').onclick = toggleDocs;
+        document.getElementById('icons').onclick = toggleIcons;
     }
     catch (error){
         console.log("Help page loading...")
@@ -53,7 +55,11 @@ function initiate() {
     }
     if (params.doc == "true") {
         document.getElementById("kal").checked = true;
-        enableDocs();
+        toggleDocs();
+    }
+    if (params.icons == "true") {
+        document.getElementById("icons").checked = false;
+        toggleIcons();
     }
 }
 let asr = ""
@@ -66,6 +72,22 @@ function toggleOptions(){
             els[i].classList.toggle("vis");
         }
     document.getElementById("options").classList.toggle("activated");
+    if (document.getElementById("display").classList.contains("activated")){
+        document.getElementById("saveholder").classList.toggle("vis");
+        document.getElementById("saveholder").classList.toggle("ups");
+    }
+}
+
+function toggleDisplay(){
+    let els = document.getElementsByClassName("plaid");
+        for (let i = 0; i < els.length; i++){
+            els[i].classList.toggle("vis");
+        }
+    document.getElementById("display").classList.toggle("activated");
+    if (!document.getElementById("options").classList.contains("activated")){
+        document.getElementById("saveholder").classList.toggle("vis");
+        document.getElementById("saveholder").classList.toggle("ups");
+    }
 }
 
 function lightMode(){
@@ -428,9 +450,14 @@ function copyFeedback(){
     }
 }
 
-function enableDocs(){
+function toggleDocs(){
     if (document.getElementById("kal").checked){
-        document.getElementById("copy").innerHTML = "📎 LMS Format";
+        if (!document.getElementById("icons").checked){
+            document.getElementById("copy").innerHTML = "📎";
+        }
+        else{
+            document.getElementById("copy").innerHTML = "📎 LMS Format";
+        }
         document.getElementById("snq").style.display = 'none';
         document.getElementById("roa").style.display = 'none';
     }
@@ -439,6 +466,35 @@ function enableDocs(){
         document.getElementById("snq").style.display = 'inline-block';
         document.getElementById("roa").style.display = 'inline-block';
     }
+}
+
+function toggleIcons(){
+    if (document.getElementById("icons").checked){
+        document.getElementById("format").innerHTML = "✍️ Format";
+        document.getElementById("copy").innerHTML = "➕ Copy Qs";
+        if (document.getElementById("kal").checked){
+            document.getElementById("copy").innerHTML = "📎 LMS Format";
+        }
+        document.getElementById("snq").innerHTML = "🔰 SNQ";
+        document.getElementById("roa").innerHTML = "🈸 ROA";
+        document.getElementById("light").innerHTML = "🔄 Theme";
+    }
+    else {
+        document.getElementById("format").innerHTML = "✍️";
+        document.getElementById("copy").innerHTML = "➕";
+        if (document.getElementById("kal").checked){
+            document.getElementById("copy").innerHTML = "📎";
+        }
+        document.getElementById("snq").innerHTML = "🔰";
+        document.getElementById("roa").innerHTML = "🈸";
+        document.getElementById("light").innerHTML = "🔄";
+    }
+    document.getElementById("format").classList.toggle("left");
+    document.getElementById("copy").classList.toggle("left");
+    document.getElementById("snq").classList.toggle("left");
+    document.getElementById("roa").classList.toggle("left");
+    document.getElementById("light").classList.toggle("left");
+
 }
 
 function newTab(){
@@ -460,6 +516,9 @@ function newTab(){
     }
     if (document.getElementById("pa").checked){
         url += "pa=true&";
+    }
+    if (!document.getElementById("icons").checked){
+        url += "icons=true&";
     }
     if (document.getElementById("assr").value != ""){
         url += `assessor=${document.getElementById("assr").value.replace(" ","_")}&`;

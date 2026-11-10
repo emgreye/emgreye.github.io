@@ -14,21 +14,29 @@
         <button type="button" title="Copy questions" id="copy">➕ Copy Qs</button>
         <button type="button" title="Format as Student Needs Questionnaire" id="snq">🔰 SNQ</button>
         <button type="button" title="Format as Record of Assessment" id="roa">🈸 ROA</button>
-        <select name="linetype" id="linetype">
-            <option value="auto" selected>❓Auto</option>
-            <option value="question">❓Questions</option>
-            <option value="thing">❓Things</option>
-        </select>
-        <select name="accent" id="accent">
-            <option value="bold" selected>🖊️ Bold</option>
-            <option value="italic">🖊️ Italics</option>
-            <option value="hl">🖊️ Highlight</option>
-        </select>
-        <button type="button" title="Change theme" id="light">🔄 Theme</button>
-        <button type="button" title="Open help page" id="help"><a id="helplink" href="/fb-help.html" target="_blank">📙 Help</a></button>
-        <button type="button" title="Open options" id="options">⚙️</button>
+        <button type="button" title="Open text options" class="right" id="options">⚙️</button>
+        <button type="button" title="Open display options" class="right" id="display">🎨</button>
+        <button type="button" title="Open help page" class="right" id="help"><a id="helplink" href="/fb-help.html" target="_blank">❓</a></button>
+    </div>
+    <div id="disps">
+        <label class="plaid" style="display:none" for="icons">Show text:</label>
+        <label class="container plaid" style="display:none">&nbsp;
+            <input type="checkbox" checked id="icons">
+            <span class="tick"></span>
+        </label>
+        <button class="plaid" type="button" style="display:none" title="Change theme" id="light">🔄 Theme</button>
     </div>
     <div id="optis">
+        <select class="checker" style="display:none" name="linetype" id="linetype">
+            <option value="auto" selected>Auto</option>
+            <option value="question">Questions</option>
+            <option value="thing">Things</option>
+        </select>
+        <select class="checker" style="display:none" name="accent" id="accent">
+            <option value="italic" selected>Italics</option>
+            <option value="bold">Bold</option>
+            <option value="hl">Highlight</option>
+        </select>
         <label class="checker" style="display:none" for="date">Date:</label>
         <label class="container checker" style="display:none">&nbsp;
             <input type="checkbox" id="date">
@@ -59,7 +67,7 @@
             <input type="text" name="Assessor" id="assr" placeholder="Jake McAuliffe">
         </label>
         <br/>
-        <div class="checker" style="display:none">
+        <div class="checker" id="saveholder" style="display:none">
             <button type="button" title="Save options in new tab" id="saveopt">Export options</button>
         </div>
     </div>
